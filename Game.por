@@ -1,7 +1,9 @@
 programa
 {
-
 	inclua biblioteca Util --> u
+	
+	inteiro CoorX = 0
+	inteiro CoorY = 0
 
 	funcao inicio()
 	{
@@ -25,7 +27,7 @@ programa
 		leia(opcao)
 
 	
-		se (opcao == 1)
+		se (opcao == 1) // Lore
 		{
 			limpa()
 			para(inteiro i=0; i < 5; i++)
@@ -88,15 +90,23 @@ programa
 		senao se (opcao == 4)
 		{
 			limpa()
+			para(inteiro g=15; g > 0; g--)
+			{
+				limpa()
+				escreva("Conexão encerrada. O último eco se apagou no vácuo")
+
+			para(inteiro i=0; i < g; i++)
+			{
+				escreva(".")
+				u.aguarde((i*10)+20)
+			}
+			}
+			escreva("\n")
+			limpa()
 			escreva("Conexão encerrada. O último eco se apagou no vácuo")
-			u.aguarde(500)
-			escreva(".")
-			u.aguarde(500)
-			escreva(".")
-			u.aguarde(500)
-			escreva(".")
 			menu_ativo = falso
 			pare
+			//Conexão encerrada. O último eco se apagou no vácuo
 		
 		}
 		senao
@@ -115,9 +125,12 @@ programa
 		escreva("=========================================================================\n")
 		escreva("                           CONEXÃO ESTABELECIDA                          \n")
 		escreva("=========================================================================\n\n")
-		u.aguarde
+		u.aguarde(500)
 		escreva("Estática ecoa pelos alto-falantes da sua cabine.\n")
 		escreva("O monitor pisca com uma linha de código piscando em verde...\n\n")
+
+		CoorX = sorteia(0 , 10)	//
+		CoorY = sorteia(0 , 10)
 
 		u.aguarde(5000)
 	}
