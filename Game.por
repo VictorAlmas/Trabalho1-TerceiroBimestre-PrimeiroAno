@@ -2,7 +2,7 @@ programa
 {
 	inclua biblioteca Util --> u
 	
-	inteiro CoorX = 0 // Coordenada
+	inteiro CoorX = 0 // = Coordenada
 	inteiro CoorY = 0
 
 	funcao inicio()
