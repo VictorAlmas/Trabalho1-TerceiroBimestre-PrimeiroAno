@@ -2,7 +2,7 @@ programa
 {
 	inclua biblioteca Util --> u
 	
-	inteiro CoorX = 0
+	inteiro CoorX = 0 // Coordenada
 	inteiro CoorY = 0
 
 	funcao inicio()
@@ -129,7 +129,7 @@ programa
 		escreva("Estática ecoa pelos alto-falantes da sua cabine.\n")
 		escreva("O monitor pisca com uma linha de código piscando em verde...\n\n")
 
-		CoorX = sorteia(0 , 10)	//
+		CoorX = sorteia(0 , 10)	// Coor = Coordenada
 		CoorY = sorteia(0 , 10)
 
 		u.aguarde(5000)
