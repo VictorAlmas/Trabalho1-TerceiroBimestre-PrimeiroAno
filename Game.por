@@ -150,47 +150,31 @@ Programa
 
                 escreva("Estática ecoa pelos alto-falantes da sua cabine.\n")
                 escreva("O monitor pisca com uma linha de código piscando em vermelho...\n\n")
-
-u.aguarde(1500)
-
-escreva("Há mais um passageiro a bordo dessa nave.\n\n")
-
-u.aguarde(2000)
- 
-u.aguarde(2500)
-escreva("ALERTA DE SEGURANÇA: Intruso detectado a bordo da nave.\n")
-u.aguarde(1000)
-escreva("Espécie não identificada.\n\n")
-
-u.aguarde(3000)
-escreva("Iniciando protocolo de orientação para sobrevivente.\n")
-u.aguarde(2000)
-
-escreva("Você está na sala principal de criogenia.\n")
-u.aguarde(2500)
-
-escreva("Há outras salas que poderão ajudá-lo a sobreviver.\n")
-u.aguarde(2500)
-
-escreva("Há a sala de mantimentos, a sala de armamentos e a sala de auxílio médico.\n")
-u.aguarde(3000)
-
-escreva("Elas correspondem às três últimas portas do corredor principal, respectivamente.\n\n")
-u.aguarde(3500)
-
-escreva("Entrando em modo de suporte de vida e manutenção.\n")
-u.aguarde(2500)
-
-escreva("Ativando estufa para melhorar o fluxo e a qualidade do ar.\n")
-u.aguarde(3000)
-
-escreva("\n")
-escreva("*Um som metálico ecoa pelos corredores da nave.*\n")
-u.aguarde(2000)
-
-escreva("*Sistemas secundários voltam lentamente à atividade.*\n\n")
-u.aguarde(2500)
-
+                u.aguarde(1500)
+                escreva("Há mais um passageiro a bordo dessa nave.\n\n")
+                u.aguarde(4500)
+                escreva("ALERTA DE SEGURANÇA: Intruso detectado a bordo da nave.\n")
+                u.aguarde(1000)
+                escreva("Espécie não identificada.\n\n")
+                u.aguarde(3000)
+                escreva("Iniciando protocolo de orientação para sobrevivente.\n")
+                u.aguarde(2000)
+                escreva("Você está na sala principal de criogenia.\n")
+                u.aguarde(2500)
+                escreva("Há outras salas que poderão ajudá-lo a sobreviver.\n")
+                u.aguarde(2500)
+                escreva("Há a sala de mantimentos, a sala de armamentos e a sala de auxílio médico.\n")
+                u.aguarde(3000)
+                escreva("Elas correspondem às três últimas portas do corredor principal, respectivamente.\n\n")
+                u.aguarde(3500)
+                escreva("Entrando em modo de suporte de vida e manutenção.\n")
+                u.aguarde(2500)
+                escreva("Ativando estufa para melhorar o fluxo e a qualidade do ar.\n")
+                u.aguarde(3000)
+                escreva("\n")
+                escreva("*Um som metálico ecoa pelos corredores da nave.*\n")
+                u.aguarde(2000)
+                escreva("*Sistemas secundários voltam lentamente à atividade.*\n\n")
                 CoorX = sorteia(0 , 10)        // Coor = Coordenada
                 CoorY = sorteia(0 , 10)
 
