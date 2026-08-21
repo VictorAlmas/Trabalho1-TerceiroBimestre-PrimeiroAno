@@ -7,6 +7,7 @@ programa
 	inteiro CoorXAlien = 0 
 	inteiro CoorYAlien = 0	
 	inteiro opcao
+	caracter andar
 	logico menu_ativo = verdadeiro
 	
 	funcao Sair()
@@ -188,6 +189,8 @@ programa
 	CoorYAlien = sorteia(0 , 10)
 	}
 	escreva(CoorX , " - " , CoorY , "\n" , CoorXAlien , " - " , CoorYAlien)
+	escreva("\nVocê está na sala principal de criogenia, seja lá o que está a bordo, está procurando você...\n")
+	Move()
 	
 	u.aguarde(5000)
 	}
@@ -198,5 +201,104 @@ programa
 	cadeia pausa
 	leia(pausa)
 	}
+
+	//logico jogo_rodando = verdadeiro
+	//logico encontrou_objetivo = falso
+
+	//enquanto (jogo_rodando == verdadeiro e encontrou_objetivo == falso)
+	//{
+
+	funcao Move()
+	//verificar eventos()
+	{
+	escreva("Posição Atual -> X: ", CoorX, " | Y: ", CoorY, "\n")
+    escreva("Use W, A, S, D para se mover (ou Q para sair): ")
+	leia(andar
+	
+	escolha(andar)
+	{
+	
+	caso 'W':
+	caso 'w':
+		CoorY++
+		pare
+	
+	caso 'A':
+	caso 'a':
+		CoorX--
+		pare
+	
+	caso 'S':
+	caso 's':
+		CoorY--
+		pare
+	
+	caso 'D':
+	caso 'd':
+		CoorX++
+		pare
+	caso 'Q':
+	caso 'q':
+		Sair()
+	
+	caso contrario:
+
+	se (CoorX == 6 e CoorY == 3)
+	{
+
+		caracter opcao
+		logico continuar = verdadeiro
+
+		enquanto (continuar == verdadeiro)
+		{
+			limpa()
+
+			escreva("Você entrou em uma sala com algumas pilhas de folhas nas mesas,\n a iluminação do ambiente falha levemente. O local tem cheiro de coisas antigas, nas paredes há alguns quadros\n")
+			escreva("Voce nota uma porta no fim desta sala, o que voce fará?")
+
+			escreva("[w] para abrir a porta\n")
+			escreva("[a] para olhar as folhas\n")
+			escreva("[s] para olhar os quadros\n")
+			escreva("Escolha: ")
+
+			leia(opcao)
+			limpa()
+
+			escolha(opcao)
+			{
+				caso 'w':
+				caso 'W':
+						escreva("A porta esta trancada, voce precisara de uma chave.\n")
+					continuar = falso
+					pare
+					
+				caso 'a':
+				caso 'A':
+					escreva("Você mexe nas folhas. São relatórios antigos cobertos de poeira e sem nexo.\n")
+					escreva("\nPressione ENTER para continuar...")
+					leia(opcao) 
+					pare
+					
+				caso 's':
+				caso 'S':
+					escreva("Os quadros mostram retratos de pessoas antigas que parecem te encarar.\n")
+					escreva("\nPressione ENTER para continuar...")
+					leia(opcao) 
+					pare
+					
+				caso contrario:
+					escreva("Comando inválido! Escolha uma opção válida (w, a ou s).\n")
+					escreva("\nPressione ENTER para tentar novamente...")
+					leia(opcao)
+			}
+		}
+
+	}
 }
+ 
+			}
+			
+	}
+
+
 
