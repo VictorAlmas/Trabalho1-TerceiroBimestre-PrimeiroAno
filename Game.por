@@ -213,7 +213,7 @@ programa
 	{
 	escreva("Posição Atual -> X: ", CoorX, " | Y: ", CoorY, "\n")
     escreva("Use W, A, S, D para se mover (ou Q para sair): ")
-	leia(andar
+	leia(andar)
 	
 	escolha(andar)
 	{
