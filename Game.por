@@ -10,6 +10,9 @@ programa
 	caracter andar
 	caracter amdar
 	logico menu_ativo = verdadeiro
+	logico item = falso
+	logico sala_armamento = falso
+	logico chave_armamento = falso
 	
 	funcao Sair()
 	{
@@ -195,18 +198,12 @@ programa
 	u.aguarde(5000)
 	}
 	
-	// Função p segurar o menu e evitar que ele feche direto
 	funcao aguardarEnter()
 	{
 	cadeia pausa
 	leia(pausa)
 	}
 
-	//logico jogo_rodando = verdadeiro
-	//logico encontrou_objetivo = falso
-
-	//enquanto (jogo_rodando == verdadeiro e encontrou_objetivo == falso)
-	//{
 
 	funcao Move()
 	//verificar eventos()
@@ -221,7 +218,9 @@ programa
 		limpa()
 
 			escreva("Você entrou em uma sala com algumas pilhas de folhas nas mesas,\n a iluminação do ambiente falha levemente. O local tem cheiro de coisas antigas, nas paredes há alguns quadros\n")
-			escreva("Voce nota uma porta no fim desta sala, o que voce fará?")
+			escreva("Voce nota uma porta no fim desta sala, o que voce fará?\n")
+			
+			sala_armamento = verdadeiro
 
 			escreva("[w] para abrir a porta\n")
 			escreva("[a] para olhar as folhas\n")
@@ -258,12 +257,56 @@ programa
 					leia(opcao)
 			
 			}
+		}senao se (CoorX == 6 e CoorY == 3)
+	{
+
+		limpa()
+		// necessario inventario para armazenar a chave
+		escreva("Voce esbarrou numa mesa, em cima desta mesa tem uma chave de ferro um pouco desgastada...o que voce fara?\n")
+		escreva("[w] para pegar a chave\n")
+		escreva("[a] para explorar a sala novamente\n")
+		escreva("[s] para sair da sala\n")
+
+		escolha(amdar)
+		{
+
+			caso 'W':
+			caso 'w':
+				chave_armamento = verdadeiro
+				
+				escreva("Voce pegou a chave! Faca a escolha certa.(essa acao tera consequencias...\n)")
+				se (sala_armamento == verdadeiro)
+				{escreva("Se quiser voltar até a porta, mova-se ate X:6 | Y:3")}
+				escreva("[a] para guardar a chave\n")
+				escreva("[s] para devolver a chave")
+				leia(amdar)
+
+				escolha(amdar)
+				{
+					caso 'W':
+					caso 'w':
+						
+						se (chave_armamento == verdadeiro)
+						{
+							escreva("Parabens, voce desbloqueou uma nova sala: Sala de Armamentos")	
+						}
+						}
+					caso 'A':
+					caso 'a':
+						escreva("Voce guardou a chave no seu butiquinho porque voce nao tem inventario bicho burro")
+
+
 		}
+					
 		
+				
+				
+		
+	}
 		escreva("Posição Atual -> X: ", CoorX, " | Y: ", CoorY, "\n")
 		escreva("Use W, A, S, D para se mover (ou Q para sair): ")
-		
 		leia(andar)
+		
 		
 			escolha(andar)
 			{
