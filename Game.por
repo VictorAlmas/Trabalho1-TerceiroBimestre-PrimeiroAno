@@ -8,6 +8,7 @@ programa
 	inteiro CoorYAlien = 0	
 	inteiro opcao
 	caracter andar
+	caracter amdar
 	logico menu_ativo = verdadeiro
 	
 	funcao Sair()
@@ -180,7 +181,6 @@ programa
 	// Inicio do joguinhozinho
 	funcao Executarjogo()
 	{
-	
 	CoorX = sorteia(0 , 10)        // Coor = Coordenada
 	CoorY = sorteia(0 , 10)
 	enquanto((CoorX == CoorXAlien) ou (CoorY == CoorYAlien))
@@ -188,7 +188,7 @@ programa
 	CoorXAlien = sorteia(0 , 10)
 	CoorYAlien = sorteia(0 , 10)
 	}
-	escreva(CoorX , " - " , CoorY , "\n" , CoorXAlien , " - " , CoorYAlien)
+	escreva(CoorXAlien , " - " , CoorYAlien)
 	escreva("\nVocê está na sala principal de criogenia, seja lá o que está a bordo, está procurando você...\n")
 	Move()
 	
@@ -211,47 +211,14 @@ programa
 	funcao Move()
 	//verificar eventos()
 	{
-	escreva("Posição Atual -> X: ", CoorX, " | Y: ", CoorY, "\n")
-    escreva("Use W, A, S, D para se mover (ou Q para sair): ")
-	leia(andar)
-	
-	escolha(andar)
+	logico Simsalabim = verdadeiro
+	enquanto(Simsalabim == verdadeiro)
 	{
-	
-	caso 'W':
-	caso 'w':
-		CoorY++
-		pare
-	
-	caso 'A':
-	caso 'a':
-		CoorX--
-		pare
-	
-	caso 'S':
-	caso 's':
-		CoorY--
-		pare
-	
-	caso 'D':
-	caso 'd':
-		CoorX++
-		pare
-	caso 'Q':
-	caso 'q':
-		Sair()
-	
-	caso contrario:
-
-	se (CoorX == 6 e CoorY == 3)
+		
+	se(CoorX == 6 e CoorY == 3)
 	{
-
-		caracter opcao
-		logico continuar = verdadeiro
-
-		enquanto (continuar == verdadeiro)
-		{
-			limpa()
+		
+		limpa()
 
 			escreva("Você entrou em uma sala com algumas pilhas de folhas nas mesas,\n a iluminação do ambiente falha levemente. O local tem cheiro de coisas antigas, nas paredes há alguns quadros\n")
 			escreva("Voce nota uma porta no fim desta sala, o que voce fará?")
@@ -261,15 +228,14 @@ programa
 			escreva("[s] para olhar os quadros\n")
 			escreva("Escolha: ")
 
-			leia(opcao)
+			leia(amdar)
 			limpa()
 
-			escolha(opcao)
+			escolha(amdar)
 			{
 				caso 'w':
 				caso 'W':
-						escreva("A porta esta trancada, voce precisara de uma chave.\n")
-					continuar = falso
+					escreva("A porta esta trancada, voce precisara de uma chave.\n")
 					pare
 					
 				caso 'a':
@@ -290,15 +256,41 @@ programa
 					escreva("Comando inválido! Escolha uma opção válida (w, a ou s).\n")
 					escreva("\nPressione ENTER para tentar novamente...")
 					leia(opcao)
+			
 			}
 		}
-
+		
+		escreva("Posição Atual -> X: ", CoorX, " | Y: ", CoorY, "\n")
+		escreva("Use W, A, S, D para se mover (ou Q para sair): ")
+		
+		leia(andar)
+		
+			escolha(andar)
+			{
+			
+				caso 'W':
+				caso 'w':
+					CoorY++
+					pare
+				
+				caso 'A':
+				caso 'a':
+					CoorX--
+					pare
+				
+				caso 'S':
+				caso 's':
+					CoorY--
+					pare
+				
+				caso 'D':
+				caso 'd':
+					CoorX++
+					pare
+				caso 'Q':
+				caso 'q':
+					Sair()
+				}
+		}
 	}
 }
- 
-			}
-			
-	}
-
-
-
