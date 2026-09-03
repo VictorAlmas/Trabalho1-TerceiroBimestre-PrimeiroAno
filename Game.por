@@ -420,27 +420,24 @@ programa
                                 caso 'w':
                                 caso 'W':
                                         escreva("A porta esta trancada, voce precisara de uma chave.\n")
+                                        u.aguarde(2900)
                                         pare
 
                                 caso 'a':
                                 caso 'A':
                                         escreva("Você mexe nas folhas. São relatórios antigos cobertos de poeira e sem nexo.\n")
-                                        escreva("\nPressione ENTER para continuar...")
-                                        leia(opcao) 
+                                        u.aguarde(3200)
                                         pare
 
                                 caso 's':
                                 caso 'S':
                                         escreva("Os quadros mostram retratos de pessoas antigas que parecem te encarar.\n")
-                                        escreva("\nPressione ENTER para continuar...")
-                                        leia(opcao) 
+								u.aguarde(3000)
                                         pare
 
                                 caso contrario:
-                                        escreva("Comando inválido! Escolha uma opção válida (w, a ou s).\n")
-                                        escreva("\nPressione ENTER para tentar novamente...")
-                                        leia(opcao)
-
+                                escreva("Comando inválido!\n")
+                                       retorne
                         }
                 }senao se (CoorX == 4 e CoorY == 7)
         {
@@ -454,68 +451,83 @@ programa
 
                 leia(amdar)
 
-                escolha(amdar)
-                {
+			escolha(amdar)
+			{
+			
+			caso 'W':
+			caso 'w':
+			se (chave_armamento == falso)
+			{
+			chave_armamento = verdadeiro
+			AdicionarItem("Chave de Ferro")
+			
+			escreva("Voce pegou a chave! Faca a escolha certa (essa acao tera consequencias...)\n")
+			u.aguarde(4000)
+			se (sala_armamento == verdadeiro)
+			{
+			escreva("Se quiser voltar até a porta, mova-se ate X:6 | Y:3\n")
+			u.aguarde(2500)
+			}
+			}
+			senao
+			{
+			escreva("Você já pegou essa chave.\n")
+			u.aguarde(1700)
+			}
+			pare
+			
+			caso 'A':
+			caso 'a':
+			escreva("Você observa a sala novamente, mas não encontra nada de novo.\n")
+			u.aguarde(2600)
+			pare
+			
+			caso 'S':
+			caso 's':
+			escreva("Você sai da sala.\n")
+			u.aguarde(1200)
+			pare
+			
+			caso contrario:
+			escreva("Comando inválido!\n")
+			u.aguarde(1300)
+			retorne
+			}
 
-                        caso 'W':
-                        caso 'w':
-                                se (chave_armamento == falso)
-                                {
-                                        chave_armamento = verdadeiro
-                                        AdicionarItem("Chave de Ferro")
-
-                                        escreva("Voce pegou a chave! Faca a escolha certa (essa acao tera consequencias...)\n")
-                                        se (sala_armamento == verdadeiro)
-                                        {
-                                                escreva("Se quiser voltar até a porta, mova-se ate X:6 | Y:3\n")
-                                        }
-                                }
-                                senao
-                                {
-                                        escreva("Você já pegou essa chave.\n")
-                                }
-                                pare
-
-                        caso 'A':
-                        caso 'a':
-                                escreva("Você observa a sala novamente, mas não encontra nada de novo.\n")
-                                pare
-
-                        caso 'S':
-                        caso 's':
-                                escreva("Você sai da sala.\n")
-                                pare
-
-                        caso contrario:
-                                escreva("Comando inválido!\n")
-                }
-
-                escreva("\nPressione ENTER para continuar...")
-                leia(opcao)
-        }
-
-                escreva("Posição Atual -> X: ", CoorX, " | Y: ", CoorY, "\n")
-                escreva("Use W, A, S, D para se mover, F para o inventário (ou Q para sair): ")
-                leia(andar)
+		}
+					limpa()
+					escreva("Posição Atual -> X: ", CoorX, " | Y: ", CoorY, "\n")
+					escreva("Use W, A, S, D para se mover, F para o inventário (ou Q para sair): ")
+					leia(andar)
 
 
-                        escolha(andar)
-                        {
+					escolha(andar)
+					{
 
-                                caso 'W':
-                                caso 'w':
-                                        CoorY++
-                                        pare
+					caso 'W':
+					caso 'w':
+						CoorY++
+						pare
 
-                                caso 'A':
-                                caso 'a':
-                                        CoorX--
-                                        pare
+					caso 'A':
+					caso 'a':
+						CoorX--
+						pare
 
-                                caso 'S':
-                                caso 's':
-                                        CoorY--
-                                        pare
+					caso 'S':
+					caso 's':
+						CoorY--
+						pare
 
-                                caso 'D':
-     
+					caso 'D':
+					caso 'd':
+						CoorX++
+						pare
+						
+					caso 'Q':
+					caso 'q':
+						Sair()
+				}
+		}
+	}
+}
