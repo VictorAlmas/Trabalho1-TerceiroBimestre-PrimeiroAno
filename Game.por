@@ -13,6 +13,7 @@ programa
         logico item = falso
         logico sala_armamento = falso
         logico chave_armamento = falso
+        logico chave_dispensa = falso
 
         // ===================== INVENTÁRIO =====================
         cadeia inventario[20]
@@ -34,6 +35,7 @@ programa
 
                         u.aguarde(500)
                 }
+                
                 escreva("\n")
                 limpa()
                 escreva("Conexão encerrada. O último eco se apagou no vácuo")
@@ -59,6 +61,7 @@ programa
         funcao Jogunho()
         {
                 limpa()
+                
                 para(inteiro i=0; i < 5; i++)
                 {
                         limpa()
@@ -71,8 +74,10 @@ programa
                                 u.aguarde(200)
                         }
                 }
+                
                 escreva("\n")
                 u.aguarde(500)
+                
                 para(inteiro i=0; i < 5; i++)
                 {
                         limpa()
@@ -154,6 +159,7 @@ programa
                         escreva(" 2 - ARQUIVOS DE MEMORIA(HISTORIA)\n")
                         escreva(" 3 - TRANSMISSAO DE CREDITOS\n")
                         escreva(" 4 - INTERROMPER SISTEMA(SAIR)\n")
+                        escreva(" 5 - PULAR INTRODUCAO\n")
                         escreva("=================================\n")
                         escreva("Digite o codigo de acesso: ")
                         leia(opcao)
@@ -191,24 +197,27 @@ programa
         // Inicio do joguinhozinho
         funcao Executarjogo()
         {
-        CoorX = sorteia(0 , 10)        // Coor = Coordenada
-        CoorY = sorteia(0 , 10)
-        enquanto((CoorX == CoorXAlien) ou (CoorY == CoorYAlien))
-        {
-        CoorXAlien = sorteia(0 , 10)
-        CoorYAlien = sorteia(0 , 10)
-        }
-        escreva(CoorXAlien , " - " , CoorYAlien)
-        escreva("\nVocê está na sala principal de criogenia, seja lá o que está a bordo, está procurando você...\n")
-        Move()
-
-        u.aguarde(5000)
+	        CoorX = sorteia(0 , 10)        // Coor = Coordenada
+	        CoorY = sorteia(0 , 10)
+	        
+	        enquanto((CoorX == CoorXAlien) e (CoorY == CoorYAlien))
+	        {
+		        CoorXAlien = sorteia(0 , 10)
+		        CoorYAlien = sorteia(0 , 10)
+	        }
+	        
+	        escreva(CoorXAlien , " - " , CoorYAlien)
+	        escreva("\nVocê está na sala principal de criogenia, seja lá o que está a bordo, está procurando você...\n")
+	        
+	        Move()
+	
+	        u.aguarde(5000)
         }
 
         funcao aguardarEnter()
         {
-        cadeia pausa
-        leia(pausa)
+	        cadeia pausa
+	        leia(pausa)
         }
 
         // ===================== FUNÇÕES DE INVENTÁRIO =====================
@@ -419,6 +428,44 @@ programa
                         {
                                 caso 'w':
                                 caso 'W':
+					                para(inteiro i = 0; i < 20; i++)
+					                {
+					                	se(inventario[i] == "Chave de Ferro")
+					                	{
+					                		escreva("Parabens! voce desbloqueou a sala de armamentos!\n")
+					                		escreva("[w] para explorar a sala\n")
+					                		escreva("[Q] para RETORNAR\n")
+										leia(amdar)
+										
+					                		escolha(amdar)
+					                		{
+					                			caso'w':
+					                			caso'W':
+					                				escreva("Voce olha ao redor e ve um painel com varias armas:\n")
+					                				escreva("lasers de energia direcionada, pistolas giroscopicas\n")
+					                				escreva("armas magnéticas de pulso, lançadores de agulha flechette\n")
+					                				escreva("armas de micro-ondas\n")
+
+					                				escreva("[1] para entender como as armas funcionam\n")
+					                				escreva("[Q] para retornar")
+					                				leia(amdar)
+
+					                				escolha(amdar)
+					                				{
+					                					caso'1':
+					                						escreva("LASERS DE ENERGIA DIRECIONADA: Feixes de luz de alta intensidade baseados no espaço\n Cega sensores de satelites ou queima paineis solares e estruturas a distancia.\n")
+					                						escreva("PISTOLAS GIROSCOPICAS: Dispara mini-foguetes que aceleram apos sairem do cano\n O recuo é praticamente zero, perfeito para a ausencia de gravidade, o projetil ganha velocidade no vacuo.\n")
+					                						escreva("ARMAS MAGNETICAS DE PULSO: Usam bobinas eletromagnéticas para acelerar um dardo metálico envenenado silenciosamente\n Sem explosao de polvora que precisa de oxigenio, sem cartuchos vazios flutuando e recuo muito menor do que armas de fogo.")
+					                						escreva("LANCADORES DE AGULHA FLECHETTE: Disparam centenas de microagulhas de tungstenio em alta velocidade.\n Ideais para rasgar trajes espaciais e causar descompressão sem o risco de atravessar e perfurar o casco de metal da sua propria nave")
+					                					caso'Q':
+					                						escreva("")
+					                						u.aguarde(2900)
+					                				}
+					                				
+					                		}
+					                	}
+					                }
+		
                                         escreva("A porta esta trancada, voce precisara de uma chave.\n")
                                         u.aguarde(2900)
                                         pare
@@ -443,7 +490,7 @@ programa
         {
 
                 limpa()
-                escreva("Voce esbarrou numa mesa, em cima desta mesa tem uma chave de ferro um pouco desgastada...o que voce fara?\n")
+                escreva("Voce entra numa sala escura e esbarra numa mesa, em cima desta mesa tem uma chave de ferro um pouco desgastada...o que voce fara?\n")
                 escreva("[w] para pegar a chave\n")
                 escreva("[a] para explorar a sala novamente\n")
                 escreva("[s] para sair da sala\n")
@@ -458,34 +505,35 @@ programa
 			caso 'w':
 			se (chave_armamento == falso)
 			{
-			chave_armamento = verdadeiro
-			AdicionarItem("Chave de Ferro")
-			
-			escreva("Voce pegou a chave! Faca a escolha certa (essa acao tera consequencias...)\n")
-			u.aguarde(4000)
-			se (sala_armamento == verdadeiro)
-			{
-			escreva("Se quiser voltar até a porta, mova-se ate X:6 | Y:3\n")
-			u.aguarde(2500)
-			}
+				chave_armamento = verdadeiro
+				AdicionarItem("Chave de Ferro")
+				
+				escreva("Voce pegou a chave! Faca a escolha certa (essa acao tera consequencias...)\n")
+				u.aguarde(4000)
+				
+				se (sala_armamento == verdadeiro)
+				{
+					escreva("Se quiser voltar até a porta, mova-se ate X:6 | Y:3\n")
+					u.aguarde(2500)
+				}
 			}
 			senao
 			{
-			escreva("Você já pegou essa chave.\n")
-			u.aguarde(1700)
+				escreva("Você já pegou essa chave.\n")
+				u.aguarde(1700)
 			}
 			pare
 			
 			caso 'A':
 			caso 'a':
-			escreva("Você observa a sala novamente, mas não encontra nada de novo.\n")
-			u.aguarde(2600)
+				escreva("Você observa a sala novamente, mas não encontra nada de novo.\n")
+				u.aguarde(2600)
 			pare
 			
 			caso 'S':
 			caso 's':
 			escreva("Você sai da sala.\n")
-			u.aguarde(1200)
+			u.aguarde(1300)
 			pare
 			
 			caso contrario:
@@ -493,11 +541,12 @@ programa
 			u.aguarde(1300)
 			retorne
 			}
+        }
 
-		}
+
 					limpa()
 					escreva("Posição Atual -> X: ", CoorX, " | Y: ", CoorY, "\n")
-					escreva("Use W, A, S, D para se mover, F para o inventário (ou Q para sair): ")
+					escreva("Use W, A, S, D para se mover, F para o inventário (ou Q para retornar): ")
 					leia(andar)
 
 
@@ -526,8 +575,14 @@ programa
 						
 					caso 'Q':
 					caso 'q':
-						Sair()
+					pare
+
+					caso 'F':
+					caso 'f':
+					 MostrarInventario()
+					 
+						
 				}
+			}
 		}
 	}
-}
