@@ -1,19 +1,102 @@
 programa 
 {
-	inclua biblioteca Util --> u
 	
-	        inteiro CoorX = 0 // = Coordenada
+	inclua biblioteca Util --> u
+	//=======COORDENADAS DO PLAYER=======
+	   inteiro CoorX = 0 
         inteiro CoorY = 0
+     //===================================
+
+     //=======COORDENADAS DO ALIEN========
         inteiro CoorXAlien = 0
         inteiro CoorYAlien = 0
-        inteiro opcao
+     //===================================
+
+     	inteiro sanidade = 100
+	
+		real jogador_x = 0
+    		real jogador_y = 0
+
+     	real alien_x = 20
+     	real alien_y = 20
+
+
+        inteiro opcao // Escolhas do player
         caracter andar
         caracter amdar
         logico menu_ativo = verdadeiro
-        logico item = falso
+        logico item = falso 
         logico sala_armamento = falso
         logico chave_armamento = falso
         logico chave_dispensa = falso
+
+     //=========S A N I D A D E===========
+     funcao inicio()
+     {
+        enquanto(sanidade > 0)
+        {
+            calcular_sanidade()
+
+            escreva("\nSANIDADE: ", sanidade, "/100\n")
+
+            escreva("Posicao do jogador: ", jogador_x, ", ", jogador_y, "\n")
+            escreva("Posicao do alien: ", alien_x, ", ", alien_y, "\n")
+
+            // Aqui entraria a movimentacao do jogador
+            jogador_x = jogador_x + 1
+
+            // Exemplo: alien se aproximando
+            alien_x = alien_x - 1
+
+            esperar(1000)
+        }
+
+        escreva("\n")
+        escreva("====================================\n")
+        escreva("           COLAPSO MENTAL           \n")
+        escreva("====================================\n")
+    }
+
+
+    funcao calcular_sanidade()
+    {
+        real distancia
+        real diferenca_x
+        real diferenca_y
+
+        diferenca_x = alien_x - jogador_x
+        diferenca_y = alien_y - jogador_y
+
+        distancia = raiz_quadrada(
+            diferenca_x * diferenca_x +
+            diferenca_y * diferenca_y
+        )
+
+        se (distancia <= 3)
+        {
+            sanidade = sanidade - 10
+            escreva("\n!!! O ALIEN ESTA MUITO PERTO !!!\n")
+        }
+        senao se (distancia <= 7)
+        {
+            sanidade = sanidade - 5
+            escreva("\nVoce sente uma presenca proxima...\n")
+        }
+        senao se (distancia <= 12)
+        {
+            sanidade = sanidade - 2
+            escreva("\nAlgo parece estar observando voce...\n")
+        }
+
+        se (sanidade < 0)
+        {
+            sanidade = 0
+        }
+    }
+}
+
+     
+
 
         // ===================== INVENTÁRIO =====================
         cadeia inventario[20]
@@ -92,6 +175,8 @@ programa
                         }
                 }
 
+                cadeia passar
+
                 limpa()
                 escreva("=========================================================================\n")
                 escreva("                           CONEXÃO ESTABELECIDA                          \n")
@@ -124,7 +209,7 @@ programa
                 u.aguarde(1000)
                 escreva("Sistemas secundários voltam lentamente à atividade.\n\n")
                 escreva("Pressione F a qualquer momento durante o jogo para abrir seu inventário.\n\n")
-                u.aguarde(1000)
+                leia(passar)
                 Executarjogo()
                 menu_ativo = falso
                 retorne
@@ -149,19 +234,41 @@ programa
 
                 enquanto (menu_ativo)
                 {
+                        cadeia comecar_jogo
                         limpa()
 
                         // Menu
-                        escreva("=================================\n")
-                        escreva("          O ULTIMO ECO           \n")
-                        escreva("=================================\n")
-                        escreva(" 1 - INICIAR PROTOCOLO DE BUSCA(JOGAR)\n")
-                        escreva(" 2 - ARQUIVOS DE MEMORIA(HISTORIA)\n")
-                        escreva(" 3 - TRANSMISSAO DE CREDITOS\n")
-                        escreva(" 4 - INTERROMPER SISTEMA(SAIR)\n")
-                        escreva(" 5 - PULAR INTRODUCAO\n")
-                        escreva("=================================\n")
-                        escreva("Digite o codigo de acesso: ")
+                         escreva("______        __  __     __         ______   __     __    __     ______        ______     ______     ______    \n")
+					escreva("/\\  __ \\      /\\ \\/\\ \\   /\\ \\       /\\__  _\\ /\\ \\   /\\ \"-./  \\   /\\  __ \\      /\\  ___\\   /\\  ___\\   /\\  __ \\   \n")
+					escreva("\\ \\ \\/\\ \\     \\ \\ \\_\\ \\  \\ \\ \\____  \\/_/\\ \\/ \\ \\ \\  \\ \\ \\-./\\ \\  \\ \\ \\/\\ \\     \\ \\  __\\   \\ \\ \\____  \\ \\ \\/\\ \\  \n")
+					escreva(" \\ \\_____\\     \\ \\_____\\  \\ \\_____\\    \\ \\_\\  \\ \\_\\  \\ \\_\\ \\ \\_\\  \\ \\_____\\     \\ \\_____\\  \\ \\_____\\  \\ \\_____\\ \n")
+					escreva("  \\/_____/      \\/_____/   \\/_____/     \\/_/   \\/_/   \\/_/  \\/_/   \\/_____/      \\/_____/   \\/_____/   \\/_____/ \n")
+
+					leia(comecar_jogo)
+					limpa()
+                         escreva("\n")
+					escreva("===============================================================\n")
+					escreva("                    SISTEMA DE CONTROLE                       \n")
+					escreva("===============================================================\n")
+					escreva("|                                                             |\n")
+					escreva("|  [1] INICIAR PROTOCOLO DE BUSCA                            |\n")
+					escreva("|      > Iniciar protocolo de busca                          |\n")
+					escreva("|                                                             |\n")
+					escreva("|  [2] ARQUIVOS DE MEMORIA                                   |\n")
+					escreva("|      > Acessar registros e historia                        |\n")
+					escreva("|                                                             |\n")
+					escreva("|  [3] TRANSMISSAO DE CREDITOS                               |\n")
+					escreva("|      > Transferir creditos                                 |\n")
+					escreva("|                                                             |\n")
+					escreva("|  [4] INTERROMPER SISTEMA                                   |\n")
+					escreva("|      > Encerrar sistema                                    |\n")
+					escreva("|                                                             |\n")
+					escreva("|  [5] PULAR INTRODUCAO                                      |\n")
+					escreva("|      > Ignorar sequencia inicial                           |\n")
+					escreva("|                                                             |\n")
+					escreva("===============================================================\n")
+					escreva("  CODIGO DE ACESSO: ")
+
                         leia(opcao)
 
 
