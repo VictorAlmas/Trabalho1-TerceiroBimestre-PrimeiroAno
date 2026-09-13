@@ -272,18 +272,25 @@ programa
             // Processa o SEU movimento baseado na tecla apertada
             escolha(tecla_movimento)
             {
-                caso 'W': caso 'w':
-                    jogador_y = jogador_y + 1
-                    
-                caso 'S': caso 's':
-                    jogador_y = jogador_y - 1
-                    
-                caso 'A': caso 'a':
-                    jogador_x = jogador_x - 1
-                    
-                caso 'D': caso 'd':
-                    jogador_x = jogador_x + 1
-                    
+                caso 'W':
+                caso 'w':
+                    jogador_y++
+                    pare
+
+                caso 'A':
+                caso 'a':
+                    jogador_x--
+                    pare
+
+                caso 'S':
+                caso 's':
+                    jogador_y--
+                    pare
+
+                caso 'D':
+                caso 'd':
+                    jogador_x++
+                    pare
             }
 
             // Ele só dá o passo DEPOIS que você se moveu!
@@ -345,7 +352,6 @@ programa
             sanidade = 0
         }     
 	
-	        u.aguarde(5000)
         }
 
         funcao aguardarEnter()
