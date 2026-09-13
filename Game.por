@@ -2,6 +2,7 @@ programa
 {
 	
 	inclua biblioteca Util --> u
+	inclua biblioteca Matematica --> mat
 	//=======COORDENADAS DO PLAYER=======
 	   inteiro CoorX = 0 
         inteiro CoorY = 0
@@ -23,80 +24,14 @@ programa
 
         inteiro opcao // Escolhas do player
         caracter andar
-        caracter amdar
+        caracter andar_teclas
         logico menu_ativo = verdadeiro
         logico item = falso 
         logico sala_armamento = falso
         logico chave_armamento = falso
         logico chave_dispensa = falso
 
-     //=========S A N I D A D E===========
-     funcao inicio()
-     {
-        enquanto(sanidade > 0)
-        {
-            calcular_sanidade()
-
-            escreva("\nSANIDADE: ", sanidade, "/100\n")
-
-            escreva("Posicao do jogador: ", jogador_x, ", ", jogador_y, "\n")
-            escreva("Posicao do alien: ", alien_x, ", ", alien_y, "\n")
-
-            // Aqui entraria a movimentacao do jogador
-            jogador_x = jogador_x + 1
-
-            // Exemplo: alien se aproximando
-            alien_x = alien_x - 1
-
-            esperar(1000)
-        }
-
-        escreva("\n")
-        escreva("====================================\n")
-        escreva("           COLAPSO MENTAL           \n")
-        escreva("====================================\n")
-    }
-
-
-    funcao calcular_sanidade()
-    {
-        real distancia
-        real diferenca_x
-        real diferenca_y
-
-        diferenca_x = alien_x - jogador_x
-        diferenca_y = alien_y - jogador_y
-
-        distancia = raiz_quadrada(
-            diferenca_x * diferenca_x +
-            diferenca_y * diferenca_y
-        )
-
-        se (distancia <= 3)
-        {
-            sanidade = sanidade - 10
-            escreva("\n!!! O ALIEN ESTA MUITO PERTO !!!\n")
-        }
-        senao se (distancia <= 7)
-        {
-            sanidade = sanidade - 5
-            escreva("\nVoce sente uma presenca proxima...\n")
-        }
-        senao se (distancia <= 12)
-        {
-            sanidade = sanidade - 2
-            escreva("\nAlgo parece estar observando voce...\n")
-        }
-
-        se (sanidade < 0)
-        {
-            sanidade = 0
-        }
-    }
-}
-
-     
-
+   
 
         // ===================== INVENTÁRIO =====================
         cadeia inventario[20]
@@ -251,20 +186,20 @@ programa
 					escreva("                    SISTEMA DE CONTROLE                       \n")
 					escreva("===============================================================\n")
 					escreva("|                                                             |\n")
-					escreva("|  [1] INICIAR PROTOCOLO DE BUSCA                            |\n")
-					escreva("|      > Iniciar protocolo de busca                          |\n")
+					escreva("|  [1] INICIAR PROTOCOLO DE BUSCA                             |\n")
+					escreva("|      > Jogar                          |                     |\n")
 					escreva("|                                                             |\n")
-					escreva("|  [2] ARQUIVOS DE MEMORIA                                   |\n")
-					escreva("|      > Acessar registros e historia                        |\n")
+					escreva("|  [2] ARQUIVOS DE MEMORIA                                    |\n")
+					escreva("|      > Acessar registros e historia                         |\n")
 					escreva("|                                                             |\n")
-					escreva("|  [3] TRANSMISSAO DE CREDITOS                               |\n")
-					escreva("|      > Transferir creditos                                 |\n")
+					escreva("|  [3] TRANSMISSAO DE CREDITOS                                |\n")
+					escreva("|      > Transferir creditos                                  |\n")
 					escreva("|                                                             |\n")
-					escreva("|  [4] INTERROMPER SISTEMA                                   |\n")
-					escreva("|      > Encerrar sistema                                    |\n")
+					escreva("|  [4] INTERROMPER SISTEMA                                    |\n")
+					escreva("|      > Encerrar sistema                                     |\n")
 					escreva("|                                                             |\n")
-					escreva("|  [5] PULAR INTRODUCAO                                      |\n")
-					escreva("|      > Ignorar sequencia inicial                           |\n")
+					escreva("|  [5] PULAR INTRODUCAO                                       |\n")
+					escreva("|      > Ignorar sequencia inicial                            |\n")
 					escreva("|                                                             |\n")
 					escreva("===============================================================\n")
 					escreva("  CODIGO DE ACESSO: ")
@@ -275,7 +210,7 @@ programa
                         escolha(opcao)
                         {
                                 caso 1:
-                                        Jogunho()
+                                        loop()
                                         pare
 
                                 caso 2:
@@ -302,21 +237,113 @@ programa
         }
 
         // Inicio do joguinhozinho
-        funcao Executarjogo()
+      funcao Executarjogo(  )
         {
-	        CoorX = sorteia(0 , 10)        // Coor = Coordenada
-	        CoorY = sorteia(0 , 10)
-	        
-	        enquanto((CoorX == CoorXAlien) e (CoorY == CoorYAlien))
-	        {
-		        CoorXAlien = sorteia(0 , 10)
-		        CoorYAlien = sorteia(0 , 10)
-	        }
-	        
-	        escreva(CoorXAlien , " - " , CoorYAlien)
-	        escreva("\nVocê está na sala principal de criogenia, seja lá o que está a bordo, está procurando você...\n")
-	        
-	        Move()
+        	escreva("\nVocê está na sala principal de criogenia, seja lá o que está a bordo, está procurando você...\n")
+        	loop()
+        }
+	        //=========S A N I D A D E===========
+      funcao loop()
+    {
+        caracter tecla_movimento
+
+        enquanto(sanidade > 0)
+        {
+            // O computador calcula a distância e atualiza sua sanidade
+            calcular_sanidade()
+
+            // Se a sanidade zerou no cálculo, interrompe o jogo 
+            se (sanidade <= 0)
+            {
+                pare
+            }
+
+            limpa()
+            escreva("==================================================\n")
+            escreva(" SANIDADE: ", sanidade, "/100\n")
+            escreva(" Posição do jogador: X:", jogador_x, " | Y:", jogador_y, "\n")
+            escreva(" Posição do alien:   X:", alien_x, " | Y:", alien_y, "\n")
+            escreva("==================================================\n")
+            
+            // Ele fica travado esperando você escolher para onde ir
+            escreva("Use W(subir), A(esquerda), S(descer), D(direita) para andar: ")
+            leia(tecla_movimento)
+
+            // Processa o SEU movimento baseado na tecla apertada
+            escolha(tecla_movimento)
+            {
+                caso 'W': caso 'w':
+                    jogador_y = jogador_y + 1
+                    
+                caso 'S': caso 's':
+                    jogador_y = jogador_y - 1
+                    
+                caso 'A': caso 'a':
+                    jogador_x = jogador_x - 1
+                    
+                caso 'D': caso 'd':
+                    jogador_x = jogador_x + 1
+                    
+            }
+
+            // Ele só dá o passo DEPOIS que você se moveu!
+            // Ele compara a posição X dele com a sua
+            se (alien_x < jogador_x) { 
+                alien_x = alien_x + 1 
+            }
+            senao se (alien_x > jogador_x) { 
+                alien_x = alien_x - 1 
+            }
+
+            // Ele compara a posição Y dele com a sua
+            se (alien_y < jogador_y) { 
+                alien_y = alien_y + 1 
+            }
+            senao se (alien_y > jogador_y) { 
+                alien_y = alien_y - 1 
+            }
+        }
+
+        // Se sair do loop porque a sanidade chegou a 0, exibe o fim de jogo
+        limpa()
+        escreva("\n")
+        escreva("====================================\n")
+        escreva("           COLAPSO MENTAL           \n")
+        escreva("====================================\n")
+        escreva("O Alien encurralou você no silêncio do espaço.\n")
+    }
+
+        funcao calcular_sanidade()
+    {
+        real distancia
+        real diferenca_x
+        real diferenca_y
+
+        diferenca_x = alien_x - jogador_x
+        diferenca_y = alien_y - jogador_y
+		
+        distancia = mat.raiz((diferenca_x * diferenca_x + diferenca_y * diferenca_y), 2.0)
+
+        se (distancia <= 3)
+        {
+            sanidade = sanidade - 10
+            escreva("\n!!! O ALIEN ESTA MUITO PERTO !!!\n")
+        }
+        senao se (distancia <= 7)
+        {
+            sanidade = sanidade - 5
+            escreva("\nVoce sente uma presenca proxima...\n")
+        }
+        senao se (distancia <= 12)
+        {
+            sanidade = sanidade - 2
+            escreva("\nAlgo parece estar observando voce...\n")
+        }
+
+        se (sanidade < 0)
+        {
+            sanidade = 0
+        }     
 	
 	        u.aguarde(5000)
         }
@@ -528,10 +555,10 @@ programa
                         escreva("[s] para olhar os quadros\n")
                         escreva("Escolha: ")
 
-                        leia(amdar)
+                        leia(andar_teclas)
                         limpa()
 
-                        escolha(amdar)
+                        escolha(andar_teclas)
                         {
                                 caso 'w':
                                 caso 'W':
@@ -542,9 +569,9 @@ programa
 					                		escreva("Parabens! voce desbloqueou a sala de armamentos!\n")
 					                		escreva("[w] para explorar a sala\n")
 					                		escreva("[Q] para RETORNAR\n")
-										leia(amdar)
+										leia(andar_teclas)
 										
-					                		escolha(amdar)
+					                		escolha(andar_teclas)
 					                		{
 					                			caso'w':
 					                			caso'W':
@@ -555,9 +582,9 @@ programa
 
 					                				escreva("[1] para entender como as armas funcionam\n")
 					                				escreva("[Q] para retornar")
-					                				leia(amdar)
+					                				leia(andar_teclas)
 
-					                				escolha(amdar)
+					                				escolha(andar_teclas)
 					                				{
 					                					caso'1':
 					                						escreva("LASERS DE ENERGIA DIRECIONADA: Feixes de luz de alta intensidade baseados no espaço\n Cega sensores de satelites ou queima paineis solares e estruturas a distancia.\n")
@@ -603,9 +630,9 @@ programa
                 escreva("[s] para sair da sala\n")
                 escreva("Escolha: ")
 
-                leia(amdar)
+                leia(andar_teclas)
 
-			escolha(amdar)
+			escolha(andar_teclas)
 			{
 			
 			caso 'W':
