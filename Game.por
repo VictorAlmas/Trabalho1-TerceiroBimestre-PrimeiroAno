@@ -101,12 +101,18 @@ programa
                         limpa()
                         escreva("Desativando modo de sobrevivência em estado de criogenia acordar sobrevivente\n\n")
                         escreva("Buscando sinais vitais no perímetro cósmico")
+                        u.aguarde(600)
+                        escreva(".")
+                        u.aguarde(600)
+
 
                         para(inteiro g=0; g < 3; g++)
                         {
                                 u.aguarde(200)
                                 escreva(".")
                                 u.aguarde(200)
+
+                                loop()
                         }
                 }
 
@@ -178,6 +184,8 @@ programa
 					escreva("\\ \\ \\/\\ \\     \\ \\ \\_\\ \\  \\ \\ \\____  \\/_/\\ \\/ \\ \\ \\  \\ \\ \\-./\\ \\  \\ \\ \\/\\ \\     \\ \\  __\\   \\ \\ \\____  \\ \\ \\/\\ \\  \n")
 					escreva(" \\ \\_____\\     \\ \\_____\\  \\ \\_____\\    \\ \\_\\  \\ \\_\\  \\ \\_\\ \\ \\_\\  \\ \\_____\\     \\ \\_____\\  \\ \\_____\\  \\ \\_____\\ \n")
 					escreva("  \\/_____/      \\/_____/   \\/_____/     \\/_/   \\/_/   \\/_/  \\/_/   \\/_____/      \\/_____/   \\/_____/   \\/_____/ \n")
+					escreva("\n")
+					escreva("\n                                          PRESSIONE ENTER PARA COMEÇAR")
 
 					leia(comecar_jogo)
 					limpa()
@@ -210,7 +218,7 @@ programa
                         escolha(opcao)
                         {
                                 caso 1:
-                                        loop()
+                                        Jogunho()
                                         pare
 
                                 caso 2:
@@ -249,16 +257,17 @@ programa
 
         enquanto(sanidade > 0)
         {
+        	limpa()
             // O computador calcula a distância e atualiza sua sanidade
             calcular_sanidade()
 
             // Se a sanidade zerou no cálculo, interrompe o jogo 
+            
             se (sanidade <= 0)
             {
                 pare
             }
-
-            limpa()
+            
             escreva("==================================================\n")
             escreva(" SANIDADE: ", sanidade, "/100\n")
             escreva(" Posição do jogador: X:", jogador_x, " | Y:", jogador_y, "\n")
@@ -296,18 +305,18 @@ programa
             // Ele só dá o passo DEPOIS que você se moveu!
             // Ele compara a posição X dele com a sua
             se (alien_x < jogador_x) { 
-                alien_x = alien_x + 1 
+                alien_x = alien_x + 0.5 
             }
             senao se (alien_x > jogador_x) { 
-                alien_x = alien_x - 1 
+                alien_x = alien_x - 0.5 
             }
 
             // Ele compara a posição Y dele com a sua
             se (alien_y < jogador_y) { 
-                alien_y = alien_y + 1 
+                alien_y = alien_y + 0.5
             }
             senao se (alien_y > jogador_y) { 
-                alien_y = alien_y - 1 
+                alien_y = alien_y - 0.5 
             }
         }
 
@@ -318,6 +327,8 @@ programa
         escreva("           COLAPSO MENTAL           \n")
         escreva("====================================\n")
         escreva("O Alien encurralou você no silêncio do espaço.\n")
+
+	   aguardarEnter()
     }
 
         funcao calcular_sanidade()
@@ -556,9 +567,11 @@ programa
 
                         sala_armamento = verdadeiro
 
-                        escreva("[w] para abrir a porta\n")
-                        escreva("[a] para olhar as folhas\n")
-                        escreva("[s] para olhar os quadros\n")
+				    escreva("===============================\n")
+                        escreva("|[1] para abrir a porta       |\n")
+                        escreva("|[2] para olhar as folhas     |\n")
+                        escreva("|[3] para olhar os quadros    |\n")
+                        escreva("===============================\n")
                         escreva("Escolha: ")
 
                         leia(andar_teclas)
@@ -566,34 +579,38 @@ programa
 
                         escolha(andar_teclas)
                         {
-                                caso 'w':
-                                caso 'W':
+                                caso '1':
 					                para(inteiro i = 0; i < 20; i++)
 					                {
 					                	se(inventario[i] == "Chave de Ferro")
 					                	{
 					                		escreva("Parabens! voce desbloqueou a sala de armamentos!\n")
-					                		escreva("[w] para explorar a sala\n")
+					                		escreva("[E] para explorar a sala\n")
 					                		escreva("[Q] para RETORNAR\n")
 										leia(andar_teclas)
 										
 					                		escolha(andar_teclas)
 					                		{
-					                			caso'w':
-					                			caso'W':
-					                				escreva("Voce olha ao redor e ve um painel com varias armas:\n")
-					                				escreva("lasers de energia direcionada, pistolas giroscopicas\n")
-					                				escreva("armas magnéticas de pulso, lançadores de agulha flechette\n")
-					                				escreva("armas de micro-ondas\n")
+					                			caso'E':
+					                			caso'e':
+					                				escreva("A porta pesada se abre com um silvo hidráulico, revelando a Sala de Armamentos.\n")
+					                				escreva("Diante de você, um painel iluminado exibe fileiras de equipamentos avançados.\n")
+					                				escreva("O brilho neon reflete na superfície polida de lasers de energia direcionada e pistolas giroscópicas.\n")
+					                				escreva("Ao lado, descansam armas magnéticas de pulso, lançadores de agulha Flechette e imponentes armas de micro-ondas.\n")
+					                				escreva("O arsenal está à sua disposição, use com sabedoria.")
 
-					                				escreva("[1] para entender como as armas funcionam\n")
+					                				escreva("[1] para entender o funcionamento das armas\n")
 					                				escreva("[Q] para retornar")
 					                				leia(andar_teclas)
 
 					                				escolha(andar_teclas)
 					                				{
 					                					caso'1':
-					                						escreva("LASERS DE ENERGIA DIRECIONADA: Feixes de luz de alta intensidade baseados no espaço\n Cega sensores de satelites ou queima paineis solares e estruturas a distancia.\n")
+					                						escreva("[               LASERS DE ENERGIA DIRECIONADA                ] \n")
+					                						escreva("---------------------------------------------------------------\n")
+					                						escreva("Descrição: Emite feixes de luz concentrada de alta intensidade.\n")
+					                						escreva("Utilidade: Ideal para cegar sensores de satélites ou derreter\n")
+					                						escreva("estruturas espaciais como uma nave.")
 					                						escreva("PISTOLAS GIROSCOPICAS: Dispara mini-foguetes que aceleram apos sairem do cano\n O recuo é praticamente zero, perfeito para a ausencia de gravidade, o projetil ganha velocidade no vacuo.\n")
 					                						escreva("ARMAS MAGNETICAS DE PULSO: Usam bobinas eletromagnéticas para acelerar um dardo metálico envenenado silenciosamente\n Sem explosao de polvora que precisa de oxigenio, sem cartuchos vazios flutuando e recuo muito menor do que armas de fogo.")
 					                						escreva("LANCADORES DE AGULHA FLECHETTE: Disparam centenas de microagulhas de tungstenio em alta velocidade.\n Ideais para rasgar trajes espaciais e causar descompressão sem o risco de atravessar e perfurar o casco de metal da sua propria nave")
@@ -612,8 +629,9 @@ programa
 
                                 caso 'a':
                                 caso 'A':
-                                        escreva("Você mexe nas folhas. São relatórios antigos cobertos de poeira e sem nexo.\n")
+                                        escreva("Você mexe nas folhas. São relatórios antigos cobertos de poeira e sem nexo. Uma folha em especial te chama atenção\n")
                                         u.aguarde(3200)
+                                        escreva("[w]")
                                         pare
 
                                 caso 's':
