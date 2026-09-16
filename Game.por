@@ -567,7 +567,7 @@ programa
 
                         sala_armamento = verdadeiro
 
-				    escreva("===============================\n")
+				        escreva("===============================\n")
                         escreva("|[1] para abrir a porta       |\n")
                         escreva("|[2] para olhar as folhas     |\n")
                         escreva("|[3] para olhar os quadros    |\n")
