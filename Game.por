@@ -3,15 +3,6 @@ programa
 	
 	inclua biblioteca Util --> u
 	inclua biblioteca Matematica --> mat
-	//=======COORDENADAS DO PLAYER=======
-	   inteiro CoorX = 0 
-        inteiro CoorY = 0
-     //===================================
-
-     //=======COORDENADAS DO ALIEN========
-        inteiro CoorXAlien = 0
-        inteiro CoorYAlien = 0
-     //===================================
 
      	inteiro sanidade = 100
 	
@@ -112,7 +103,6 @@ programa
                                 escreva(".")
                                 u.aguarde(200)
 
-                                loop()
                         }
                 }
 
@@ -149,9 +139,8 @@ programa
                 escreva("Um som metálico ecoa pelos corredores da nave.\n\n")
                 u.aguarde(1000)
                 escreva("Sistemas secundários voltam lentamente à atividade.\n\n")
-                escreva("Pressione F a qualquer momento durante o jogo para abrir seu inventário.\n\n")
                 leia(passar)
-                Executarjogo()
+                loop()
                 menu_ativo = falso
                 retorne
         }
@@ -185,7 +174,7 @@ programa
 					escreva(" \\ \\_____\\     \\ \\_____\\  \\ \\_____\\    \\ \\_\\  \\ \\_\\  \\ \\_\\ \\ \\_\\  \\ \\_____\\     \\ \\_____\\  \\ \\_____\\  \\ \\_____\\ \n")
 					escreva("  \\/_____/      \\/_____/   \\/_____/     \\/_/   \\/_/   \\/_/  \\/_/   \\/_____/      \\/_____/   \\/_____/   \\/_____/ \n")
 					escreva("\n")
-					escreva("\n                                          PRESSIONE ENTER PARA COMEÇAR")
+					escreva("\n                                          PRESSIONE ENTER PARA COMEÇAR: ")
 
 					leia(comecar_jogo)
 					limpa()
@@ -299,7 +288,13 @@ programa
                 caso 'D':
                 caso 'd':
                     jogador_x++
-                    pare
+                	pare
+   
+            	caso 'F':
+			caso 'f':
+			 MostrarInventario()
+					 
+            
             }
 
             // Ele só dá o passo DEPOIS que você se moveu!
@@ -496,10 +491,7 @@ programa
         funcao MostrarInventario()
         {
                 inteiro opcaoInventario
-                logico inventario_ativo = verdadeiro
-
-                enquanto (inventario_ativo)
-                {
+                
                         limpa()
                         escreva("=================================\n")
                         escreva("            INVENTÁRIO           \n")
@@ -538,14 +530,12 @@ programa
                                 caso 3:
                                         RetirarItem()
                                         pare
-                                caso 0:
-                                        inventario_ativo = falso
-                                        pare
+                                
                                 caso contrario:
                                         escreva("Opção inválida.\n")
                                         u.aguarde(800)
                         }
-                }
+                
         }
 
         // ====================================================================
@@ -557,7 +547,7 @@ programa
         enquanto(Simsalabim == verdadeiro)
         {
 
-        se(CoorX == 6 e CoorY == 3)
+        se(jogador_x == 6 e jogador_y == 3)
         {
 
                 limpa()
@@ -567,7 +557,7 @@ programa
 
                         sala_armamento = verdadeiro
 
-				        escreva("===============================\n")
+				    escreva("===============================\n")
                         escreva("|[1] para abrir a porta       |\n")
                         escreva("|[2] para olhar as folhas     |\n")
                         escreva("|[3] para olhar os quadros    |\n")
@@ -606,14 +596,22 @@ programa
 					                				escolha(andar_teclas)
 					                				{
 					                					caso'1':
-					                						escreva("[               LASERS DE ENERGIA DIRECIONADA                ] \n")
-					                						escreva("---------------------------------------------------------------\n")
+					                						escreva("1 - [               LASERS DE ENERGIA DIRECIONADA                ] \n")
+					                						escreva("-------------------------------------------------------------------\n")
 					                						escreva("Descrição: Emite feixes de luz concentrada de alta intensidade.\n")
 					                						escreva("Utilidade: Ideal para cegar sensores de satélites ou derreter\n")
-					                						escreva("estruturas espaciais como uma nave.")
-					                						escreva("PISTOLAS GIROSCOPICAS: Dispara mini-foguetes que aceleram apos sairem do cano\n O recuo é praticamente zero, perfeito para a ausencia de gravidade, o projetil ganha velocidade no vacuo.\n")
-					                						escreva("ARMAS MAGNETICAS DE PULSO: Usam bobinas eletromagnéticas para acelerar um dardo metálico envenenado silenciosamente\n Sem explosao de polvora que precisa de oxigenio, sem cartuchos vazios flutuando e recuo muito menor do que armas de fogo.")
-					                						escreva("LANCADORES DE AGULHA FLECHETTE: Disparam centenas de microagulhas de tungstenio em alta velocidade.\n Ideais para rasgar trajes espaciais e causar descompressão sem o risco de atravessar e perfurar o casco de metal da sua propria nave")
+					                						escreva("estruturas espaciais como uma nave.\n")
+					                						escreva("2 - [                    PISTOLAS GIROSCOPICAS                   ] \n")
+					                						escreva("-------------------------------------------------------------------\n")
+					                						escreva("Descrição: Dispara mini-foguetes que aceleram apos sairem do cano\n")
+					                						escreva("Vantagem: Recuo zero (ideal para gravidade zero) e projétil ganha velocidade no vácuo.\n\n")
+					                						escreva("3 - [                 ARMAS MAGNÉTICAS DE PULSO                  ]\n")
+					                						escreva("-------------------------------------------------------------------")
+					                						escreva("Descrição: Bobinas eletromagnéticas que aceleram um dardo metálico envenenado.\n")
+					                						escreva("Vantagem: Disparo silencioso, sem necessidade de oxigênio e sem cartuchos vazios.\n\n")
+					                						escreva("4 - [               LANÇADORES DE AGULHA FLECHETTE               ]\n")
+					                						escreva("--------------------------------------------------------------------")
+					                						escreva("")
 					                					caso'Q':
 					                						escreva("")
 					                						u.aguarde(2900)
@@ -644,7 +642,7 @@ programa
                                 escreva("Comando inválido!\n")
                                        retorne
                         }
-                }senao se (CoorX == 4 e CoorY == 7)
+                }senao se (jogador_x == 4 e jogador_y == 7)
         {
 
                 limpa()
@@ -700,47 +698,7 @@ programa
 			retorne
 			}
         }
-
-
-					limpa()
-					escreva("Posição Atual -> X: ", CoorX, " | Y: ", CoorY, "\n")
-					escreva("Use W, A, S, D para se mover, F para o inventário (ou Q para retornar): ")
-					leia(andar)
-
-
-					escolha(andar)
-					{
-
-					caso 'W':
-					caso 'w':
-						CoorY++
-						pare
-
-					caso 'A':
-					caso 'a':
-						CoorX--
-						pare
-
-					caso 'S':
-					caso 's':
-						CoorY--
-						pare
-
-					caso 'D':
-					caso 'd':
-						CoorX++
-						pare
-						
-					caso 'Q':
-					caso 'q':
-					pare
-
-					caso 'F':
-					caso 'f':
-					 MostrarInventario()
-					 
-						
+		
 				}
 			}
-		}
 	}
