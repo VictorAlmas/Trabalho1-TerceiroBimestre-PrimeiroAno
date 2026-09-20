@@ -1,704 +1,997 @@
-programa 
+programa
 {
-	
 	inclua biblioteca Util --> u
 	inclua biblioteca Matematica --> mat
 
-     	inteiro sanidade = 100
-	
-		real jogador_x = 0
-    		real jogador_y = 0
-
-     	real alien_x = 20
-     	real alien_y = 20
-
-
-        inteiro opcao // Escolhas do player
-        caracter andar
-        caracter andar_teclas
-        logico menu_ativo = verdadeiro
-        logico item = falso 
-        logico sala_armamento = falso
-        logico chave_armamento = falso
-        logico chave_dispensa = falso
-
-   
-
-        // ===================== INVENTÁRIO =====================
-        cadeia inventario[20]
-        inteiro itensNoInventario = 0
-        // ========================================================
-
-        funcao Sair()
-        {
-                limpa()
-                para(inteiro g=15; g > 0; g--)
-                {
-                        limpa()
-                        escreva("Conexão encerrada. O último eco se apagou no vácuo")
-
-                        para(inteiro i=0; i < g; i++)
-                        {
-                                escreva(".")
-                        }
-
-                        u.aguarde(500)
-                }
-                
-                escreva("\n")
-                limpa()
-                escreva("Conexão encerrada. O último eco se apagou no vácuo")
-                u.aguarde(1000)
-                limpa()
-                menu_ativo = falso
-                retorne
-        }
-
-        funcao Creditos()
-        {
-                limpa()
-                escreva("=================== TRANSMISSÃO DE CRÉDITOS ===================\n\n")
-                escreva(" Desenvolvedores: Ayka E., Victor H., Lucas N. \n")
-                escreva(" Interface de Desenvolvimento: Portugol Studio\n")
-                escreva(" Atmosfera: Suspense Sci-Fi / Sobrevivência\n\n")
-                escreva("===============================================================\n")
-                escreva("Pressione ENTER para retornar ao terminal...")
-                aguardarEnter()
-                retorne
-        }
-
-        funcao Jogunho()
-        {
-                limpa()
-                
-                para(inteiro i=0; i < 5; i++)
-                {
-                        limpa()
-                        escreva("Sintonizando a ultima frequencia de radio conhecida")
-
-                        para(inteiro g=0; g < 3; g++)
-                        {
-                                u.aguarde(200)
-                                escreva(".")
-                                u.aguarde(200)
-                        }
-                }
-                
-                escreva("\n")
-                u.aguarde(500)
-                
-                para(inteiro i=0; i < 5; i++)
-                {
-                        limpa()
-                        escreva("Desativando modo de sobrevivência em estado de criogenia acordar sobrevivente\n\n")
-                        escreva("Buscando sinais vitais no perímetro cósmico")
-                        u.aguarde(600)
-                        escreva(".")
-                        u.aguarde(600)
-
-
-                        para(inteiro g=0; g < 3; g++)
-                        {
-                                u.aguarde(200)
-                                escreva(".")
-                                u.aguarde(200)
-
-                        }
-                }
-
-                cadeia passar
-
-                limpa()
-                escreva("=========================================================================\n")
-                escreva("                           CONEXÃO ESTABELECIDA                          \n")
-                escreva("=========================================================================\n\n")
-                u.aguarde(500)
-                escreva("Estática ecoa pelos alto-falantes da sua cabine.\n\n")
-                escreva("O monitor pisca com uma linha de código piscando em vermelho...\n\n")
-                u.aguarde(1500)
-                escreva("Há mais um passageiro a bordo dessa nave.\n\n")
-                u.aguarde(4500)
-                escreva("ALERTA DE SEGURANÇA: Intruso detectado a bordo da nave.\n\n")
-                u.aguarde(1000)
-                escreva("Espécie não identificada.\n\n")
-                u.aguarde(3000)
-                escreva("Iniciando protocolo de orientação para sobrevivente.\n\n")
-                u.aguarde(2000)
-                escreva("Você está na sala principal de criogenia.\n\n")
-                u.aguarde(2500)
-                escreva("Há outras salas que poderão ajudá-lo a sobreviver.\n\n")
-                u.aguarde(1000)
-                escreva("Há a sala de mantimentos, a sala de armamentos e a sala de auxílio médico.\n\n")
-                u.aguarde(1000)
-                escreva("Elas correspondem às três últimas portas do corredor principal, respectivamente.\n\n")
-                u.aguarde(1000)
-                escreva("Entrando em modo de suporte de vida e manutenção.\n\n")
-                u.aguarde(1000)
-                escreva("Ativando estufa para melhorar o fluxo e a qualidade do ar.\n\n")
-                u.aguarde(1200)
-                escreva("Um som metálico ecoa pelos corredores da nave.\n\n")
-                u.aguarde(1000)
-                escreva("Sistemas secundários voltam lentamente à atividade.\n\n")
-                leia(passar)
-                loop()
-                menu_ativo = falso
-                retorne
-        }
-
-        funcao Historia()
-        {
-                limpa()
-                escreva("===================== ARQUIVOS DE MEMÓRIA =====================\n\n")
-                escreva(" O silêncio engoliu tudo. As cidades estão vazias e as estrelas\n")
-                escreva(" parecem mais frias. Não há mais transmissões, não há mais vozes.\n")
-                escreva(" Você capta um pulso fraco no radar. Um último eco humano.\n\n")
-                escreva(" OBJETIVO: Siga o sinal. Descubra se você realmente está sozinho.\n")
-                escreva("===============================================================\n")
-                escreva("Pressione ENTER para retornar ao terminal...")
-                aguardarEnter()
-                retorne
-        }
-
-        funcao inicio()
-        {
-
-                enquanto (menu_ativo)
-                {
-                        cadeia comecar_jogo
-                        limpa()
-
-                        // Menu
-                         escreva("______        __  __     __         ______   __     __    __     ______        ______     ______     ______    \n")
-					escreva("/\\  __ \\      /\\ \\/\\ \\   /\\ \\       /\\__  _\\ /\\ \\   /\\ \"-./  \\   /\\  __ \\      /\\  ___\\   /\\  ___\\   /\\  __ \\   \n")
-					escreva("\\ \\ \\/\\ \\     \\ \\ \\_\\ \\  \\ \\ \\____  \\/_/\\ \\/ \\ \\ \\  \\ \\ \\-./\\ \\  \\ \\ \\/\\ \\     \\ \\  __\\   \\ \\ \\____  \\ \\ \\/\\ \\  \n")
-					escreva(" \\ \\_____\\     \\ \\_____\\  \\ \\_____\\    \\ \\_\\  \\ \\_\\  \\ \\_\\ \\ \\_\\  \\ \\_____\\     \\ \\_____\\  \\ \\_____\\  \\ \\_____\\ \n")
-					escreva("  \\/_____/      \\/_____/   \\/_____/     \\/_/   \\/_/   \\/_/  \\/_/   \\/_____/      \\/_____/   \\/_____/   \\/_____/ \n")
-					escreva("\n")
-					escreva("\n                                          PRESSIONE ENTER PARA COMEÇAR: ")
-
-					leia(comecar_jogo)
-					limpa()
-                         escreva("\n")
-					escreva("===============================================================\n")
-					escreva("                    SISTEMA DE CONTROLE                       \n")
-					escreva("===============================================================\n")
-					escreva("|                                                             |\n")
-					escreva("|  [1] INICIAR PROTOCOLO DE BUSCA                             |\n")
-					escreva("|      > Jogar                          |                     |\n")
-					escreva("|                                                             |\n")
-					escreva("|  [2] ARQUIVOS DE MEMORIA                                    |\n")
-					escreva("|      > Acessar registros e historia                         |\n")
-					escreva("|                                                             |\n")
-					escreva("|  [3] TRANSMISSAO DE CREDITOS                                |\n")
-					escreva("|      > Transferir creditos                                  |\n")
-					escreva("|                                                             |\n")
-					escreva("|  [4] INTERROMPER SISTEMA                                    |\n")
-					escreva("|      > Encerrar sistema                                     |\n")
-					escreva("|                                                             |\n")
-					escreva("|  [5] PULAR INTRODUCAO                                       |\n")
-					escreva("|      > Ignorar sequencia inicial                            |\n")
-					escreva("|                                                             |\n")
-					escreva("===============================================================\n")
-					escreva("  CODIGO DE ACESSO: ")
-
-                        leia(opcao)
-
-
-                        escolha(opcao)
-                        {
-                                caso 1:
-                                        Jogunho()
-                                        pare
-
-                                caso 2:
-                                        Historia()
-                                        pare
-
-                                caso 3:
-                                        Creditos()
-                                        pare
-
-                                caso 4:
-                                        Sair()
-                                        pare
-
-                                caso 5:
-                                        Executarjogo()
-                                        pare
-
-                                caso contrario:
-                                        limpa()
-                                        escreva("Opção errada! Rode o programa de novo.\n")
-                        }
-                }
-        }
-
-        // Inicio do joguinhozinho
-      funcao Executarjogo(  )
-        {
-        	escreva("\nVocê está na sala principal de criogenia, seja lá o que está a bordo, está procurando você...\n")
-        	loop()
-        }
-	        //=========S A N I D A D E===========
-      funcao loop()
-    {
-        caracter tecla_movimento
-
-        enquanto(sanidade > 0)
-        {
-        	limpa()
-            // O computador calcula a distância e atualiza sua sanidade
-            calcular_sanidade()
-
-            // Se a sanidade zerou no cálculo, interrompe o jogo 
-            
-            se (sanidade <= 0)
-            {
-                pare
-            }
-            
-            escreva("==================================================\n")
-            escreva(" SANIDADE: ", sanidade, "/100\n")
-            escreva(" Posição do jogador: X:", jogador_x, " | Y:", jogador_y, "\n")
-            escreva(" Posição do alien:   X:", alien_x, " | Y:", alien_y, "\n")
-            escreva("==================================================\n")
-            
-            // Ele fica travado esperando você escolher para onde ir
-            escreva("Use W(subir), A(esquerda), S(descer), D(direita) para andar: ")
-            leia(tecla_movimento)
-
-            // Processa o SEU movimento baseado na tecla apertada
-            escolha(tecla_movimento)
-            {
-                caso 'W':
-                caso 'w':
-                    jogador_y++
-                    pare
-
-                caso 'A':
-                caso 'a':
-                    jogador_x--
-                    pare
-
-                caso 'S':
-                caso 's':
-                    jogador_y--
-                    pare
-
-                caso 'D':
-                caso 'd':
-                    jogador_x++
-                	pare
-   
-            	caso 'F':
-			caso 'f':
-			 MostrarInventario()
-					 
-            
-            }
-
-            // Ele só dá o passo DEPOIS que você se moveu!
-            // Ele compara a posição X dele com a sua
-            se (alien_x < jogador_x) { 
-                alien_x = alien_x + 0.5 
-            }
-            senao se (alien_x > jogador_x) { 
-                alien_x = alien_x - 0.5 
-            }
-
-            // Ele compara a posição Y dele com a sua
-            se (alien_y < jogador_y) { 
-                alien_y = alien_y + 0.5
-            }
-            senao se (alien_y > jogador_y) { 
-                alien_y = alien_y - 0.5 
-            }
-        }
-
-        // Se sair do loop porque a sanidade chegou a 0, exibe o fim de jogo
-        limpa()
-        escreva("\n")
-        escreva("====================================\n")
-        escreva("           COLAPSO MENTAL           \n")
-        escreva("====================================\n")
-        escreva("O Alien encurralou você no silêncio do espaço.\n")
-
-	   aguardarEnter()
-    }
-
-        funcao calcular_sanidade()
-    {
-        real distancia
-        real diferenca_x
-        real diferenca_y
-
-        diferenca_x = alien_x - jogador_x
-        diferenca_y = alien_y - jogador_y
-		
-        distancia = mat.raiz((diferenca_x * diferenca_x + diferenca_y * diferenca_y), 2.0)
-
-        se (distancia <= 3)
-        {
-            sanidade = sanidade - 10
-            escreva("\n!!! O ALIEN ESTA MUITO PERTO !!!\n")
-        }
-        senao se (distancia <= 7)
-        {
-            sanidade = sanidade - 5
-            escreva("\nVoce sente uma presenca proxima...\n")
-        }
-        senao se (distancia <= 12)
-        {
-            sanidade = sanidade - 2
-            escreva("\nAlgo parece estar observando voce...\n")
-        }
-
-        se (sanidade < 0)
-        {
-            sanidade = 0
-        }     
-	
-        }
-
-        funcao aguardarEnter()
-        {
-	        cadeia pausa
-	        leia(pausa)
-        }
-
-        // ===================== FUNÇÕES DE INVENTÁRIO =====================
-
-        funcao AdicionarItem(cadeia nome)
-        {
-                se (itensNoInventario < 20)
-                {
-                        inventario[itensNoInventario] = nome
-                        itensNoInventario++
-                        escreva("Item \"", nome, "\" adicionado ao inventário! (", itensNoInventario, "/20)\n")
-                }
-                senao
-                {
-                        escreva("Inventário cheio! Não é possível carregar mais itens.\n")
-                }
-                u.aguarde(1000)
-        }
-
-        funcao RemoverItemPorIndice(inteiro indice)
-        {
-                para(inteiro i = indice; i < itensNoInventario - 1; i++)
-                {
-                        inventario[i] = inventario[i + 1]
-                }
-                itensNoInventario--
-        }
-
-        funcao TrocarItem()
-        {
-                inteiro origem
-                inteiro destino
-                cadeia temp
-
-                se (itensNoInventario == 0)
-                {
-                        escreva("Inventário vazio, não há itens para trocar.\n")
-                        u.aguarde(1000)
-                        retorne
-                }
-
-                escreva("Digite o número do item que deseja mover: ")
-                leia(origem)
-                escreva("Digite a posição de destino: ")
-                leia(destino)
-
-                origem--
-                destino--
-
-                se (origem >= 0 e origem < itensNoInventario e destino >= 0 e destino < itensNoInventario)
-                {
-                        temp = inventario[origem]
-                        inventario[origem] = inventario[destino]
-                        inventario[destino] = temp
-                        escreva("Itens trocados de posição com sucesso!\n")
-                }
-                senao
-                {
-                        escreva("Posição inválida.\n")
-                }
-                u.aguarde(1200)
-        }
-
-        funcao UsarItem()
-        {
-                inteiro indice
-
-                se (itensNoInventario == 0)
-                {
-                        escreva("Inventário vazio, não há itens para usar.\n")
-                        u.aguarde(1000)
-                        retorne
-                }
-
-                escreva("Digite o número do item que deseja usar: ")
-                leia(indice)
-                indice--
-
-                se (indice >= 0 e indice < itensNoInventario)
-                {
-                        escreva("Você usou: ", inventario[indice], "\n")
-
-                        se (inventario[indice] == "Chave de Ferro")
-                        {
-                                chave_armamento = verdadeiro
-                                escreva("A chave se encaixa em uma fechadura próxima!\n")
-                        }
-
-                        RemoverItemPorIndice(indice)
-                }
-                senao
-                {
-                        escreva("Posição inválida.\n")
-                }
-                u.aguarde(1500)
-        }
-
-        funcao RetirarItem()
-        {
-                inteiro indice
-
-                se (itensNoInventario == 0)
-                {
-                        escreva("Inventário vazio, não há itens para retirar.\n")
-                        u.aguarde(1000)
-                        retorne
-                }
-
-                escreva("Digite o número do item que deseja descartar: ")
-                leia(indice)
-                indice--
-
-                se (indice >= 0 e indice < itensNoInventario)
-                {
-                        escreva("Item \"", inventario[indice], "\" descartado.\n")
-                        RemoverItemPorIndice(indice)
-                }
-                senao
-                {
-                        escreva("Posição inválida.\n")
-                }
-                u.aguarde(1000)
-        }
-
-        funcao MostrarInventario()
-        {
-                inteiro opcaoInventario
-                
-                        limpa()
-                        escreva("=================================\n")
-                        escreva("            INVENTÁRIO           \n")
-                        escreva("=================================\n")
-                        escreva("Espaços livres: ", (20 - itensNoInventario), " / 20\n\n")
-
-                        se (itensNoInventario == 0)
-                        {
-                                escreva("O inventário está vazio.\n\n")
-                        }
-                        senao
-                        {
-                                para(inteiro i = 0; i < itensNoInventario; i++)
-                                {
-                                        escreva(i + 1, " - ", inventario[i], "\n")
-                                }
-                                escreva("\n")
-                        }
-
-                        escreva("=================================\n")
-                        escreva("[1] Trocar item de posição\n")
-                        escreva("[2] Usar item\n")
-                        escreva("[3] Retirar item\n")
-                        escreva("[0] Voltar ao jogo\n")
-                        escreva("Escolha: ")
-                        leia(opcaoInventario)
-
-                        escolha(opcaoInventario)
-                        {
-                                caso 1:
-                                        TrocarItem()
-                                        pare
-                                caso 2:
-                                        UsarItem()
-                                        pare
-                                caso 3:
-                                        RetirarItem()
-                                        pare
-                                
-                                caso contrario:
-                                        escreva("Opção inválida.\n")
-                                        u.aguarde(800)
-                        }
-                
-        }
-
-        // ====================================================================
-
-        funcao Move()
-        //verificar eventos()
-        {
-        logico Simsalabim = verdadeiro
-        enquanto(Simsalabim == verdadeiro)
-        {
-
-        se(jogador_x == 6 e jogador_y == 3)
-        {
-
-                limpa()
-
-                        escreva("Você entrou em uma sala com algumas pilhas de folhas nas mesas,\n a iluminação do ambiente falha levemente. O local tem cheiro de coisas antigas, nas paredes há alguns quadros\n")
-                        escreva("Voce nota uma porta no fim desta sala, o que voce fará?\n")
-
-                        sala_armamento = verdadeiro
-
-				    escreva("===============================\n")
-                        escreva("|[1] para abrir a porta       |\n")
-                        escreva("|[2] para olhar as folhas     |\n")
-                        escreva("|[3] para olhar os quadros    |\n")
-                        escreva("===============================\n")
-                        escreva("Escolha: ")
-
-                        leia(andar_teclas)
-                        limpa()
-
-                        escolha(andar_teclas)
-                        {
-                                caso '1':
-					                para(inteiro i = 0; i < 20; i++)
-					                {
-					                	se(inventario[i] == "Chave de Ferro")
-					                	{
-					                		escreva("Parabens! voce desbloqueou a sala de armamentos!\n")
-					                		escreva("[E] para explorar a sala\n")
-					                		escreva("[Q] para RETORNAR\n")
-										leia(andar_teclas)
-										
-					                		escolha(andar_teclas)
-					                		{
-					                			caso'E':
-					                			caso'e':
-					                				escreva("A porta pesada se abre com um silvo hidráulico, revelando a Sala de Armamentos.\n")
-					                				escreva("Diante de você, um painel iluminado exibe fileiras de equipamentos avançados.\n")
-					                				escreva("O brilho neon reflete na superfície polida de lasers de energia direcionada e pistolas giroscópicas.\n")
-					                				escreva("Ao lado, descansam armas magnéticas de pulso, lançadores de agulha Flechette e imponentes armas de micro-ondas.\n")
-					                				escreva("O arsenal está à sua disposição, use com sabedoria.")
-
-					                				escreva("[1] para entender o funcionamento das armas\n")
-					                				escreva("[Q] para retornar")
-					                				leia(andar_teclas)
-
-					                				escolha(andar_teclas)
-					                				{
-					                					caso'1':
-					                						escreva("1 - [               LASERS DE ENERGIA DIRECIONADA                ] \n")
-					                						escreva("-------------------------------------------------------------------\n")
-					                						escreva("Descrição: Emite feixes de luz concentrada de alta intensidade.\n")
-					                						escreva("Utilidade: Ideal para cegar sensores de satélites ou derreter\n")
-					                						escreva("estruturas espaciais como uma nave.\n")
-					                						escreva("2 - [                    PISTOLAS GIROSCOPICAS                   ] \n")
-					                						escreva("-------------------------------------------------------------------\n")
-					                						escreva("Descrição: Dispara mini-foguetes que aceleram apos sairem do cano\n")
-					                						escreva("Vantagem: Recuo zero (ideal para gravidade zero) e projétil ganha velocidade no vácuo.\n\n")
-					                						escreva("3 - [                 ARMAS MAGNÉTICAS DE PULSO                  ]\n")
-					                						escreva("-------------------------------------------------------------------")
-					                						escreva("Descrição: Bobinas eletromagnéticas que aceleram um dardo metálico envenenado.\n")
-					                						escreva("Vantagem: Disparo silencioso, sem necessidade de oxigênio e sem cartuchos vazios.\n\n")
-					                						escreva("4 - [               LANÇADORES DE AGULHA FLECHETTE               ]\n")
-					                						escreva("--------------------------------------------------------------------")
-					                						escreva("")
-					                					caso'Q':
-					                						escreva("")
-					                						u.aguarde(2900)
-					                				}
-					                				
-					                		}
-					                	}
-					                }
-		
-                                        escreva("A porta esta trancada, voce precisara de uma chave.\n")
-                                        u.aguarde(2900)
-                                        pare
-
-                                caso 'a':
-                                caso 'A':
-                                        escreva("Você mexe nas folhas. São relatórios antigos cobertos de poeira e sem nexo. Uma folha em especial te chama atenção\n")
-                                        u.aguarde(3200)
-                                        escreva("[w]")
-                                        pare
-
-                                caso 's':
-                                caso 'S':
-                                        escreva("Os quadros mostram retratos de pessoas antigas que parecem te encarar.\n")
-								u.aguarde(3000)
-                                        pare
-
-                                caso contrario:
-                                escreva("Comando inválido!\n")
-                                       retorne
-                        }
-                }senao se (jogador_x == 4 e jogador_y == 7)
-        {
-
-                limpa()
-                escreva("Voce entra numa sala escura e esbarra numa mesa, em cima desta mesa tem uma chave de ferro um pouco desgastada...o que voce fara?\n")
-                escreva("[w] para pegar a chave\n")
-                escreva("[a] para explorar a sala novamente\n")
-                escreva("[s] para sair da sala\n")
-                escreva("Escolha: ")
-
-                leia(andar_teclas)
-
-			escolha(andar_teclas)
+	inteiro sanidade = 100
+	real jogador_x = 0.0
+	real jogador_y = 0.0
+
+	real alien_x = 20.0
+	real alien_y = 20.0
+
+	inteiro opcao
+	caracter andar
+	caracter andar_teclas
+	logico menu_ativo = verdadeiro
+
+	logico item = falso
+	logico sala_armamento = falso
+	logico chave_armamento = falso
+	logico chave_dispensa = falso
+
+	cadeia inventario[20]
+	inteiro itensNoInventario = 0
+
+	cadeia arma_equipada = ""
+	logico arma_carregada = falso
+	inteiro municao_atual = 0
+	inteiro municao_carregador = 0
+	inteiro municao_reserva = 0
+
+	funcao Sair()
+	{
+		limpa()
+		para (inteiro g = 15; g > 0; g--)
+		{
+			limpa()
+			escreva("Conexão encerrada. O último eco se apagou no vácuo")
+			para (inteiro i = 0; i < g; i++)
 			{
-			
-			caso 'W':
-			caso 'w':
-			se (chave_armamento == falso)
+				escreva(".")
+			}
+			u.aguarde(500)
+		}
+		escreva("\n")
+		limpa()
+		escreva("Conexão encerrada. O último eco se apagou no vácuo")
+		u.aguarde(1000)
+		limpa()
+		menu_ativo = falso
+		retorne
+	}
+
+	funcao Creditos()
+	{
+		limpa()
+		escreva("=================== TRANSMISSÃO DE CRÉDITOS ===================\n\n")
+		escreva("  Desenvolvedores: Ayka E., Victor H., Lucas N. \n")
+		escreva("  Interface de Desenvolvimento: Portugol Studio\n")
+		escreva("  Atmosfera: Suspense Sci-Fi / Sobrevivência\n\n")
+		escreva("===============================================================\n")
+		escreva("Pressione ENTER para retornar ao terminal...")
+		AguardarEnter()
+		retorne
+	}
+
+	funcao Historia()
+	{
+		limpa()
+		escreva("===================== ARQUIVOS DE MEMÓRIA =====================\n\n")
+		escreva("  O silêncio engoliu tudo. As cidades estão vazias e as estrelas\n")
+		escreva("  parecem mais frias. Não há mais transmissões, não há mais vozes.\n")
+		escreva("  Você capta um pulso fraco no radar. Um último eco humano.\n\n")
+		escreva("  OBJETIVO: Siga o sinal. Descubra se você realmente está sozinho.\n")
+		escreva("===============================================================\n")
+		escreva("Pressione ENTER para retornar ao terminal...")
+		AguardarEnter()
+		retorne
+	}
+
+	funcao Sintonizacao()
+	{
+		para (inteiro i = 0; i < 5; i++)
+		{
+			limpa()
+			escreva("Sintonizando a ultima frequencia de radio conhecida")
+			para (inteiro g = 0; g < 3; g++)
+			{
+				u.aguarde(200)
+				escreva(".")
+				u.aguarde(200)
+			}
+		}
+		escreva("\n")
+		u.aguarde(500)
+	}
+
+	funcao Acordando()
+	{
+		para (inteiro i = 0; i < 5; i++)
+		{
+			limpa()
+			escreva("Desativando modo de sobrevivência em estado de criogenia acordar sobrevivente\n\n")
+			escreva("Buscando sinais vitais no perímetro cósmico")
+			u.aguarde(600)
+			escreva(".")
+			u.aguarde(600)
+			para (inteiro g = 0; g < 3; g++)
+			{
+				u.aguarde(200)
+				escreva(".")
+				u.aguarde(200)
+			}
+		}
+	}
+
+	funcao Introduzir()
+	{
+		limpa()
+		escreva("=========================================================================\n")
+		escreva("                       CONEXÃO ESTABELECIDA                             \n")
+		escreva("=========================================================================\n\n")
+		u.aguarde(500)
+		escreva("Estática ecoa pelos alto-falantes da sua cabine.\n\n")
+		escreva("O monitor pisca com uma linha de código piscando em vermelho...\n\n")
+		u.aguarde(1500)
+		escreva("Há mais um passageiro a bordo dessa nave.\n\n")
+		u.aguarde(4500)
+		escreva("ALERTA DE SEGURANÇA: Intruso detectado a bordo da nave.\n\n")
+		u.aguarde(1000)
+		escreva("Espécie não identificada.\n\n")
+		u.aguarde(3000)
+		escreva("Iniciando protocolo de orientação para sobrevivente.\n\n")
+		u.aguarde(2000)
+		escreva("Você está na sala principal de criogenia.\n\n")
+		u.aguarde(2500)
+		escreva("Há outras salas que poderão ajudá-lo a sobreviver.\n\n")
+		u.aguarde(1000)
+		escreva("Há a sala de mantimentos, a sala de armamentos e a sala de auxílio médico.\n\n")
+		u.aguarde(1000)
+		escreva("Elas correspondem às três últimas portas do corredor principal, respectivamente.\n\n")
+		u.aguarde(1000)
+		escreva("Entrando em modo de suporte de vida e manutenção.\n\n")
+		u.aguarde(1000)
+		escreva("Ativando estufa para melhorar o fluxo e a qualidade do ar.\n\n")
+		u.aguarde(1200)
+		escreva("Um som metálico ecoa pelos corredores da nave.\n\n")
+		u.aguarde(1000)
+		escreva("Sistemas secundários voltam lentamente à atividade.\n\n")
+	}
+
+	funcao ComJog()
+	{
+		cadeia passar
+
+		limpa()
+		Sintonizacao()
+		Acordando()
+		Introduzir()
+		leia(passar)
+		SortearPos()
+		loop()
+		menu_ativo = falso
+		retorne
+	}
+
+	funcao Titulo()
+	{
+		escreva("______  __  __  __     ______  __  __  __     ______  ______  ______  ______   \n")
+		escreva("/\\  __ \\/\\ \\/\\ \\/\\ \\   /\\__  _\\/\\ \\ /\\ \"-./  \\/\\  __ \\/\\  ___\\/\\  ___\\/\\  __ \\  \n")
+		escreva("\\ \\  __ \\ \\ \\_\\ \\ \\ \\____\\/_/\\ \\/\\ \\ \\ \\ \\ \\-./\\ \\ \\ \\/\\ \\ \\ \\  __\\ \\ \\____ \\ \\ \\/\\ \\ \n")
+		escreva(" \\ \\_____\\ \\_____\\ \\_____\\  \\ \\_\\ \\ \\_\\ \\_\\ \\ \\_\\ \\_____\\ \\_____\\ \\_____\\ \\_____\\\n")
+		escreva("  \\/_____/\\/_____/\\/_____/   \\/_/  \\/_/\\/_/  \\/_/\\/_____/\\/_____/\\/_____/\\/_____/\n")
+		escreva("\n")
+	}
+
+	funcao Menu()
+	{
+		escreva("\n")
+		escreva("===============================================================\n")
+		escreva("                     SISTEMA DE CONTROLE                      \n")
+		escreva("===============================================================\n")
+		escreva("|                                                             |\n")
+		escreva("|  [1] INICIAR PROTOCOLO DE BUSCA                             |\n")
+		escreva("|      > Jogar                                                |\n")
+		escreva("|                                                             |\n")
+		escreva("|  [2] ARQUIVOS DE MEMORIA                                    |\n")
+		escreva("|      > Acessar registros e historia                         |\n")
+		escreva("|                                                             |\n")
+		escreva("|  [3] TRANSMISSAO DE CREDITOS                                |\n")
+		escreva("|      > Transferir creditos                                  |\n")
+		escreva("|                                                             |\n")
+		escreva("|  [4] INTERROMPER SISTEMA                                    |\n")
+		escreva("|      > Encerrar sistema                                     |\n")
+		escreva("|                                                             |\n")
+		escreva("|  [5] PULAR INTRODUCAO                                       |\n")
+		escreva("|      > Ignorar sequencia inicial                            |\n")
+		escreva("|                                                             |\n")
+		escreva("===============================================================\n")
+		escreva(" CODIGO DE ACESSO: ")
+	}
+
+	funcao inicio()
+	{
+		enquanto (menu_ativo)
+		{
+			cadeia comecar_jogo
+			limpa()
+			Titulo()
+			escreva("\n PRESSIONE ENTER PARA COMEÇAR: ")
+			leia(comecar_jogo)
+			limpa()
+
+			Menu()
+			leia(opcao)
+
+			escolha (opcao)
+			{
+				caso 1:
+					ComJog()
+				pare
+				caso 2:
+					Historia()
+				pare
+				caso 3:
+					Creditos()
+				pare
+				caso 4:
+					Sair()
+				pare
+				caso 5:
+					ExecutarJogo()
+				pare
+				caso contrario:
+					limpa()
+					escreva("Opção errada! Rode o programa de novo.\n")
+			}
+		}
+	}
+
+	funcao ExecutarJogo()
+	{
+		escreva("\nVocê está na sala principal de criogenia, seja lá o que está a bordo, está procurando você...\n")
+		SortearPos()
+		loop()
+	}
+
+	funcao Status()
+	{
+		escreva("==================================================\n")
+		escreva(" SANIDADE: ", sanidade, "/100\n")
+		escreva(" Posição do jogador: X:", jogador_x, " | Y:", jogador_y, "\n")
+		escreva(" Posição do alien: X:", alien_x, " | Y:", alien_y, "\n")
+		se (arma_equipada != "")
+		{
+			escreva(" Arma: ", arma_equipada, " | Municao: ", municao_atual, "/", municao_carregador, " (Reserva: ", municao_reserva, ")\n")
+		}
+		escreva("==================================================\n")
+	}
+
+	funcao Acao(cadeia acao)
+	{
+		se (acao == "W" ou acao == "w")
+		{
+			jogador_y++
+		}
+		senao se (acao == "A" ou acao == "a")
+		{
+			jogador_x--
+		}
+		senao se (acao == "S" ou acao == "s")
+		{
+			jogador_y--
+		}
+		senao se (acao == "D" ou acao == "d")
+		{
+			jogador_x++
+		}
+		senao se (acao == "F" ou acao == "f")
+		{
+			MostrarInventario()
+		}
+		senao se (acao == "6")
+		{
+			Recarregar()
+		}
+		senao se (acao == "7")
+		{
+			Atirar()
+		}
+		senao
+		{
+			escreva("Opção inválida!\n")
+			u.aguarde(800)
+		}
+
+		LimitPosicoes()
+	}
+
+	funcao PosAlien()
+	{
+		se (alien_x < jogador_x)
+		{
+			alien_x = alien_x + 0.5
+		}
+		senao se (alien_x > jogador_x)
+		{
+			alien_x = alien_x - 0.5
+		}
+
+		se (alien_y < jogador_y)
+		{
+			alien_y = alien_y + 0.5
+		}
+		senao se (alien_y > jogador_y)
+		{
+			alien_y = alien_y - 0.5
+		}
+	}
+
+	funcao MorteAlien()
+	{
+		limpa()
+		escreva("\n")
+		escreva("====================================\n")
+		escreva("           COLAPSO MENTAL          \n")
+		escreva("====================================\n")
+		escreva("O Alien encurralou você no silêncio do espaço.\n")
+		AguardarEnter()
+	}
+
+	funcao loop()
+	{
+		cadeia acao_jogador
+
+		enquanto (sanidade > 0)
+		{
+			limpa()
+
+			CalcSan()
+
+			se (sanidade <= 0)
+			{
+				pare
+			}
+
+			Status()
+
+			escreva("Use W(subir), A(esquerda), S(descer), D(direita), F(inventario), 6(recarregar), 7(atirar): ")
+			leia(acao_jogador)
+
+			Acao(acao_jogador)
+
+			PosAlien()
+
+			EventoSala()
+		}
+
+		MorteAlien()
+	}
+
+	funcao CalcSan()
+	{
+		real distancia
+		real diferenca_x
+		real diferenca_y
+
+		diferenca_x = alien_x - jogador_x
+		diferenca_y = alien_y - jogador_y
+
+		distancia = mat.raiz((diferenca_x * diferenca_x + diferenca_y * diferenca_y), 2.0)
+
+		se (distancia <= 3)
+		{
+			sanidade = sanidade - 10
+			escreva("\n!!! O ALIEN ESTA MUITO PERTO !!!\n")
+		}
+		senao se (distancia <= 7)
+		{
+			sanidade = sanidade - 5
+			escreva("\nVoce sente uma presenca proxima...\n")
+		}
+		senao se (distancia <= 12)
+		{
+			sanidade = sanidade - 2
+			escreva("\nAlgo parece estar observando voce...\n")
+		}
+
+		se (sanidade < 0)
+		{
+			sanidade = 0
+		}
+	}
+
+	funcao AguardarEnter()
+	{
+		cadeia pausa
+		leia(pausa)
+	}
+
+	funcao AdicionarItem(cadeia nome)
+	{
+		se (itensNoInventario < 20)
+		{
+			inventario[itensNoInventario] = nome
+			itensNoInventario++
+			escreva("Item \"", nome, "\" adicionado ao inventário! (", itensNoInventario, "/20)\n")
+		}
+		senao
+		{
+			escreva("Inventário cheio! Não é possível carregar mais itens.\n")
+		}
+		u.aguarde(1000)
+	}
+
+	funcao RemoverItemPorIndice(inteiro indice)
+	{
+		para (inteiro i = indice; i < itensNoInventario - 1; i++)
+		{
+			inventario[i] = inventario[i + 1]
+		}
+		itensNoInventario--
+	}
+
+	funcao TrocarItem()
+	{
+		inteiro origem
+		inteiro destino
+		cadeia temp
+
+		se (itensNoInventario == 0)
+		{
+			escreva("Inventário vazio, não há itens para trocar.\n")
+			u.aguarde(1000)
+			retorne
+		}
+
+		escreva("Digite o número do item que deseja mover: ")
+		leia(origem)
+		escreva("Digite a posição de destino: ")
+		leia(destino)
+
+		origem--
+		destino--
+
+		se (origem >= 0 e origem < itensNoInventario e destino >= 0 e destino < itensNoInventario)
+		{
+			temp = inventario[origem]
+			inventario[origem] = inventario[destino]
+			inventario[destino] = temp
+			escreva("Itens trocados de posição com sucesso!\n")
+		}
+		senao
+		{
+			escreva("Posição inválida.\n")
+		}
+		u.aguarde(1200)
+	}
+
+	funcao UsarItem()
+	{
+		inteiro indice
+
+		se (itensNoInventario == 0)
+		{
+			escreva("Inventário vazio, não há itens para usar.\n")
+			u.aguarde(1000)
+			retorne
+		}
+
+		escreva("Digite o número do item que deseja usar: ")
+		leia(indice)
+		indice--
+
+		se (indice >= 0 e indice < itensNoInventario)
+		{
+			escreva("Você usou: ", inventario[indice], "\n")
+
+			se (inventario[indice] == "Chave de Ferro")
 			{
 				chave_armamento = verdadeiro
-				AdicionarItem("Chave de Ferro")
-				
-				escreva("Voce pegou a chave! Faca a escolha certa (essa acao tera consequencias...)\n")
-				u.aguarde(4000)
-				
-				se (sala_armamento == verdadeiro)
-				{
-					escreva("Se quiser voltar até a porta, mova-se ate X:6 | Y:3\n")
-					u.aguarde(2500)
-				}
+				escreva("A chave se encaixa em uma fechadura próxima!\n")
 			}
-			senao
+
+			se (inventario[indice] == "Laser de Energia" ou inventario[indice] == "Pistola Giroscopica" ou inventario[indice] == "Arma Magnetica de Pulso" ou inventario[indice] == "Lancador Flechette")
 			{
-				escreva("Você já pegou essa chave.\n")
-				u.aguarde(1700)
+				EquiparArma(inventario[indice])
 			}
+
+			RemoverItemPorIndice(indice)
+		}
+		senao
+		{
+			escreva("Posição inválida.\n")
+		}
+		u.aguarde(1500)
+	}
+
+	funcao RetirarItem()
+	{
+		inteiro indice
+
+		se (itensNoInventario == 0)
+		{
+			escreva("Inventário vazio, não há itens para retirar.\n")
+			u.aguarde(1000)
+			retorne
+		}
+
+		escreva("Digite o número do item que deseja descartar: ")
+		leia(indice)
+		indice--
+
+		se (indice >= 0 e indice < itensNoInventario)
+		{
+			escreva("Item \"", inventario[indice], "\" descartado.\n")
+			RemoverItemPorIndice(indice)
+		}
+		senao
+		{
+			escreva("Posição inválida.\n")
+		}
+		u.aguarde(1000)
+	}
+
+	funcao ExibirCabecalhoInv()
+	{
+		escreva("=================================\n")
+		escreva("            INVENTÁRIO           \n")
+		escreva("=================================\n")
+		escreva("Espaços livres: ", (20 - itensNoInventario), " / 20\n\n")
+	}
+
+	funcao ExibirListaInv()
+	{
+		se (itensNoInventario == 0)
+		{
+			escreva("O inventário está vazio.\n\n")
+		}
+		senao
+		{
+			para (inteiro i = 0; i < itensNoInventario; i++)
+			{
+				escreva(i + 1, " - ", inventario[i], "\n")
+			}
+			escreva("\n")
+		}
+	}
+
+	funcao MostrarInventario()
+	{
+		inteiro opcaoInventario
+		limpa()
+
+		ExibirCabecalhoInv()
+		ExibirListaInv()
+
+		escreva("=================================\n")
+		escreva("[1] Trocar item de posição\n")
+		escreva("[2] Usar item\n")
+		escreva("[3] Retirar item\n")
+		escreva("[0] Voltar ao jogo\n")
+		escreva("Escolha: ")
+		leia(opcaoInventario)
+
+		escolha (opcaoInventario)
+		{
+			caso 1:
+				TrocarItem()
 			pare
-			
+			caso 2:
+				UsarItem()
+			pare
+			caso 3:
+				RetirarItem()
+			pare
+			caso contrario:
+				escreva("Opção inválida.\n")
+				u.aguarde(800)
+		}
+	}
+
+	funcao inteiro CapacidadeDaArma(cadeia nome)
+	{
+		se (nome == "Laser de Energia")
+		{
+			retorne 8
+		}
+		senao se (nome == "Pistola Giroscopica")
+		{
+			retorne 12
+		}
+		senao se (nome == "Arma Magnetica de Pulso")
+		{
+			retorne 6
+		}
+		senao se (nome == "Lancador Flechette")
+		{
+			retorne 4
+		}
+
+		retorne 10
+	}
+
+	funcao EquiparArma(cadeia nome)
+	{
+		arma_equipada = nome
+		municao_carregador = CapacidadeDaArma(nome)
+		municao_atual = municao_carregador
+		municao_reserva = municao_carregador * 3
+		arma_carregada = verdadeiro
+
+		escreva("\n[", arma_equipada, "] equipada e carregada! (", municao_atual, "/", municao_carregador, ")\n")
+		escreva("Municao de reserva: ", municao_reserva, "\n")
+		u.aguarde(1500)
+	}
+
+	funcao AfastarAlienAoDisparar()
+	{
+		se (alien_x > jogador_x)
+		{
+			alien_x = alien_x + 1.5
+		}
+		senao
+		{
+			alien_x = alien_x - 1.5
+		}
+
+		se (alien_y > jogador_y)
+		{
+			alien_y = alien_y + 1.5
+		}
+		senao
+		{
+			alien_y = alien_y - 1.5
+		}
+	}
+
+	funcao Atirar()
+	{
+		se (arma_equipada == "")
+		{
+			escreva("\nVocê não tem nenhuma arma equipada!\n")
+			u.aguarde(1200)
+			retorne
+		}
+
+		se (municao_atual <= 0)
+		{
+			escreva("\n*Click* Carregador vazio! Pressione R para recarregar.\n")
+			u.aguarde(1200)
+			retorne
+		}
+
+		municao_atual--
+		escreva("\nVocê disparou a ", arma_equipada, "! (", municao_atual, "/", municao_carregador, " restantes)\n")
+
+		AfastarAlienAoDisparar()
+
+		escreva("O alien recua com o estampido!\n")
+		u.aguarde(1200)
+	}
+
+	funcao Recarregar()
+	{
+		inteiro necessario
+
+		se (arma_equipada == "")
+		{
+			escreva("\nVocê não tem nenhuma arma para recarregar!\n")
+			u.aguarde(1200)
+			retorne
+		}
+
+		se (municao_atual == municao_carregador)
+		{
+			escreva("\nO carregador já está cheio!\n")
+			u.aguarde(1000)
+			retorne
+		}
+
+		se (municao_reserva <= 0)
+		{
+			escreva("\nVocê não tem mais munição de reserva!\n")
+			u.aguarde(1200)
+			retorne
+		}
+
+		necessario = municao_carregador - municao_atual
+
+		escreva("\nRecarregando ", arma_equipada, "...\n")
+		u.aguarde(1500)
+
+		se (municao_reserva >= necessario)
+		{
+			municao_reserva = municao_reserva - necessario
+			municao_atual = municao_carregador
+		}
+		senao
+		{
+			municao_atual = municao_atual + municao_reserva
+			municao_reserva = 0
+		}
+
+		escreva("Recarregado! (", municao_atual, "/", municao_carregador, " | Reserva: ", municao_reserva, ")\n")
+		u.aguarde(1200)
+	}
+
+	funcao EventoSala()
+	{
+		se (jogador_x == 6.0 e jogador_y == 3.0)
+		{
+			SalaEscritorio()
+		}
+		senao se (jogador_x == 4.0 e jogador_y == 7.0)
+		{
+			SalaChave()
+		}
+	}
+
+	funcao Folhas()
+	{
+		escreva("Você mexe nas folhas. São relatórios antigos cobertos de poeira e sem nexo. Uma folha em especial te chama atenção\n")
+		u.aguarde(3200)
+		escreva("[w]")
+	}
+
+	funcao Quadros()
+	{
+		escreva("Os quadros mostram retratos de pessoas antigas que parecem te encarar.\n")
+		u.aguarde(3000)
+	}
+
+	funcao PegarArma(cadeia nome, cadeia numero, cadeia titulo, cadeia descricao, cadeia vantagem)
+	{
+		AdicionarItem(nome)
+		escreva(numero, " - ", titulo, " \n")
+		escreva("-------------------------------------------------------------------\n")
+		escreva("Descrição: ", descricao, "\n")
+		escreva(vantagem, "\n")
+		u.aguarde(2500)
+	}
+
+	funcao SalaArmamento()
+	{
+		escreva("A porta pesada se abre com um silvo hidráulico, revelando a Sala de Armamentos.\n")
+		escreva("Diante de você, um painel iluminado exibe fileiras de equipamentos avançados.\n")
+		escreva("O brilho neon reflete na superfície polida de lasers de energia direcionada e pistolas giroscópicas.\n")
+		escreva("Ao lado, descansam armas magnéticas de pulso, lançadores de agulha Flechette e imponentes armas de micro-ondas.\n")
+		escreva("O arsenal está à sua disposição.\n")
+		escreva("[1] para pegar o Laser de Energia\n")
+		escreva("[2] para pegar a Pistola Giroscopica\n")
+		escreva("[3] para pegar a Arma Magnetica de Pulso\n")
+		escreva("[4] para pegar o Lancador Flechette\n")
+		escreva("[Q] para retornar")
+		leia(andar_teclas)
+
+		escolha (andar_teclas)
+		{
+			caso '1':
+				PegarArma("Laser de Energia", "1", "[ LASERS DE ENERGIA DIRECIONADA ]", "Emite feixes de luz concentrada de alta intensidade.", "Utilidade: Ideal para cegar sensores de satélites ou derreter estruturas espaciais como uma nave.")
+			pare
+			caso '2':
+				PegarArma("Pistola Giroscopica", "2", "[ PISTOLAS GIROSCOPICAS ]", "Dispara mini-foguetes que aceleram apos sairem do cano.", "Vantagem: Recuo zero (ideal para gravidade zero) e projétil ganha velocidade no vácuo.")
+			pare
+			caso '3':
+				PegarArma("Arma Magnetica de Pulso", "3", "[ ARMAS MAGNÉTICAS DE PULSO ]", "Bobinas eletromagnéticas que aceleram um dardo metálico envenenado.", "Vantagem: Disparo silencioso, sem necessidade de oxigênio e sem cartuchos vazios.")
+			pare
+			caso '4':
+				AdicionarItem("Lancador Flechette")
+				escreva("4 - [ LANÇADORES DE AGULHA FLECHETTE ]\n")
+				escreva("--------------------------------------------------------------------\n")
+				u.aguarde(2500)
+			pare
+			caso 'Q':
+			caso 'q':
+				escreva("")
+			pare
+		}
+		u.aguarde(1000)
+	}
+
+	funcao AbrirPortaArm()
+	{
+		logico tem_chave = falso
+
+		para (inteiro i = 0; i < itensNoInventario; i++)
+		{
+			se (inventario[i] == "Chave de Ferro")
+			{
+				tem_chave = verdadeiro
+			}
+		}
+
+		se (tem_chave == falso)
+		{
+			escreva("A porta esta trancada, voce precisara de uma chave.\n")
+			u.aguarde(2900)
+			retorne
+		}
+
+		escreva("Parabens! voce desbloqueou a sala de armamentos!\n")
+		escreva("[E] para explorar a sala\n")
+		escreva("[Q] para RETORNAR\n")
+		leia(andar_teclas)
+
+		escolha (andar_teclas)
+		{
+			caso 'E':
+			caso 'e':
+				SalaArmamento()
+			pare
+			caso 'Q':
+			caso 'q':
+				escreva("")
+				u.aguarde(2900)
+			pare
+		}
+	}
+
+	funcao SalaEscritorio()
+	{
+		limpa()
+		escreva("Você entrou em uma sala com algumas pilhas de folhas nas mesas,\n a iluminação do ambiente falha levemente. O local tem cheiro de coisas antigas, nas paredes há alguns quadros\n")
+		escreva("Voce nota uma porta no fim desta sala, o que voce fará?\n")
+		sala_armamento = verdadeiro
+		escreva("===============================\n")
+		escreva("|[1] para abrir a porta       |\n")
+		escreva("|[2] para olhar as folhas     |\n")
+		escreva("|[3] para olhar os quadros    |\n")
+		escreva("===============================\n")
+		escreva("Escolha: ")
+		leia(andar_teclas)
+		limpa()
+
+		escolha (andar_teclas)
+		{
+			caso '1':
+				AbrirPortaArm()
+			pare
+			caso 'a':
+			caso 'A':
+				Folhas()
+			pare
+			caso 's':
+			caso 'S':
+				Quadros()
+			pare
+			caso contrario:
+				escreva("Comando inválido!\n")
+		}
+	}
+
+	funcao PegChave()
+	{
+		// Bread > Key
+		
+		se (chave_armamento == falso)
+		{
+			chave_armamento = verdadeiro
+			AdicionarItem("Chave de Ferro")
+			escreva("Voce pegou a chave! Faca a escolha certa (essa acao tera consequencias...)\n")
+			u.aguarde(4000)
+			se (sala_armamento == verdadeiro)
+			{
+				escreva("Se quiser voltar até a porta, mova-se ate X:6 | Y:3\n")
+				u.aguarde(2500)
+			}
+		}
+		senao
+		{
+			escreva("Você já pegou essa chave.\n")
+			u.aguarde(1700)
+		}
+	}
+
+	funcao SalaChave()
+	{
+		limpa()
+		escreva("Voce entra numa sala escura e esbarra numa mesa, em cima desta mesa tem uma chave de ferro um pouco desgastada...o que voce fara?\n")
+		escreva("[w] para pegar a chave\n")
+		escreva("[a] para explorar a sala novamente\n")
+		escreva("[s] para sair da sala\n")
+		escreva("Escolha: ")
+		leia(andar_teclas)
+
+		escolha (andar_teclas)
+		{
+			caso 'W':
+			caso 'w':
+				PegChave()
+			pare
 			caso 'A':
 			caso 'a':
 				escreva("Você observa a sala novamente, mas não encontra nada de novo.\n")
 				u.aguarde(2600)
 			pare
-			
 			caso 'S':
 			caso 's':
-			escreva("Você sai da sala.\n")
-			u.aguarde(1300)
+				escreva("Você sai da sala.\n")
+				u.aguarde(1300)
 			pare
-			
 			caso contrario:
-			escreva("Comando inválido!\n")
-			u.aguarde(1300)
-			retorne
-			}
-        }
-		
-				}
-			}
+				escreva("Comando inválido!\n")
+				u.aguarde(1300)
+		}
 	}
+
+	funcao LimitPosicoes()
+	{
+		se (jogador_x > 10.0)
+		{
+			jogador_x = 10.0
+		}
+		senao se (jogador_x < -10.0)
+		{
+			jogador_x = -10.0
+		}
+	
+		se (jogador_y > 10.0)
+		{
+			jogador_y = 10.0
+		}
+		senao se (jogador_y < -10.0)
+		{
+			jogador_y = -10.0
+		}
+	
+		se (alien_x > 10.0)
+		{
+			alien_x = 10.0
+		}
+		senao se (alien_x < -10.0)
+		{
+			alien_x = -10.0
+		}
+	
+		se (alien_y > 10.0)
+		{
+			alien_y = 10.0
+		}
+		senao se (alien_y < -10.0)
+		{
+			alien_y = -10.0
+		}
+	}	
+
+	funcao SortearPos()
+	{
+		inteiro nov_x = 0
+		inteiro nov_y = 0
+		logico posicao_val = falso
+	
+		enquanto (posicao_val == falso)
+		{
+			nov_x = u.sorteia(-10, 10)
+			nov_y = u.sorteia(-10, 10)
+	
+			se (SalaEspecial(nov_x, nov_y) == falso)
+			{
+				jogador_x = nov_x
+				jogador_y = nov_y
+				posicao_val = verdadeiro
+			}
+		}
+	
+		posicao_val = falso	
+
+		enquanto (posicao_val == falso)
+		{
+			nov_x = u.sorteia(-10, 10)
+			nov_y = u.sorteia(-10, 10)
+	
+			se (SalaEspecial(nov_x, nov_y) == falso)
+			{
+				alien_x = nov_x
+				alien_y = nov_y
+				posicao_val = verdadeiro
+			}
+		}
+	}
+
+	funcao logico SalaEspecial(real x, real y)
+	{
+	se (x == 6.0 e y == 3.0)
+	{
+		retorne verdadeiro
+	}
+	senao se (x == 4.0 e y == 7.0)
+	{
+		retorne verdadeiro
+	}
+
+	retorne falso
+
+	}
+}
