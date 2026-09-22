@@ -158,7 +158,7 @@ programa
 		Acordando()
 		Introduzir()
 		leia(passar)
-		SortearPos()
+		SortearPosicoes()
 		loop()
 		menu_ativo = falso
 		retorne
@@ -166,11 +166,11 @@ programa
 
 	funcao Titulo()
 	{
-		escreva("______  __  __  __     ______  __  __  __     ______  ______  ______  ______   \n")
-		escreva("/\\  __ \\/\\ \\/\\ \\/\\ \\   /\\__  _\\/\\ \\ /\\ \"-./  \\/\\  __ \\/\\  ___\\/\\  ___\\/\\  __ \\  \n")
-		escreva("\\ \\  __ \\ \\ \\_\\ \\ \\ \\____\\/_/\\ \\/\\ \\ \\ \\ \\ \\-./\\ \\ \\ \\/\\ \\ \\ \\  __\\ \\ \\____ \\ \\ \\/\\ \\ \n")
-		escreva(" \\ \\_____\\ \\_____\\ \\_____\\  \\ \\_\\ \\ \\_\\ \\_\\ \\ \\_\\ \\_____\\ \\_____\\ \\_____\\ \\_____\\\n")
-		escreva("  \\/_____/\\/_____/\\/_____/   \\/_/  \\/_/\\/_/  \\/_/\\/_____/\\/_____/\\/_____/\\/_____/\n")
+		escreva("______        __  __     __         ______   __     __    __     ______        ______     ______     ______    \n")
+		escreva("/\\  __ \\      /\\ \\/\\ \\   /\\ \\       /\\__  _\\ /\\ \\   /\\ \"-./  \\   /\\  __ \\      /\\  ___\\   /\\  ___\\   /\\  __ \\   \n")
+		escreva("\\ \\ \\/\\ \\     \\ \\ \\_\\ \\  \\ \\ \\____  \\/_/\\ \\/ \\ \\ \\  \\ \\ \\-./\\ \\  \\ \\ \\/\\ \\     \\ \\  __\\   \\ \\ \\____  \\ \\ \\/\\ \\  \n")
+		escreva(" \\ \\_____\\     \\ \\_____\\  \\ \\_____\\    \\ \\_\\  \\ \\_\\  \\ \\_\\ \\ \\_\\  \\ \\_____\\     \\ \\_____\\  \\ \\_____\\  \\ \\_____\\ \n")
+		escreva("  \\/_____/      \\/_____/   \\/_____/     \\/_/   \\/_/   \\/_/  \\/_/   \\/_____/      \\/_____/   \\/_____/   \\/_____/ \n")
 		escreva("\n")
 	}
 
@@ -241,7 +241,7 @@ programa
 	funcao ExecutarJogo()
 	{
 		escreva("\nVocê está na sala principal de criogenia, seja lá o que está a bordo, está procurando você...\n")
-		SortearPos()
+		SortearPosicoes()
 		loop()
 	}
 
@@ -945,42 +945,42 @@ programa
 		}
 	}	
 
-	funcao SortearPos()
+	funcao SortearPosicoes()
 	{
-		inteiro nov_x = 0
-		inteiro nov_y = 0
-		logico posicao_val = falso
+		inteiro nova_x
+		inteiro nova_y
+		logico posicao_valida = falso
 	
-		enquanto (posicao_val == falso)
+		enquanto (posicao_valida == falso)
 		{
-			nov_x = u.sorteia(-10, 10)
-			nov_y = u.sorteia(-10, 10)
+			nova_x = u.sorteia(-10, 10)
+			nova_y = u.sorteia(-10, 10)
 	
-			se (SalaEspecial(nov_x, nov_y) == falso)
+			se (PosicaoSalaEspecial(nova_x, nova_y) == falso)
 			{
-				jogador_x = nov_x
-				jogador_y = nov_y
-				posicao_val = verdadeiro
+				jogador_x = nova_x
+				jogador_y = nova_y
+				posicao_valida = verdadeiro
 			}
 		}
 	
-		posicao_val = falso	
-
-		enquanto (posicao_val == falso)
-		{
-			nov_x = u.sorteia(-10, 10)
-			nov_y = u.sorteia(-10, 10)
+		posicao_valida = falso
 	
-			se (SalaEspecial(nov_x, nov_y) == falso)
+		enquanto (posicao_valida == falso)
+		{
+			nova_x = u.sorteia(-10, 10)
+			nova_y = u.sorteia(-10, 10)
+	
+			se (PosicaoSalaEspecial(nova_x, nova_y) == falso)
 			{
-				alien_x = nov_x
-				alien_y = nov_y
-				posicao_val = verdadeiro
+				alien_x = nova_x
+				alien_y = nova_y
+				posicao_valida = verdadeiro
 			}
 		}
 	}
 
-	funcao logico SalaEspecial(real x, real y)
+	funcao logico PosicaoSalaEspecial(real x, real y)
 	{
 	se (x == 6.0 e y == 3.0)
 	{
