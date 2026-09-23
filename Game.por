@@ -9,6 +9,7 @@ programa
 
 	real alien_x = 20.0
 	real alien_y = 20.0
+	logico andar_alien = verdadeiro
 
 	inteiro opcao
 	caracter andar
@@ -28,6 +29,11 @@ programa
 	inteiro municao_atual = 0
 	inteiro municao_carregador = 0
 	inteiro municao_reserva = 0
+
+	inteiro medkits = 0
+	logico chip_acesso_encontrado = falso
+	logico salaEnf_explorada = falso
+	inteiro sorteio
 
 	funcao Sair()
 	{
@@ -720,9 +726,82 @@ programa
 
 	funcao Folhas()
 	{
-		escreva("Você mexe nas folhas. São relatórios antigos cobertos de poeira e sem nexo. Uma folha em especial te chama atenção\n")
+		escreva("Você mexe nas folhas. São relatórios antigos cobertos de poeira e sem nexo. Uma folha em especial te chama atenção...\n")
 		u.aguarde(3200)
-		escreva("[w]")
+		escreva("[E] para pegar\n")
+		escreva("[Q] para retornar\n")
+		leia(andar_teclas)
+
+		escolha(andar_teclas)
+		{
+
+			caso 'E':
+			caso 'e':
+					ExibirLaudo()
+			pare
+			caso 'Q': 
+			caso 'q':
+					escreva("")
+			pare
+			caso contrario: escreva("comando inválido!")
+			pare
+		}
+		
+	}
+
+	funcao ExibirLaudo()
+	{
+		limpa()
+		
+		escreva("=================================================================\n")
+		escreva("       ESTAÇÃO ESPACIAL AURA - RELATÓRIO MÉDICO / CONFIDENCIAL   \n")
+		escreva("=================================================================\n\n")
+		
+		u.aguarde(800) 
+		
+		escrever_devagar("DOCUMENTO: Laudo de Triagem Psiquiátrica e Biológica\n")
+		escrever_devagar("PACIENTE: Dra. Aris Thorne (Especialista em Xenobiologia)\n")
+		escrever_devagar("RESPONSÁVEL: Dr. Marcus Vance (Médico Chefe)\n")
+		escrever_devagar("STATUS: QUARENTENA NÍVEL 4 [ACESSO RESTRITO]\n")
+		escreva("-----------------------------------------------------------------\n\n")
+		
+		u.aguarde(1000)
+
+		escrever_devagar("[OBSERVAÇÕES CLÍNICAS]:\n")
+		escrever_devagar("A paciente deu entrada no setor médico apresentando quadro de paranóia severa.\n")
+		escrever_devagar("Relata 'zumbidos na frequência espectral' e insistia que os colegas do módulo B\n")
+		escrever_devagar("estavam 'com os olhares vazios e tomados por uma raiva invisível'.\n\n")
+
+		u.aguarde(1200)
+
+		escrever_devagar("[EXAMES FISIOLÓGICOS]:\n")
+		escrever_devagar("- Batimentos cardíacos: Excepcionalmente estáveis (incompatível com o pânico).\n")
+		escrever_devagar("- Varredura biológica: Negativa para bactérias, vírus ou toxinas conhecidas.\n")
+		escrever_devagar("- Mapeamento Cerebral: Anomalia detectada. Padrões de ondas cerebrais mostram\n")
+		escrever_devagar("  picos de agressividade extrema ocorrendo em microsegundos, alternados com\n")
+		escrever_devagar("  períodos de aparente calma e lucidez.\n\n")
+
+		u.aguarde(1200)
+
+		escrever_devagar("[NOTA FINAL DO MÉDICO]:\n")
+		escrever_devagar("A paranoia é contagiosa? De um dia para o outro, três auxiliares que estavam em\n")
+		escrever_devagar("contato com a Dra. Aris começaram a manifestar o mesmo comportamento hostil.\n")
+		escrever_devagar("O mais perturbador é que NENHUM dos exames aponta infecção física. Não há febre,\n")
+		escrever_devagar("não há lesão... É como se a agressividade estivesse sendo transmitida pelo ar,\n")
+		escrever_devagar("ou por algo que nossos sensores simplesmente não conseguem rastrear.\n\n")
+
+		escreva("-----------------------------------------------------------------\n")
+		escreva("              [FIM DO LAUDO - ARQUIVO SALVO]                     \n")
+		escreva("=================================================================\n\n")
+
+		
+		escreva("Pressione ENTER para continuar...")
+		AguardarEnter()
+	}
+	funcao escrever_devagar(cadeia texto)
+	{
+		escreva(texto)
+		u.aguarde(300) 
 	}
 
 	funcao Quadros()
@@ -743,6 +822,8 @@ programa
 
 	funcao SalaArmamento()
 	{
+		andar_alien = falso
+		
 		escreva("A porta pesada se abre com um silvo hidráulico, revelando a Sala de Armamentos.\n")
 		escreva("Diante de você, um painel iluminado exibe fileiras de equipamentos avançados.\n")
 		escreva("O brilho neon reflete na superfície polida de lasers de energia direcionada e pistolas giroscópicas.\n")
@@ -777,6 +858,8 @@ programa
 				escreva("")
 			pare
 		}
+
+		andar_alien = verdadeiro
 		u.aguarde(1000)
 	}
 
@@ -828,6 +911,7 @@ programa
 		escreva("|[1] para abrir a porta       |\n")
 		escreva("|[2] para olhar as folhas     |\n")
 		escreva("|[3] para olhar os quadros    |\n")
+		escreva("|[Q] para retornar            |\n")
 		escreva("===============================\n")
 		escreva("Escolha: ")
 		leia(andar_teclas)
@@ -838,16 +922,74 @@ programa
 			caso '1':
 				AbrirPortaArm()
 			pare
-			caso 'a':
-			caso 'A':
+			caso '2':
 				Folhas()
 			pare
-			caso 's':
-			caso 'S':
+			caso '3':
 				Quadros()
 			pare
+			caso 'Q':
+			caso 'q':
 			caso contrario:
 				escreva("Comando inválido!\n")
+		}
+	}
+
+	funcao SalaEnfermaria()
+	{
+		limpa()
+		escreva("=====================================================\n")
+		escreva("                 [SALA DA ENFERMARIA]                \n")
+		escreva("=====================================================\n")
+		escreva("As portas pneumáticas se abrem com um silvo suave.\n")
+		escreva("O cheiro de ozônio e antisséptico invade seus pulmões.\n")
+		escreva("Luzes fluorescentes brancas piscam no teto, iluminando\n")
+		escreva("macas cirúrgicas vazias e tanques de vidro com líquido azul.\n")
+		escreva("-----------------------------------------------------\n")
+		u.aguarde(1300)
+		escreva("[E] para explorar")
+		escreva("[Q] para retornar")
+
+		escolha(andar_teclas)
+		{
+
+			caso 'E': 
+			caso 'e':
+				escreva("Você começa a revirar os armários metálicos e gavetas de\n")
+				escreva("suprimentos médicos danificados...\n")
+				u.aguarde(2000)
+
+				sorteio = u.sorteia(1, 3)
+
+			escolha(sorteio)
+			{
+				caso 1:
+					escreva("\n[SUCESSO] Você encontrou um compartimento secreto!\n")
+					escreva("+1 Nano-Medkit adicionado ao inventário.\n")
+					escreva("+15 Créditos estelares transferidos para sua conta.\n")
+					medkits = medkits + 1
+					pare
+
+				caso 2:
+					escreva("\n[SUCESSO] Sob restos de vidros de um tanque de bacta quebrado,\n")
+					escreva("você encontra um Chip de Acesso de Segurança Nível 2!\n")
+					
+					chip_acesso_encontrado = verdadeiro
+					pare
+
+				caso 3:
+					escreva("\n[FALHA] Você abre uma gaveta travada à força e uma pequena\n")
+					escreva("explosão de curto-circuito acontece na sua cara!\n")
+					escreva("As luzes da enfermaria piscam, mas você não encontra nada.\n")
+					pare
+			}
+			
+			caso 'Q':
+			caso 'q':
+				escreva("")
+			pare
+			caso contrario: escreva("contrario")
+			pare
 		}
 	}
 
