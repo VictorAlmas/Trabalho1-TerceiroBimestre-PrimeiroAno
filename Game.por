@@ -30,7 +30,6 @@ programa
 	inteiro municao_carregador = 0
 	inteiro municao_reserva = 0
 
-	inteiro medkits = 0
 	logico chip_acesso_encontrado = falso
 	logico salaEnf_explorada = falso
 	inteiro sorteio
@@ -305,6 +304,9 @@ programa
 
 	funcao PosAlien()
 	{
+		se (andar_alien == verdadeiro)
+		{
+			
 		se (alien_x < jogador_x)
 		{
 			alien_x = alien_x + 0.5
@@ -323,6 +325,7 @@ programa
 			alien_y = alien_y - 0.5
 		}
 	}
+}
 
 	funcao MorteAlien()
 	{
@@ -555,6 +558,7 @@ programa
 
 	funcao MostrarInventario()
 	{
+		andar_alien = falso
 		inteiro opcaoInventario
 		limpa()
 
@@ -584,6 +588,7 @@ programa
 				escreva("Opção inválida.\n")
 				u.aguarde(800)
 		}
+		andar_alien = verdadeiro
 	}
 
 	funcao inteiro CapacidadeDaArma(cadeia nome)
@@ -722,10 +727,15 @@ programa
 		{
 			SalaChave()
 		}
+		senao se (jogador_x == 8.0 e jogador_y == 1.0)
+		{
+			SalaEnfermaria()
+		}
 	}
 
 	funcao Folhas()
 	{
+		andar_alien = falso
 		escreva("Você mexe nas folhas. São relatórios antigos cobertos de poeira e sem nexo. Uma folha em especial te chama atenção...\n")
 		u.aguarde(3200)
 		escreva("[E] para pegar\n")
@@ -746,7 +756,7 @@ programa
 			caso contrario: escreva("comando inválido!")
 			pare
 		}
-		
+		andar_alien = verdadeiro
 	}
 
 	funcao ExibirLaudo()
@@ -883,6 +893,7 @@ programa
 			u.aguarde(2900)
 			retorne
 		}
+		andar_alien = falso
 
 		escreva("Parabens! voce desbloqueou a sala de armamentos!\n")
 		escreva("[E] para explorar a sala\n")
@@ -902,14 +913,19 @@ programa
 				u.aguarde(2900)
 			pare
 		}
+		andar_alien = verdadeiro
 	}
 
 	funcao SalaEscritorio()
 	{
+		andar_alien = falso
+		
 		limpa()
 		escreva("Você entrou em uma sala com algumas pilhas de folhas nas mesas,\n a iluminação do ambiente falha levemente. O local tem cheiro de coisas antigas, nas paredes há alguns quadros\n")
 		escreva("Voce nota uma porta no fim desta sala, o que voce fará?\n")
+		
 		sala_armamento = verdadeiro
+		
 		escreva("===============================\n")
 		escreva("|[1] para abrir a porta       |\n")
 		escreva("|[2] para olhar as folhas     |\n")
@@ -936,31 +952,45 @@ programa
 			caso contrario:
 				escreva("Comando inválido!\n")
 		}
+		andar_alien = verdadeiro
 	}
 
 	funcao SalaEnfermaria()
 	{
+		andar_alien = falso
+		
 		limpa()
 		escreva("=====================================================\n")
+		u.aguarde(500)
 		escreva("                 [SALA DA ENFERMARIA]                \n")
+		u.aguarde(500)
 		escreva("=====================================================\n")
+		u.aguarde(500)
 		escreva("As portas pneumáticas se abrem com um silvo suave.\n")
+		u.aguarde(500)
 		escreva("O cheiro de ozônio e antisséptico invade seus pulmões.\n")
+		u.aguarde(500)
 		escreva("Luzes fluorescentes brancas piscam no teto, iluminando\n")
+		u.aguarde(500)
 		escreva("macas cirúrgicas vazias e tanques de vidro com líquido azul.\n")
+		u.aguarde(500)
 		escreva("-----------------------------------------------------\n")
-		u.aguarde(1300)
-		escreva("[E] para explorar")
-		escreva("[Q] para retornar")
+		u.aguarde(500)
+		escreva("[E] para explorar\n")
+		escreva("[Q] para retornar\n")
+		escreva("Escolha: ")
+		u.aguarde(2500)
+		leia(andar_teclas)
+
+		limpa()
 
 		escolha(andar_teclas)
 		{
-
 			caso 'E': 
 			caso 'e':
 				escreva("Você começa a revirar os armários metálicos e gavetas de\n")
 				escreva("suprimentos médicos danificados...\n")
-				u.aguarde(2000)
+				AguardarEnter()
 
 				sorteio = u.sorteia(1, 3)
 
@@ -968,14 +998,49 @@ programa
 			{
 				caso 1:
 					escreva("\n[SUCESSO] Você encontrou um compartimento secreto!\n")
-					escreva("+1 Nano-Medkit adicionado ao inventário.\n")
-					escreva("+15 Créditos estelares transferidos para sua conta.\n")
-					medkits = medkits + 1
-					pare
+					escreva("Contém 1 Nano-Medkit, gostaria de adicionar ao seu inventário?\n")
+					escreva("[S] sim ou [N] não")
+					leia(andar_teclas)
+
+					escolha(andar_teclas)
+					{
+
+						caso 'S':
+						caso 's':
+							AdicionarItem ("Nano-Medkit")
+							pare
+						caso 'N':
+						caso 'n':
+							escreva("Você não pegou o item.")
+							u.aguarde(500)
+							pare
+						caso contrario: escreva("contrario")
+							pare
+					}
 
 				caso 2:
 					escreva("\n[SUCESSO] Sob restos de vidros de um tanque de bacta quebrado,\n")
 					escreva("você encontra um Chip de Acesso de Segurança Nível 2!\n")
+					AguardarEnter()
+					escreva("Deseja adicionar ao inventário?\n")
+					escreva("[S] sim ou [N] não?")
+					leia(andar_teclas)
+
+					escolha(andar_teclas)
+					{
+
+						caso 'S': 
+						caso 's':
+							AdicionarItem ("Chip de Acesso Nv.2")
+							pare
+						caso 'N':
+						caso 'n':
+							escreva("Você não pegou o item")
+							u.aguarde(500)
+							pare
+						caso contrario: escreva("comando inválido!")
+							pare
+					}
 					
 					chip_acesso_encontrado = verdadeiro
 					pare
@@ -984,16 +1049,19 @@ programa
 					escreva("\n[FALHA] Você abre uma gaveta travada à força e uma pequena\n")
 					escreva("explosão de curto-circuito acontece na sua cara!\n")
 					escreva("As luzes da enfermaria piscam, mas você não encontra nada.\n")
+					AguardarEnter()
 					pare
 			}
 			
 			caso 'Q':
 			caso 'q':
 				escreva("")
-			pare
-			caso contrario: escreva("contrario")
-			pare
+				pare
+			caso contrario: 
+					escreva("comando inválido!")
+					pare
 		}
+		andar_alien = verdadeiro
 	}
 
 	funcao PegChave()
@@ -1021,6 +1089,8 @@ programa
 
 	funcao SalaChave()
 	{
+		andar_alien = falso
+		
 		limpa()
 		escreva("Voce entra numa sala escura e esbarra numa mesa, em cima desta mesa tem uma chave de ferro um pouco desgastada...o que voce fara?\n")
 		escreva("[w] para pegar a chave\n")
@@ -1049,6 +1119,7 @@ programa
 				escreva("Comando inválido!\n")
 				u.aguarde(1300)
 		}
+		andar_alien = verdadeiro
 	}
 
 	funcao LimitPosicoes()
