@@ -867,6 +867,8 @@ programa
 	{
 		logico tem_chave = falso
 
+		limpa()
+
 		para (inteiro i = 0; i < itensNoInventario; i++)
 		{
 			se (inventario[i] == "Chave de Ferro")
@@ -886,6 +888,7 @@ programa
 		escreva("[E] para explorar a sala\n")
 		escreva("[Q] para RETORNAR\n")
 		leia(andar_teclas)
+		limpa()
 
 		escolha (andar_teclas)
 		{
@@ -995,7 +998,7 @@ programa
 
 	funcao PegChave()
 	{
-		// Bread > Key
+		// B(r,eᵃᵈ) > keʸ.
 		
 		se (chave_armamento == falso)
 		{
