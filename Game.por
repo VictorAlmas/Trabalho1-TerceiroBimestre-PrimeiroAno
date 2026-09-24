@@ -839,28 +839,26 @@ programa
 		escreva("O brilho neon reflete na superfície polida de lasers de energia direcionada e pistolas giroscópicas.\n")
 		escreva("Ao lado, descansam armas magnéticas de pulso, lançadores de agulha Flechette e imponentes armas de micro-ondas.\n")
 		escreva("O arsenal está à sua disposição.\n")
-		escreva("[1] para pegar o Laser de Energia\n")
+		escreva("[1] para pegar a Granada de Criogênio\n")
 		escreva("[2] para pegar a Pistola Giroscopica\n")
 		escreva("[3] para pegar a Arma Magnetica de Pulso\n")
-		escreva("[4] para pegar o Lancador Flechette\n")
+		escreva("[4] para pegar o Injetor de Adrnalina Sintética\n")
 		escreva("[Q] para retornar")
 		leia(andar_teclas)
 
 		escolha (andar_teclas)
 		{
 			caso '1':
-				PegarArma("Laser de Energia", "1", "[ LASERS DE ENERGIA DIRECIONADA ]", "Emite feixes de luz concentrada de alta intensidade.", "Utilidade: Ideal para cegar sensores de satélites ou derreter estruturas espaciais como uma nave.")
+				PegarArma("Granada de Criogênio", "1", "[ GRANADA DE CRIOGÊNIO ]", "Utilidade: Congela o Alien no lugar, fazendo com que dê tempo de fugir ou receba o dobro de dano na próxima vez que a sanidade do player diminuir")
 			pare
 			caso '2':
-				PegarArma("Pistola Giroscopica", "2", "[ PISTOLAS GIROSCOPICAS ]", "Dispara mini-foguetes que aceleram apos sairem do cano.", "Vantagem: Recuo zero (ideal para gravidade zero) e projétil ganha velocidade no vácuo.")
+				PegarArma("Pistola Giroscopica", "2", "[ PISTOLAS GIROSCOPICAS ]", "Dispara mini-foguetes que aceleram apos sairem do cano.", "Vantagem: Faz o Alien recuar 0.5 nas coordenadas X e Y.")
 			pare
 			caso '3':
-				PegarArma("Arma Magnetica de Pulso", "3", "[ ARMAS MAGNÉTICAS DE PULSO ]", "Bobinas eletromagnéticas que aceleram um dardo metálico envenenado.", "Vantagem: Disparo silencioso, sem necessidade de oxigênio e sem cartuchos vazios.")
+				PegarArma("Arma Magnetica de Pulso", "3", "[ ARMAS MAGNÉTICAS DE PULSO ]", "Bobinas eletromagnéticas que aceleram um dardo metálico envenenado.", "Vantagem: Faz o Alien recuar 0.5 em X e Y e perder 6 pontos de vida.")
 			pare
 			caso '4':
-				AdicionarItem("Lancador Flechette")
-				escreva("4 - [ LANÇADORES DE AGULHA FLECHETTE ]\n")
-				escreva("--------------------------------------------------------------------\n")
+				PegarArma("Injetor de Adrenalina", "4", "[ INJETOR DE ADRENALINA SINTÉTICA ]", "Aumenta a velocidade (chance de esquiva) ou o dano do player por um curto período.")
 				u.aguarde(2500)
 			pare
 			caso 'Q':
