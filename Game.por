@@ -1076,6 +1076,8 @@ programa
 		escreva("Você entra em um local repleto de cabines individuais e no meio delas tem um corredor livre. Ao que parece, são os dormitórios dos tripulantes que um dia existiram ali...\n")
 		escreva("[E] para explorar\n")
 		escreva("[Q] para retornar\n")
+		
+		leia(andar_teclas)
 
 		escolha(andar_teclas)
 		{
@@ -1102,86 +1104,88 @@ programa
 				limpa()
 
 				
-			escolha(andar_teclas)
-			{
-
-			caso 'E':
-			caso 'e':
-				escreva("Você pega a pequena moldura de mesa nas mãos, passa a mão pela foto, tentando reconhecer aquelas pessoas...\n")
-				u.aguarde(1000)
-				escreva("Então o seu foco muda repentinamente,")
-				u.aguarde(500) 
-				escreva("uma forte dor de cabeça toma suas têmporas,")
-				u.aguarde(500)
-				escreva(" você fecha os olhos com força diante dessa situação.\n")
-				escreva("Sua mente te tortura com flashs de pessoas correndo desordenadamente, umas tentando se esconder e outras tentando atacar agressivamente o ser humanoide que você não consegue identificar.\n")
-				escreva("Sua mente é tomada por confusão, você pensa:\n")
-				escreva("M")
-				u.aguarde(500)
-				escreva("a")
-				u.aguarde(500)
-				escreva("s")
-				u.aguarde(500)
-				escreva(" ")
-				u.aguarde(500)
-				escreva("o")
-				u.aguarde(500)
-				escreva(" ")
-				u.aguarde(500)
-				escreva("q")
-				u.aguarde(500)
-				escreva("u")
-				u.aguarde(500)
-				escreva("e")
-				u.aguarde(500)
-				escreva(" ")
-				u.aguarde(500)
-				escreva("e")
-				u.aguarde(500)
-				escreva("s")
-				u.aguarde(500)
-				escreva("t")
-				u.aguarde(500)
-				escreva("á")
-				u.aguarde(500)
-				escreva(" ")
-				u.aguarde(500)
-				escreva("a")
-				u.aguarde(500)
-				escreva("c")
-				u.aguarde(500)
-				escreva("o")
-				u.aguarde(500)
-				escreva("n")
-				u.aguarde(500)
-				escreva("t")
-				u.aguarde(500)
-				escreva("e")
-				u.aguarde(500)
-				escreva("c")
-				u.aguarde(500)
-				escreva("e")
-				u.aguarde(500)
-				escreva("n")
-				u.aguarde(500)
-				escreva("d")
-				u.aguarde(500)
-				escreva("o")
-				u.aguarde(500)
-				escreva("?\n")
-				u.aguarde(500)
-				escreva("Assim que você se recompõe, você devolve a moldura e continua investigando o quarto.")
-				pare
+				escolha(andar_teclas)
+				{
+	
+					caso 'E':
+					caso 'e':
+						escreva("Você pega a pequena moldura de mesa nas mãos, passa a mão pela foto, tentando reconhecer aquelas pessoas...\n")
+						u.aguarde(1000)
+						escreva("Então o seu foco muda repentinamente,")
+						u.aguarde(500) 
+						escreva("uma forte dor de cabeça toma suas têmporas,")
+						u.aguarde(500)
+						escreva(" você fecha os olhos com força diante dessa situação.\n")
+						escreva("Sua mente te tortura com flashs de pessoas correndo desordenadamente, umas tentando se esconder e outras tentando atacar agressivamente o ser humanoide que você não consegue identificar.\n")
+						escreva("Sua mente é tomada por confusão, você pensa:\n")
+						escreva("M")
+						u.aguarde(500)
+						escreva("a")
+						u.aguarde(500)
+						escreva("s")
+						u.aguarde(500)
+						escreva(" ")
+						u.aguarde(500)
+						escreva("o")
+						u.aguarde(500)
+						escreva(" ")
+						u.aguarde(500)
+						escreva("q")
+						u.aguarde(500)
+						escreva("u")
+						u.aguarde(500)
+						escreva("e")
+						u.aguarde(500)
+						escreva(" ")
+						u.aguarde(500)
+						escreva("e")
+						u.aguarde(500)
+						escreva("s")
+						u.aguarde(500)
+						escreva("t")
+						u.aguarde(500)
+						escreva("á")
+						u.aguarde(500)
+						escreva(" ")
+						u.aguarde(500)
+						escreva("a")
+						u.aguarde(500)
+						escreva("c")
+						u.aguarde(500)
+						escreva("o")
+						u.aguarde(500)
+						escreva("n")
+						u.aguarde(500)
+						escreva("t")
+						u.aguarde(500)
+						escreva("e")
+						u.aguarde(500)
+						escreva("c")
+						u.aguarde(500)
+						escreva("e")
+						u.aguarde(500)
+						escreva("n")
+						u.aguarde(500)
+						escreva("d")
+						u.aguarde(500)
+						escreva("o")
+						u.aguarde(500)
+						escreva("?\n")
+						u.aguarde(500)
+						escreva("Assim que você se recompõe, você devolve a moldura e continua investigando o quarto.")
+						
 			caso 'Q':
 			caso 'q':
 				escreva("Você ignora a moldura e olha mais uma vez ao redor, esse quarto está tão...perfeito que chega a ser esquisito pensar que alguém \ncom uma vida, família e nome um dia dormiu ali.\n")
 				u.aguarde(3000)
 				pare
+			
 			caso contrario:
 					escreva("comando inválido!")
 					pare
-		}
-				pare
+			}
+			pare
+			
 			caso '2':
 				escreva("Você adentra em um dormitório com arranhões nas paredes, um desktop em tela azul, uma cama aparentemente feita às pressas...\n")
 				escreva("[A] para investigar os Arranhões\n")
@@ -1364,8 +1368,8 @@ programa
 	
 		enquanto (posicao_valida == falso)
 		{
-			nova_x = u.sorteia(-10, 10)
-			nova_y = u.sorteia(-10, 10)
+			nova_x = u.sorteia(4, 5)
+			nova_y = u.sorteia(6, 7)
 	
 			se (PosicaoSalaEspecial(nova_x, nova_y) == falso)
 			{
@@ -1379,8 +1383,8 @@ programa
 	
 		enquanto (posicao_valida == falso)
 		{
-			nova_x = u.sorteia(-10, 10)
-			nova_y = u.sorteia(-10, 10)
+			nova_x = u.sorteia(4, 5)
+			nova_y = u.sorteia(6, 7)
 	
 			se (PosicaoSalaEspecial(nova_x, nova_y) == falso)
 			{
