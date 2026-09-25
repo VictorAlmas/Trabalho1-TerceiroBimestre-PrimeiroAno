@@ -382,11 +382,9 @@ programa
 		se (distancia <= 3)
 		{
 			sanidade = sanidade - 10
-			escreva("\nVocê então vê...")
-			u.aguarde(500)
-			escreva("vultos de algo humanoide passando perto o suficiente para te dar calafrios,\n")
-			u.aguarde(600)
-			escreva(" você sabe que essa coisa-não humana esteve perseguindo você na solidão desta nave\ne agora, !!!VOCÊ ESTÁ PRESTES A SER ENCURRALADO!!!\n")
+			escreva("=====================================\n")
+			escreva("| O ALIEN ESTÁ MUITO PERTO, FUJA!!! |\n")
+			escreva("=====================================\n")
 		}
 		senao se (distancia <= 7)
 		{
@@ -729,7 +727,7 @@ programa
 		}
 		senao se (jogador_x == 4.0 e jogador_y == 7.0)
 		{
-			SalaChave()
+			ChaveArm()
 		}
 		senao se (jogador_x == 8.0 e jogador_y == 1.0)
 		{
@@ -1094,7 +1092,7 @@ programa
 			caso '1':
 				escreva("Você se vira em direção ao primeiro quarto à sua esquerda e ao abrir a porta que range suavemente você encontra um quarto com uma aparência comum devido ao sistema de controle de gravidade e oxigênio que envolve toda a estação...\n")
 				u.aguarde(2300)
-				escreva("No pequeno quarto há uma cama com edredons marrons, intocada. Acima desta cama, acoplado ao teto há uma máscara de oxigênio para emergência...\n")
+				escreva("No pequeno quarto há uma cama com edredons marrons, intocada. Acima desta cama, acoplado ao teto há uma máscara de oxigênio para emergência, como todos os dormitórios...\n")
 				u.aguarde(2000)
 				escreva("Na mesinha de canto, ao lado da cama, há uma moldura de madeira com a foto de um homem e ao que parece, sua esposa.\n")
 				escreva("[E] para interagir")
@@ -1185,7 +1183,69 @@ programa
 		}
 				pare
 			caso '2':
-				escreva("Você adentra em um dormitório com arranhões nas paredes, um desktop em tela azul, uma cama aparentemente feita às pressas...")
+				escreva("Você adentra em um dormitório com arranhões nas paredes, um desktop em tela azul, uma cama aparentemente feita às pressas...\n")
+				escreva("[A] para investigar os Arranhões\n")
+				escreva("[D] para investigar Desktop\n")
+				escreva("[C] para investigar Cama\n")
+				escreva("Escolha: ")
+				leia(andar_teclas)
+				limpa()
+
+				escolha(andar_teclas)
+				{
+
+			caso 'A':
+			caso 'a':
+				escreva("Você se aproxima das paredes e passa seus dedos pelas marcas, você nota que...são arranhões profundos, talvez um ser humano comum não fosse capaz disso.")
+				u.aguarde(2000)
+				pare
+			caso 'D':
+			caso 'd':
+				escreva("Você se aproxima da mesa onde o desktop descansa, você tenta mexer mas nenhuma resposta...")
+				u.aguarde(1700)
+				pare
+			caso 'C':
+			caso 'c':
+				escreva("Você começa a mexer os lençóis e travesseiros e olhar rapidamente embaixo da cama.\n")
+
+				sorteio = u.sorteia(1, 3)
+
+				escolha(sorteio)
+				{
+
+			caso 1:
+				escreva("[SUCESSO]Quando você olha embaixo da cama, você encontra algo que pode ser útil: Uma CHAVE PRATEADA!\n")
+				escreva("Gostaria de adicionar ao inventário?")
+				escreva("[S] sim ou [N] não?\n")
+				escreva("Escolha: ")
+				leia(andar_teclas)
+				limpa()
+
+				escolha(andar_teclas)
+				{
+
+			caso 'S': 
+			caso 's':
+				
+			pare
+			caso 'N': escreva(1)
+			caso 'n':
+			pare
+			caso contrario: escreva("contrario")
+			pare
+		}
+			pare
+			caso 2: escreva(1)
+			pare
+			caso contrario: escreva("contrario")
+			pare
+		}
+
+				
+			caso contrario: escreva("contrario")
+			pare
+		}
+				
 			pare
 			caso contrario: escreva("contrario")
 			pare
@@ -1196,6 +1256,7 @@ programa
 			caso contrario: escreva("contrario")
 			pare
 		}
+		andar_alien = verdadeiro
 	}
 
 	funcao PegChave()
@@ -1221,7 +1282,7 @@ programa
 		}
 	}
 
-	funcao SalaChave()
+	funcao ChaveArm()
 	{
 		andar_alien = falso
 		
@@ -1337,6 +1398,10 @@ programa
 		retorne verdadeiro
 	}
 	senao se (x == 4.0 e y == 7.0)
+	{
+		retorne verdadeiro
+	}
+	senao se (x == 6.0 e y == 7.0)
 	{
 		retorne verdadeiro
 	}
