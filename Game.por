@@ -382,7 +382,11 @@ programa
 		se (distancia <= 3)
 		{
 			sanidade = sanidade - 10
-			escreva("\n!!! O ALIEN ESTA MUITO PERTO !!!\n")
+			escreva("\nVocê então vê...")
+			u.aguarde(500)
+			escreva("vultos de algo humanoide passando perto o suficiente para te dar calafrios,\n")
+			u.aguarde(600)
+			escreva(" você sabe que essa coisa-não humana esteve perseguindo você na solidão desta nave\ne agora, !!!VOCÊ ESTÁ PRESTES A SER ENCURRALADO!!!\n")
 		}
 		senao se (distancia <= 7)
 		{
@@ -731,6 +735,10 @@ programa
 		{
 			SalaEnfermaria()
 		}
+		senao se (jogador_x == 6.0 e jogador_y == 7.0)
+		{
+			SalaDormitorio()
+		}
 	}
 
 	funcao Folhas()
@@ -849,16 +857,16 @@ programa
 		escolha (andar_teclas)
 		{
 			caso '1':
-				PegarArma("Granada de Criogênio", "1", "[ GRANADA DE CRIOGÊNIO ]", "Utilidade: Congela o Alien no lugar, fazendo com que dê tempo de fugir ou receba o dobro de dano na próxima vez que a sanidade do player diminuir")
+				PegarArma("Granada de Criogênio", "1", "[ GRANADA DE CRIOGÊNIO ]", "Utilidade: Congela o Alien no lugar, fazendo com que dê tempo de fugir.","")
 			pare
 			caso '2':
 				PegarArma("Pistola Giroscopica", "2", "[ PISTOLAS GIROSCOPICAS ]", "Dispara mini-foguetes que aceleram apos sairem do cano.", "Vantagem: Faz o Alien recuar 0.5 nas coordenadas X e Y.")
 			pare
 			caso '3':
-				PegarArma("Arma Magnetica de Pulso", "3", "[ ARMAS MAGNÉTICAS DE PULSO ]", "Bobinas eletromagnéticas que aceleram um dardo metálico envenenado.", "Vantagem: Faz o Alien recuar 0.5 em X e Y e perder 6 pontos de vida.")
+				PegarArma("Arma Magnetica de Pulso", "3", "[ ARMAS MAGNÉTICAS DE PULSO ]", "Bobinas eletromagnéticas que aceleram um dardo metálico envenenado.", "Vantagem: Faz o Alien recuar 2.0 em X e Y.")
 			pare
 			caso '4':
-				PegarArma("Injetor de Adrenalina", "4", "[ INJETOR DE ADRENALINA SINTÉTICA ]", "Aumenta a velocidade (chance de esquiva) ou o dano do player por um curto período.")
+				PegarArma("Injetor de Adrenalina", "4", "[ INJETOR DE ADRENALINA SINTÉTICA ]", "Aumenta a velocidade (chance de esquiva).","")
 				u.aguarde(2500)
 			pare
 			caso 'Q':
@@ -1060,6 +1068,134 @@ programa
 					pare
 		}
 		andar_alien = verdadeiro
+	}
+
+	funcao SalaDormitorio()
+	{
+		andar_alien = falso
+		
+		limpa()
+		escreva("Você entra em um local repleto de cabines individuais e no meio delas tem um corredor livre. Ao que parece, são os dormitórios dos tripulantes que um dia existiram ali...\n")
+		escreva("[E] para explorar\n")
+		escreva("[Q] para retornar\n")
+
+		escolha(andar_teclas)
+		{
+			caso 'E':
+			caso 'e':
+				escreva("Você nota que ao longo do corredor, existem oito quartos, quatro em cada lado e eles são enumerados por uma placa acima da porta:Quarto 1 e do outro lado do corredor Quarto 2 e assim sucessivamente\n.")
+				escreva("Digite o número do dormitório que deseja explorar: ")
+				leia(andar_teclas)
+
+				limpa()
+				
+				escolha(andar_teclas)
+				{
+			caso '1':
+				escreva("Você se vira em direção ao primeiro quarto à sua esquerda e ao abrir a porta que range suavemente você encontra um quarto com uma aparência comum devido ao sistema de controle de gravidade e oxigênio que envolve toda a estação...\n")
+				u.aguarde(2300)
+				escreva("No pequeno quarto há uma cama com edredons marrons, intocada. Acima desta cama, acoplado ao teto há uma máscara de oxigênio para emergência...\n")
+				u.aguarde(2000)
+				escreva("Na mesinha de canto, ao lado da cama, há uma moldura de madeira com a foto de um homem e ao que parece, sua esposa.\n")
+				escreva("[E] para interagir")
+				escreva("[Q] para continuar explorando")
+				leia(andar_teclas)
+
+				limpa()
+
+				
+			escolha(andar_teclas)
+			{
+
+			caso 'E':
+			caso 'e':
+				escreva("Você pega a pequena moldura de mesa nas mãos, passa a mão pela foto, tentando reconhecer aquelas pessoas...\n")
+				u.aguarde(1000)
+				escreva("Então o seu foco muda repentinamente,")
+				u.aguarde(500) 
+				escreva("uma forte dor de cabeça toma suas têmporas,")
+				u.aguarde(500)
+				escreva(" você fecha os olhos com força diante dessa situação.\n")
+				escreva("Sua mente te tortura com flashs de pessoas correndo desordenadamente, umas tentando se esconder e outras tentando atacar agressivamente o ser humanoide que você não consegue identificar.\n")
+				escreva("Sua mente é tomada por confusão, você pensa:\n")
+				escreva("M")
+				u.aguarde(500)
+				escreva("a")
+				u.aguarde(500)
+				escreva("s")
+				u.aguarde(500)
+				escreva(" ")
+				u.aguarde(500)
+				escreva("o")
+				u.aguarde(500)
+				escreva(" ")
+				u.aguarde(500)
+				escreva("q")
+				u.aguarde(500)
+				escreva("u")
+				u.aguarde(500)
+				escreva("e")
+				u.aguarde(500)
+				escreva(" ")
+				u.aguarde(500)
+				escreva("e")
+				u.aguarde(500)
+				escreva("s")
+				u.aguarde(500)
+				escreva("t")
+				u.aguarde(500)
+				escreva("á")
+				u.aguarde(500)
+				escreva(" ")
+				u.aguarde(500)
+				escreva("a")
+				u.aguarde(500)
+				escreva("c")
+				u.aguarde(500)
+				escreva("o")
+				u.aguarde(500)
+				escreva("n")
+				u.aguarde(500)
+				escreva("t")
+				u.aguarde(500)
+				escreva("e")
+				u.aguarde(500)
+				escreva("c")
+				u.aguarde(500)
+				escreva("e")
+				u.aguarde(500)
+				escreva("n")
+				u.aguarde(500)
+				escreva("d")
+				u.aguarde(500)
+				escreva("o")
+				u.aguarde(500)
+				escreva("?\n")
+				u.aguarde(500)
+				escreva("Assim que você se recompõe, você devolve a moldura e continua investigando o quarto.")
+				pare
+			caso 'Q':
+			caso 'q':
+				escreva("Você ignora a moldura e olha mais uma vez ao redor, esse quarto está tão...perfeito que chega a ser esquisito pensar que alguém \ncom uma vida, família e nome um dia dormiu ali.\n")
+				u.aguarde(3000)
+				pare
+			caso contrario:
+					escreva("comando inválido!")
+					pare
+		}
+				pare
+			caso '2':
+				escreva("Você adentra em um dormitório com arranhões nas paredes, um desktop em tela azul, uma cama aparentemente feita às pressas...")
+			pare
+			caso contrario: escreva("contrario")
+			pare
+		}
+			pare
+			caso '3': escreva(1)
+			pare
+			caso contrario: escreva("contrario")
+			pare
+		}
 	}
 
 	funcao PegChave()
