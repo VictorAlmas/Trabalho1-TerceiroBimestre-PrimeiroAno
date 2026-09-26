@@ -1003,7 +1003,8 @@ programa
 				caso 1:
 					escreva("\n[SUCESSO] Você encontrou um compartimento secreto!\n")
 					escreva("Contém 1 Nano-Medkit, gostaria de adicionar ao seu inventário?\n")
-					escreva("[S] sim ou [N] não")
+					escreva("[S] sim ou [N] não\n")
+					escreva("Escolha: ")
 					leia(andar_teclas)
 
 					escolha(andar_teclas)
@@ -1071,11 +1072,13 @@ programa
 	funcao SalaDormitorio()
 	{
 		andar_alien = falso
+		limpa()
 		
 		limpa()
 		escreva("Você entra em um local repleto de cabines individuais e no meio delas tem um corredor livre. Ao que parece, são os dormitórios dos tripulantes que um dia existiram ali...\n")
 		escreva("[E] para explorar\n")
 		escreva("[Q] para retornar\n")
+		escreva("Escolha: ")
 		
 		leia(andar_teclas)
 
@@ -1083,185 +1086,212 @@ programa
 		{
 			caso 'E':
 			caso 'e':
-				escreva("Você nota que ao longo do corredor, existem oito quartos, quatro em cada lado e eles são enumerados por uma placa acima da porta:Quarto 1 e do outro lado do corredor Quarto 2 e assim sucessivamente\n.")
-				escreva("Digite o número do dormitório que deseja explorar: ")
-				leia(andar_teclas)
-
-				limpa()
-				
+				ExplorarDormitorios()
+				pare
+			caso 'Q':
+			caso 'q':
+				escreva("")
+				pare
+			caso contrario:
+				escreva("Comando inválido!\n")
+				u.aguarde(1500)
+				SalaDormitorio()
+				pare
+		}		
 				escolha(andar_teclas)
 				{
-			caso '1':
-				escreva("Você se vira em direção ao primeiro quarto à sua esquerda e ao abrir a porta que range suavemente você encontra um quarto com uma aparência comum devido ao sistema de controle de gravidade e oxigênio que envolve toda a estação...\n")
-				u.aguarde(2300)
-				escreva("No pequeno quarto há uma cama com edredons marrons, intocada. Acima desta cama, acoplado ao teto há uma máscara de oxigênio para emergência, como todos os dormitórios...\n")
-				u.aguarde(2000)
-				escreva("Na mesinha de canto, ao lado da cama, há uma moldura de madeira com a foto de um homem e ao que parece, sua esposa.\n")
-				escreva("[E] para interagir")
-				escreva("[Q] para continuar explorando")
-				leia(andar_teclas)
-
-				limpa()
-
-				
-				escolha(andar_teclas)
-				{
+					caso '1':
+						QuartoUm()
+						pare
+					caso '2':
+						escreva("Você adentra em um dormitório com arranhões nas paredes, um desktop em tela azul, uma cama aparentemente feita às pressas...\n")
+						escreva("[A] para investigar os Arranhões\n")
+						escreva("[D] para investigar Desktop\n")
+						escreva("[C] para investigar Cama\n")
+						escreva("Escolha: ")
+						
+						leia(andar_teclas)
+						
+						limpa()
 	
-					caso 'E':
-					caso 'e':
-						escreva("Você pega a pequena moldura de mesa nas mãos, passa a mão pela foto, tentando reconhecer aquelas pessoas...\n")
-						u.aguarde(1000)
-						escreva("Então o seu foco muda repentinamente,")
-						u.aguarde(500) 
-						escreva("uma forte dor de cabeça toma suas têmporas,")
-						u.aguarde(500)
-						escreva(" você fecha os olhos com força diante dessa situação.\n")
-						escreva("Sua mente te tortura com flashs de pessoas correndo desordenadamente, umas tentando se esconder e outras tentando atacar agressivamente o ser humanoide que você não consegue identificar.\n")
-						escreva("Sua mente é tomada por confusão, você pensa:\n")
-						escreva("M")
-						u.aguarde(500)
-						escreva("a")
-						u.aguarde(500)
-						escreva("s")
-						u.aguarde(500)
-						escreva(" ")
-						u.aguarde(500)
-						escreva("o")
-						u.aguarde(500)
-						escreva(" ")
-						u.aguarde(500)
-						escreva("q")
-						u.aguarde(500)
-						escreva("u")
-						u.aguarde(500)
-						escreva("e")
-						u.aguarde(500)
-						escreva(" ")
-						u.aguarde(500)
-						escreva("e")
-						u.aguarde(500)
-						escreva("s")
-						u.aguarde(500)
-						escreva("t")
-						u.aguarde(500)
-						escreva("á")
-						u.aguarde(500)
-						escreva(" ")
-						u.aguarde(500)
-						escreva("a")
-						u.aguarde(500)
-						escreva("c")
-						u.aguarde(500)
-						escreva("o")
-						u.aguarde(500)
-						escreva("n")
-						u.aguarde(500)
-						escreva("t")
-						u.aguarde(500)
-						escreva("e")
-						u.aguarde(500)
-						escreva("c")
-						u.aguarde(500)
-						escreva("e")
-						u.aguarde(500)
-						escreva("n")
-						u.aguarde(500)
-						escreva("d")
-						u.aguarde(500)
-						escreva("o")
-						u.aguarde(500)
-						escreva("?\n")
-						u.aguarde(500)
-						escreva("Assim que você se recompõe, você devolve a moldura e continua investigando o quarto.")
+						escolha(andar_teclas)
+						{
+
+							caso 'A':
+							caso 'a':
+								escreva("Você se aproxima das paredes e passa seus dedos pelas marcas, você nota que...são arranhões profundos, talvez um ser humano comum não fosse capaz disso.")
+								u.aguarde(2000)
+								pare
+							caso 'D':
+							caso 'd':
+								escreva("Você se aproxima da mesa onde o desktop descansa, você tenta mexer mas nenhuma resposta...")
+								u.aguarde(1700)
+								pare
+							caso 'C':
+							caso 'c':
+								escreva("Você começa a mexer os lençóis e travesseiros e olhar rapidamente embaixo da cama.\n")
+				
+								sorteio = u.sorteia(1, 2)
+				
+								escolha(sorteio)
+								{
+				
+							caso 1:
+								escreva("[SUCESSO]Quando você olha embaixo da cama, você encontra algo que pode ser útil: Uma CHAVE PRATEADA!\n")
+								escreva("Gostaria de adicionar ao inventário?")
+								escreva("[S] sim ou [N] não?\n")
+								escreva("Escolha: ")
+								
+								leia(andar_teclas)
+								
+								limpa()
+				
+								escolha(andar_teclas)
+								{
+						
+									caso 'S': 
+									caso 's':
+										AdicionarItem ("Chave prateada")
+										pare
+									caso 'N':
+									caso 'n':
+										escreva("Você não pegou o item")
+										pare
+									caso contrario: 
+										escreva("Comando inválido!")
+										pare
+								}
+							caso 2:
+								escreva("Que pena! Você não encontrou nada:(")
+								pare
+								}
+						}
+						andar_alien = verdadeiro
+				}
+
+	funcao ExplorarDormitorios()
+	{
+		limpa()
+		escreva("Você nota que ao longo do corredor, existem oito quartos, quatro em cada lado e eles são enumerados por uma placa acima da porta.\n")
+		escreva("Quarto 1 e do outro lado do corredor, Quarto 2 e assim por diante.\n")
+		escreva("Digite o número do dormitório que deseja explorar: ")
+		
+		leia(andar_teclas)
+		    
+		escolha(andar_teclas)
+		{
+			 caso '1':
+				ExplorarQuartoUm() 
+				pare
+			 caso contrario:
+		           escreva("Quarto inválido!\n")
+		           u.aguarde(1500)
+		           ExplorarDormitorios()
+		           pare
+		}
+	}
+
+	funcao QuartoUm()
+	{
+		limpa()
+
+		escreva("Você se vira em direção ao primeiro quarto à sua esquerda e ao abrir a porta que range suavemente você encontra um quarto com uma aparência comum devido ao sistema de controle de gravidade e oxigênio que envolve toda a estação...\n")
+		u.aguarde(2300)
+		escreva("No pequeno quarto há uma cama com edredons marrons, intocada. Acima desta cama, acoplado ao teto há uma máscara de oxigênio para emergência, como todos os dormitórios...\n")
+		u.aguarde(2000)
+		escreva("Na mesinha de canto, ao lado da cama, há uma moldura de madeira com a foto de um homem e ao que parece, sua esposa.\n")
+		escreva("[E] para interagir\n")
+		escreva("[Q] para continuar explorando")
+		escreva("Escolha: ")
+				
+		leia(andar_teclas)
+
+		escolha(andar_teclas)
+		{
+	
+			caso 'E':
+			caso 'e':
+				escreva("Você pega a pequena moldura de mesa nas mãos, passa a mão pela foto, tentando reconhecer aquelas pessoas...\n")
+				escreva("Aperte ENTER para continuar: ")
+				AguardarEnter()
+				escreva("Então o seu foco muda repentinamente,")
+				escreva("\nAperte ENTER para continuar: ")
+				AguardarEnter() 
+				escreva("uma forte dor de cabeça toma suas têmporas,")
+				escreva("\nAperte ENTER para continuar: ")
+				AguardarEnter()
+				escreva(" você fecha os olhos com força diante dessa situação.\n")
+				escreva("Sua mente te tortura com flashs de pessoas correndo desordenadamente, umas tentando se esconder e outras tentando atacar agressivamente o ser humanoide que você não consegue identificar.\n")
+				escreva("Sua mente é tomada por confusão, você pensa:\n")
+				escreva("M")
+				u.aguarde(300)
+				escreva("a")
+				u.aguarde(300)
+				escreva("s")
+				u.aguarde(300)
+				escreva(" ")
+				u.aguarde(300)
+				escreva("o")
+				u.aguarde(300)
+				escreva(" ")
+				u.aguarde(300)
+				escreva("q")
+				u.aguarde(300)
+				escreva("u")
+				u.aguarde(300)
+				escreva("e")
+				u.aguarde(300)
+				escreva(" ")
+				u.aguarde(500)
+				escreva("e")
+				u.aguarde(300)
+				escreva("s")
+				u.aguarde(300)
+				escreva("t")
+				u.aguarde(300)
+				escreva("á")
+				u.aguarde(300)
+				escreva(" ")
+				u.aguarde(300)
+				escreva("a")
+				u.aguarde(300)
+				escreva("c")
+				u.aguarde(300)
+				escreva("o")
+				u.aguarde(300)
+				escreva("n")
+				u.aguarde(300)
+				escreva("t")
+				u.aguarde(300)
+				escreva("e")
+				u.aguarde(300)
+				escreva("c")
+				u.aguarde(300)
+				escreva("e")
+				u.aguarde(300)
+				escreva("n")
+				u.aguarde(300)
+				escreva("d")
+				u.aguarde(300)
+				escreva("o")
+				u.aguarde(300)
+				escreva("?\n")
+				u.aguarde(300)
+				escreva("Assim que você se recompõe, você devolve a moldura e continua investigando o quarto.")
+				u.aguarde(2000)
+				pare
 						
 			caso 'Q':
 			caso 'q':
 				escreva("Você ignora a moldura e olha mais uma vez ao redor, esse quarto está tão...perfeito que chega a ser esquisito pensar que alguém \ncom uma vida, família e nome um dia dormiu ali.\n")
 				u.aguarde(3000)
+				ExplorarDormitorio()
 				pare
-			
-			caso contrario:
-					escreva("comando inválido!")
-					pare
 			}
-			pare
-			
-			caso '2':
-				escreva("Você adentra em um dormitório com arranhões nas paredes, um desktop em tela azul, uma cama aparentemente feita às pressas...\n")
-				escreva("[A] para investigar os Arranhões\n")
-				escreva("[D] para investigar Desktop\n")
-				escreva("[C] para investigar Cama\n")
-				escreva("Escolha: ")
-				leia(andar_teclas)
-				limpa()
 
-				escolha(andar_teclas)
-				{
+		
 
-			caso 'A':
-			caso 'a':
-				escreva("Você se aproxima das paredes e passa seus dedos pelas marcas, você nota que...são arranhões profundos, talvez um ser humano comum não fosse capaz disso.")
-				u.aguarde(2000)
-				pare
-			caso 'D':
-			caso 'd':
-				escreva("Você se aproxima da mesa onde o desktop descansa, você tenta mexer mas nenhuma resposta...")
-				u.aguarde(1700)
-				pare
-			caso 'C':
-			caso 'c':
-				escreva("Você começa a mexer os lençóis e travesseiros e olhar rapidamente embaixo da cama.\n")
-
-				sorteio = u.sorteia(1, 3)
-
-				escolha(sorteio)
-				{
-
-			caso 1:
-				escreva("[SUCESSO]Quando você olha embaixo da cama, você encontra algo que pode ser útil: Uma CHAVE PRATEADA!\n")
-				escreva("Gostaria de adicionar ao inventário?")
-				escreva("[S] sim ou [N] não?\n")
-				escreva("Escolha: ")
-				leia(andar_teclas)
-				limpa()
-
-				escolha(andar_teclas)
-				{
-
-			caso 'S': 
-			caso 's':
-				
-			pare
-			caso 'N': escreva(1)
-			caso 'n':
-			pare
-			caso contrario: escreva("contrario")
-			pare
-		}
-			pare
-			caso 2: escreva(1)
-			pare
-			caso contrario: escreva("contrario")
-			pare
-		}
-
-				
-			caso contrario: escreva("contrario")
-			pare
-		}
-				
-			pare
-			caso contrario: escreva("contrario")
-			pare
-		}
-			pare
-			caso '3': escreva(1)
-			pare
-			caso contrario: escreva("contrario")
-			pare
-		}
-		andar_alien = verdadeiro
-	}
+		
 
 	funcao PegChave()
 	{
