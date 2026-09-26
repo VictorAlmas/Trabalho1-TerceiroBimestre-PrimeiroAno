@@ -997,6 +997,7 @@ programa
 				AguardarEnter()
 
 				sorteio = u.sorteia(1, 3)
+				pare
 
 			escolha(sorteio)
 			{
@@ -1168,8 +1169,9 @@ programa
 						}
 						andar_alien = verdadeiro
 				}
+	}
 
-	funcao ExplorarDormitorios()
+	funcao ExplorarDormitorio()
 	{
 		limpa()
 		escreva("Você nota que ao longo do corredor, existem oito quartos, quatro em cada lado e eles são enumerados por uma placa acima da porta.\n")
@@ -1181,8 +1183,13 @@ programa
 		escolha(andar_teclas)
 		{
 			 caso '1':
-				ExplorarQuartoUm() 
+				QuartoUm() 
 				pare
+			caso '2':
+				QuartoDois()
+				pare
+			caso '3':
+				
 			 caso contrario:
 		           escreva("Quarto inválido!\n")
 		           u.aguarde(1500)
@@ -1289,9 +1296,72 @@ programa
 				pare
 			}
 
-		
+	funcao QuartoDois()
+	{
+		escreva("Você adentra em um dormitório com arranhões nas paredes, um desktop em tela azul, uma cama aparentemente feita às pressas...\n")
+		escreva("[A] para investigar os Arranhões\n")
+		escreva("[D] para investigar Desktop\n")
+		escreva("[C] para investigar Cama\n")
+		escreva("Escolha: ")
+						
+		leia(andar_teclas)
+						
+		limpa()
+	
+		escolha(andar_teclas)
+		{
+			caso 'A':
+			caso 'a':
+				escreva("Você se aproxima das paredes e passa seus dedos pelas marcas, você nota que...são arranhões profundos, talvez um ser humano comum não fosse capaz disso.")
+				u.aguarde(2000)
+				pare
+			caso 'D':
+			caso 'd':
+				escreva("Você se aproxima da mesa onde o desktop descansa, você tenta mexer mas nenhuma resposta...")
+				u.aguarde(1700)
+				pare
+			caso 'C':
+			caso 'c':
+				escreva("Você começa a mexer os lençóis e travesseiros e olhar rapidamente embaixo da cama.\n")
+				
+				sorteio = u.sorteia(1, 2)
+				pare
+				
+					escolha(sorteio)
+					{
+						caso 1:
+						escreva("[SUCESSO]Quando você olha embaixo da cama, você encontra algo que pode ser útil: Uma CHAVE PRATEADA!\n")
+						escreva("Gostaria de adicionar ao inventário?")
+						escreva("[S] sim ou [N] não?\n")
+						escreva("Escolha: ")
+								
+						leia(andar_teclas)
+								
+						limpa()
+				
+						escolha(andar_teclas)
+						{
+							caso 'S': 
+							caso 's':
+								AdicionarItem ("Chave prateada")
+								pare
+							caso 'N':
+							caso 'n':
+								escreva("Você não pegou o item")
+								pare
+							caso contrario: 
+								escreva("Comando inválido!")
+								pare
+								}
+							caso 2:
+								escreva("Que pena! Você não encontrou nada:(")
+								pare
+					}
+		}
+						
+	}
 
-		
+	funcao QuartoTres
 
 	funcao PegChave()
 	{
