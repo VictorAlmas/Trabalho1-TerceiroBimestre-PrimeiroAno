@@ -997,7 +997,6 @@ programa
 				AguardarEnter()
 
 				sorteio = u.sorteia(1, 3)
-				pare
 
 			escolha(sorteio)
 			{
@@ -1087,7 +1086,7 @@ programa
 		{
 			caso 'E':
 			caso 'e':
-				ExplorarDormitorios()
+				ExplorarDormitorio()
 				pare
 			caso 'Q':
 			caso 'q':
@@ -1193,7 +1192,7 @@ programa
 			 caso contrario:
 		           escreva("Quarto inválido!\n")
 		           u.aguarde(1500)
-		           ExplorarDormitorios()
+		           ExplorarDormitorio()
 		           pare
 		}
 	}
@@ -1295,6 +1294,7 @@ programa
 				ExplorarDormitorio()
 				pare
 			}
+	}
 
 	funcao QuartoDois()
 	{
@@ -1325,7 +1325,6 @@ programa
 				escreva("Você começa a mexer os lençóis e travesseiros e olhar rapidamente embaixo da cama.\n")
 				
 				sorteio = u.sorteia(1, 2)
-				pare
 				
 					escolha(sorteio)
 					{
@@ -1361,7 +1360,8 @@ programa
 						
 	}
 
-	funcao QuartoTres
+	funcao QuartoTres()
+	{}
 
 	funcao PegChave()
 	{
@@ -1468,8 +1468,8 @@ programa
 	
 		enquanto (posicao_valida == falso)
 		{
-			nova_x = u.sorteia(4, 5)
-			nova_y = u.sorteia(6, 7)
+			nova_x = u.sorteia(-10, 10)
+			nova_y = u.sorteia(-10, 10)
 	
 			se (PosicaoSalaEspecial(nova_x, nova_y) == falso)
 			{
@@ -1483,8 +1483,8 @@ programa
 	
 		enquanto (posicao_valida == falso)
 		{
-			nova_x = u.sorteia(4, 5)
-			nova_y = u.sorteia(6, 7)
+			nova_x = u.sorteia(-10, 10)
+			nova_y = u.sorteia(-10, 10)
 	
 			se (PosicaoSalaEspecial(nova_x, nova_y) == falso)
 			{
