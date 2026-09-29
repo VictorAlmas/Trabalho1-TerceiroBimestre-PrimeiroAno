@@ -231,6 +231,9 @@ programa
 				pare
 				caso 5:
 					ExecutarJogo()
+
+				caso 6:
+					MorteSono()
 				pare
 				caso contrario:
 					limpa()
@@ -1202,7 +1205,8 @@ programa
 				QuartoDois()
 				pare
 			caso '3':
-				
+				QuartoTres()
+				pare
 			 caso contrario:
 		           escreva("Quarto inválido!\n")
 		           u.aguarde(1500)
@@ -1330,7 +1334,12 @@ programa
 
 	funcao QuartoDois()
 	{
+		escreva("----------------------------------------------------------------------------------------------------------------------------\n")
+		u.aguarde(500)
 		escreva("Você adentra em um dormitório com arranhões nas paredes, um desktop em tela azul, uma cama aparentemente feita às pressas...\n")
+		u.aguarde(500)
+		escreva("----------------------------------------------------------------------------------------------------------------------------\n")
+		u.aguarde(500)
 		escreva("[A] para investigar os Arranhões\n")
 		escreva("[D] para investigar Desktop\n")
 		escreva("[C] para investigar Cama\n")
@@ -1345,16 +1354,17 @@ programa
 			caso 'A':
 			caso 'a':
 				escreva("Você se aproxima das paredes e passa seus dedos pelas marcas, você nota que...são arranhões profundos, talvez um ser humano comum não fosse capaz disso.")
-				u.aguarde(2000)
+				u.aguarde(3000)
 				pare
 			caso 'D':
 			caso 'd':
 				escreva("Você se aproxima da mesa onde o desktop descansa, você tenta mexer mas nenhuma resposta...")
-				u.aguarde(1700)
+				u.aguarde(3000)
 				pare
 			caso 'C':
 			caso 'c':
 				escreva("Você começa a mexer os lençóis e travesseiros e olhar rapidamente embaixo da cama.\n")
+				u.aguarde(3000)
 				
 				sorteio = u.sorteia(1, 2)
 				
@@ -1393,7 +1403,28 @@ programa
 	}
 
 	funcao QuartoTres()
-	{}
+	{
+		escreva("-------------------------------------------------------------------------------------------------\n")
+		u.aguarde(500)
+		escreva("Você vai para o terceiro quarto e, olhando ao redor, voce percebe que esse quarto é menos neutro,\n")
+		u.aguarde(500)
+		escreva("alguns posteres sobre musica nas paredes, fotos de familia e luzes amarelas baixas.\n")
+		u.aguarde(500)
+		escreva("Esse quarto te faz sentir um sentimento de nostalgia por algum motivo...\n")
+		u.aguarde(500)
+		escreva("-------------------------------------------------------------------------------------------------\n")
+		escreva("[E] para dormir\n")
+		escreva("[Q] para retornar")
+
+		leia(andar_teclas)
+
+		escolha(andar_teclas)
+		{
+			caso 'E':
+			caso 'e':
+				MorteSono()
+		}
+	}
 
 	funcao PegChave()
 	{
@@ -1492,6 +1523,47 @@ programa
 		}
 	}	
 
+	funcao MorteSono()
+	{
+
+		inteiro enrraboFeito = sorteia(0 , 1000)
+		inteiro aposta = sorteia(0 , 1000)
+		
+		escreva("----------------------------------------------------------------------\n")
+		u.aguarde(500)
+		escreva("Voce se deita na cama, sente a tensao dos seus musculos se esvairem...\n")
+		u.aguarde(500)
+		escreva("a quanto tempo voce nao descansava?..\n")
+		u.aguarde(500)
+		escreva("O edredom te envolve como um abraço quente e macio \n")
+		u.aguarde(500)
+		escreva("que te lembra fortemente o quao solitario voce e na sua especie.\n")
+		u.aguarde(500)
+		escreva("Entao, voce deixa o sono e o cansaço te tomarem e voce adormece profundamente.\n")
+		escreva("\n")
+		escreva("Aperte ENTER para continuar: ")
+		AguardarEnter()
+		limpa()
+		
+		escreva("Durante o seu sono, infelizmente o alien te encontra e ")
+		
+		se (enrraboFeito == aposta)
+		{
+			escreva("enrraba(FINAL RARO!PABENS)")
+		}
+		senao
+		{
+			escreva("estraçalha")
+		}
+		
+		escreva(" voce ate a morte.")
+		u.aguarde(2000)
+		escreva("========================================\n")
+		escreva("         SONO FATAL, FIM DE JOGO        \n")
+		escreva("==========================================")
+		AguardarEnter()
+		Menu()
+	}
 	funcao SortearPosicoes()
 	{
 		inteiro nova_x
