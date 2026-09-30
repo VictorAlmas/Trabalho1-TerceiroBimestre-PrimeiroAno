@@ -1434,6 +1434,51 @@ programa
 		escreva("Voce se aproxima do ultimo quarto a sua direita ")
 	}
 
+	funcao SalaMantimentos()
+	{
+		andar_alien = falso
+
+		limpa()
+		escreva("==============================================================\n")
+		u.aguarde(500)
+		escreva("                    [SALA DE MANTIMENTOS]                     \n")
+		u.aguarde(500)
+		escreva("==============================================================\n")
+		u.aguarde(500)
+		escreva("Você abre a escotilha hidráulica e entra na sala.\n")
+		u.aguarde(500)
+		escreva("O ar aqui é gelado e cheira a metal estéril. Prateleiras\n")
+		u.aguarde(500)
+		escreva("magnéticas cobrem as paredes com fileiras de pacotes.\n")
+		u.aguarde(500)
+		escreva("No centro, as luzes azuis de um terminal piscam.\n")
+		u.aguarde(500)
+		escreva("--------------------------------------------------------------\n")
+		u.aguarde(500)
+		escreva("Este lugar pode ter itens essenciais para restauração de sanidade.\n")
+		escreva("[E] para explorar\n")
+		escreva("[Q] para retornar\n")
+		escreva("Escolha: ")
+		leia(andar_teclas)
+		limpa()
+		escolha(andar_teclas)
+		{
+			caso 'E':
+			caso 'e':
+				escreva("-------------------------------------------------------------------------------\n")
+				u.aguarde(500)
+				escreva("Você anda e olha ao redor do enorme espaço cheio de corredores com prateleiras,\n")
+				u.aguarde(500)
+				escreva("nota-se centenas de pacotes aluminizados contendo 'Pasta Nutritiva Sabor Alface'.\n")
+				u.aguarde(500)
+				escreva("Isso te deixa com pouco apetite mas infelizmente não deu para trazer o Jacquin. ")
+				escreva("-------------------------------------------------------------------------------\n")
+				escreva("Através do vidro embaçado, você vê pequenas plantas crescendo em gel nutritivo.\n")
+				escreva("Tomates espaciais geneticamente modificados brilham sob uma luz ultravioleta.\n\n")
+		}
+		
+	}
+
 	funcao PegChave()
 	{
 		// B(r,eᵃᵈ) > keʸ.
