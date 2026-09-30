@@ -1414,7 +1414,8 @@ programa
 		u.aguarde(500)
 		escreva("-------------------------------------------------------------------------------------------------\n")
 		escreva("[E] para dormir\n")
-		escreva("[Q] para retornar")
+		escreva("[Q] para retornar\n")
+		escreva("Escolha: ")
 
 		leia(andar_teclas)
 
@@ -1424,6 +1425,13 @@ programa
 			caso 'e':
 				MorteSono()
 		}
+	}
+
+	funcao QuartoQuarto()
+	{
+		escreva("-----------------------------------------------------------------------------------\n")
+		u.aguarde(500)
+		escreva("Voce se aproxima do ultimo quarto a sua direita ")
 	}
 
 	funcao PegChave()
@@ -1558,7 +1566,7 @@ programa
 		
 		escreva(" voce ate a morte.")
 		u.aguarde(2000)
-		escreva("========================================\n")
+		escreva("\n========================================\n")
 		escreva("         SONO FATAL, FIM DE JOGO        \n")
 		escreva("==========================================")
 		AguardarEnter()
