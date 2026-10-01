@@ -233,7 +233,7 @@ programa
 				caso 5:
 					ExecutarJogo()
 				caso 6:
-					ExibirLaudo()
+					SalaEscritorio()
 				pare
 				
 				caso 44:
@@ -594,14 +594,16 @@ programa
 			caso 3:
 				RetirarItem()
 			pare
+			caso 0:
+				pare
+				
 			caso contrario:
 				escreva("Opção inválida.\n")
 				u.aguarde(800)
 		}
 		andar_alien = verdadeiro
 	}
-
-	funcao inteiro CapacidadeDaArma(cadeia nome)
+		funcao inteiro CapacidadeDaArma(cadeia nome)
 	{
 		se (nome == "Laser de Energia")
 		{
@@ -636,24 +638,39 @@ programa
 		u.aguarde(1500)
 	}
 
+	funcao real RecuoDaArma(cadeia nome)
+	{
+		se (nome == "Pistola Giroscopica")
+		{
+			retorne 0.5
+		}
+		senao se (nome == "Arma Magnetica de Pulso")
+		{
+			retorne 2.0
+		}
+		retorne 1.5
+	}
+
 	funcao AfastarAlienAoDisparar()
 	{
+		real r = RecuoDaArma(arma_equipada)
+
 		se (alien_x > jogador_x)
 		{
-			alien_x = alien_x + 1.5
+			alien_x = alien_x + r
 		}
 		senao
 		{
-			alien_x = alien_x - 1.5
+			alien_x = alien_x - r
 		}
 
 		se (alien_y > jogador_y)
 		{
-			alien_y = alien_y + 1.5
+			alien_y = alien_y + r
 		}
 		senao
 		{
-			alien_y = alien_y - 1.5
+			alien_y = alien_y - r
 		}
 	}
 
@@ -668,7 +685,7 @@ programa
 
 		se (municao_atual <= 0)
 		{
-			escreva("\n*Click* Carregador vazio! Pressione R para recarregar.\n")
+			escreva("\n*Click* Carregador vazio! Pressione 6 para recarregar.\n")
 			u.aguarde(1200)
 			retorne
 		}
@@ -726,6 +743,7 @@ programa
 		escreva("Recarregado! (", municao_atual, "/", municao_carregador, " | Reserva: ", municao_reserva, ")\n")
 		u.aguarde(1200)
 	}
+	
 
 	funcao EventoSala()
 	{
@@ -745,6 +763,39 @@ programa
 		{
 			SalaDormitorio()
 		}
+		senao se (jogador_x == -5.0 e jogador_y == -7.0)
+		{	
+		escreva("Tem uma sala aqui, quer entrar?\n")
+		escreva("[S] sim ou [N] não?")
+		escreva("Escolha: ")
+		
+		leia(andar_teclas)
+
+		escolha(andar_teclas)
+		{
+			caso 'S':
+			caso 's':
+				para (inteiro i = 0; i < itensNoInventario; i++)
+				{
+					se(inventario[i]=="Chave prateada")
+					{
+						SalaMantimentos()
+					}
+					senao
+					{
+						escreva("A porta está trancada, você precisará de uma chave...")
+						
+					}
+					
+				}
+				pare
+				
+				caso 'N':
+				caso 'n':
+					pare
+
+		}
+	}
 	}
 
 	funcao Folhas()
@@ -932,7 +983,11 @@ programa
 		andar_alien = falso
 		
 		limpa()
-		escreva("Você entrou em uma sala com algumas pilhas de folhas nas mesas,\n a iluminação do ambiente falha levemente. O local tem cheiro de coisas antigas, nas paredes há alguns quadros\n")
+		escrevaAguarde("=======================================================================\n", 500)
+		escrevaAguarde("                            [SALA ESCRITÓRIO]                          \n", 500)
+		escrevaAguarde("=======================================================================\n", 500)
+		escrevaLenta("Você entrou em uma sala com algumas pilhas de folhas nas mesas,\n", 33)
+		escreva("a iluminação do ambiente falha levemente. O local tem cheiro de coisas antigas, nas paredes há alguns quadros\n")
 		escreva("Voce nota uma porta no fim desta sala, o que voce fará?\n")
 		
 		sala_armamento = verdadeiro
@@ -1371,7 +1426,7 @@ programa
 		Quatros()
 		u.aguarde(444)
 		escrevaLenta("Voce se aproxima do ultimo quarto a sua direita e entra nele, o Quarto Quarto.\n\n" , 4)
-		u.aguarde(44*44+44)
+		u.aguarde(44*44+444)
 		Quatros()
 		limpa() limpa() limpa() limpa()
 		escrevaLenta("Ao analisar, parece 4 quartetos de diferentes objetos estranhos.\n\n" , 4)
@@ -1410,6 +1465,7 @@ programa
 		escrevaLenta(" - Wangari Maathai. Inteligente Cientista Queniana, tendo ganho o Nobel da Paz em 2004 e no mesmo ano mais 4 diferentes premios, publicou 4 livros e recebeu 4 diplomas honorarios.\n\n" , 4)
 		escrevaLenta("Após isso, tu se locomove as Beliches.\n\n" , 4)
 		u.aguarde(44*44)
+		AguardarEnter()
 	}
 	funcao QuatroBeliches()
 	{
@@ -1420,6 +1476,7 @@ programa
 		u.aguarde(444)
 		escrevaLenta("Após isso, tu se locomove aos Livros.\n\n" , 4)
 		u.aguarde(44*44)
+		AguardarEnter()
 	}
 
 	funcao QuatroLivros()
@@ -1434,6 +1491,7 @@ programa
 		escrevaLenta(" - Hans Vier\n\n" , 4)
 		escrevaLenta("Após isso, tu se locomove aos Baralhos.\n\n" , 4)
 		u.aguarde(44*44)
+		AguardarEnter()
 	}
 	funcao QuatroBaralhos()
 	{
@@ -1472,7 +1530,7 @@ programa
 				escrevaLenta("SOMEM!!!!\n\n" , 44*4+44)
 				escrevaLenta("Quatro portas se abre em meio a quarta parede do quarto quarto\n\n" , 4)
 				u.aguarde(44*44+444)
-				escrevaLenta("Qual voce entra\n 4/4 Porta \n 4/4+4/4 Porta \n 4-4/4 Porta\n 4 Porta" , 4)
+				escrevaLenta("Qual voce entra\n 4/4 Porta \n 4/4+4/4 Porta \n 4-4/4 Porta\n 4 Porta\n\n" , 4)
 				QuatroQuestionamento()
 				leia(andar_teclas)
 				escreva("\n")
@@ -1798,6 +1856,10 @@ programa
 		retorne verdadeiro
 	}
 	senao se (x == 6.0 e y == 7.0)
+	{
+		retorne verdadeiro
+	}
+	senao se (x == -5.0 e y == -7.0)
 	{
 		retorne verdadeiro
 	}
