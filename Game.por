@@ -1,6 +1,5 @@
 programa
 {
-	// 44
 	inclua biblioteca Texto --> txt
 	inclua biblioteca Util --> u
 	inclua biblioteca Matematica --> mat
@@ -36,7 +35,7 @@ programa
 	logico salaEnf_explorada = falso
 	inteiro sorteio
 
-	funcao Sair
+	funcao Sair()
 	{
 		limpa()
 		para (inteiro g = 15; g > 0; g--)
@@ -239,6 +238,11 @@ programa
 				
 				caso 44:
 					QuartoQuarto()
+
+				caso 444:
+					QuatroBaralhos()
+				caso 4444:
+					QuartoFim()
 				
 				caso contrario:
 					limpa()
@@ -1364,14 +1368,19 @@ programa
 	{
 		logico StoppedExploration = falso
 		limpa() limpa() limpa() limpa()
-		escrevaLenta("44444444444444444444444444444444444444444444444444444444444444444444444444444444444\n\n" , 4/4)
+		Quatros()
 		u.aguarde(444)
-		escrevaLenta("Voce se aproxima do ultimo quarto a sua direita e entra nele, o Quarto Quarto.\n" , 4)
-		u.aguarde(4444)
+		escrevaLenta("Voce se aproxima do ultimo quarto a sua direita e entra nele, o Quarto Quarto.\n\n" , 4)
+		u.aguarde(44*44+44)
+		Quatros()
 		limpa() limpa() limpa() limpa()
 		escrevaLenta("Ao analisar, parece 4 quartetos de diferentes objetos estranhos.\n\n" , 4)
-		escrevaLenta("Deseja olhar qual?\n 4/4. Cartazes\n 4/2. Beliches\n 4-4/4. Livros\n 4. Baralhos ", 4)
+		escrevaLenta("Deseja olhar qual?\n 4/4. Cartazes\n 4/4+4/4. Beliches\n 4-4/4. Livros\n 4. Baralhos\n\n", 4)
+		QuatroQuestionamento()
 		leia(andar_teclas)
+		escreva("\n")
+		Quatros()
+		limpa() limpa() limpa() limpa()
 		escolha(andar_teclas)
 		{
 			caso '1':
@@ -1379,13 +1388,17 @@ programa
 			caso '2':
 				QuatroBeliches()
 			caso '3':
+				QuatroLivros()
 			caso '4':
+				QuatroBaralhos()
 		}
 		
 	}
 
 	funcao QuatroCartazes()
 	{
+		limpa() limpa() limpa() limpa()
+		Quatros()
 		escrevaLenta("Ao analisar, parece ter 4 cartazes de 4 famosos de 4 continentes diferentes na parede.\n\n" , 4)
 		u.aguarde(444)
 		escrevaLenta(" - Neymar Junior. Grande Futebolista Brasileiro com 4 filhos, 4 Copas do mundo disputadas e 4 assistencias numa partida da  Champions.\n\n" , 4)
@@ -1394,18 +1407,160 @@ programa
 		u.aguarde(444)
 		escrevaLenta(" - Adele. Talentosa Cantora Britânica, tendo 4 albuns de estudio, '25' ganhou 4 Brit Awards e 'Make You Feel My Love', quarto single de divulgação de '19', chegou a 4 posição no UK Singles Chart.\n\n" , 4)
 		u.aguarde(444)
+		escrevaLenta(" - Wangari Maathai. Inteligente Cientista Queniana, tendo ganho o Nobel da Paz em 2004 e no mesmo ano mais 4 diferentes premios, publicou 4 livros e recebeu 4 diplomas honorarios.\n\n" , 4)
+		escrevaLenta("Após isso, tu se locomove as Beliches.\n\n" , 4)
+		u.aguarde(44*44)
 	}
 	funcao QuatroBeliches()
 	{
 		// escrevaLenta("\n" , 4)
+		limpa() limpa() limpa() limpa()
+		Quatros()
 		escrevaLenta("Percebes que possui 4 beliches, 4 andares com 4 metros de altura cada, além de cada um ter 4 colchoes de 4cm cada, 4 lencois e 4 travesseiros.\n" , 4)
 		u.aguarde(444)
-		escrevaLenta("\n" , 4)
+		escrevaLenta("Após isso, tu se locomove aos Livros.\n\n" , 4)
+		u.aguarde(44*44)
 	}
 
 	funcao QuatroLivros()
 	{
-		escrevaLenta("Observa que todos os Livros estão cheios de 4, possuindo 44 paginas dividas em 4 capitulos e possui 4 autores\nSendo eles: " , 4)
+		limpa() limpa() limpa() limpa()
+		Quatros()
+		escrevaLenta("Observa que todos os 4 livros estão cheios de 4, possuindo 44 paginas dividas em 4 capitulos e possui 4 autores\nSendo eles: \n\n" , 4)
+		u.aguarde(444)
+		escrevaLenta(" - Paul IV\n\n" , 4)
+		escrevaLenta(" - Hugo Fourcade \n\n" , 4)
+		escrevaLenta(" - Vlad Patru\n\n" , 4)
+		escrevaLenta(" - Hans Vier\n\n" , 4)
+		escrevaLenta("Após isso, tu se locomove aos Baralhos.\n\n" , 4)
+		u.aguarde(44*44)
+	}
+	funcao QuatroBaralhos()
+	{
+		limpa() limpa() limpa() limpa()
+		Quatros()
+		escrevaLenta("Viersualiza que cada um dos 4 baralhos possui temas diferentes, um sendo tema das 4 estaçoes do ano, outro sendo das 4 semanas do ano, outrem sendo 4 periodos do dia e o ultimo sendo dos 4 pontos cardeais \n" , 4)
+		escrevaLenta("\nCada carta possui suas 4 vieriacoes, Copas, Paus, Espadas e Ouros, por ser uma sala com muita coincidencia com o 4, olha para as cartas 4, mas qual? \n"  , 4)
+		escrevaLenta("\n 4/4. Copas\n 4/4+4/4. Paus\n 4-4/4. Espadas\n 4. Ouros\n\n ", 4)
+		QuatroQuestionamento()
+		leia(andar_teclas)
+		escreva("\n")
+		Quatros()
+		limpa() limpa() limpa() limpa()
+		escolha(andar_teclas)
+		{
+			caso '1':
+			caso '2':
+			caso '3':
+				se (QuatroMorte() == verdadeiro)
+				{
+					pare
+				}
+				senao
+				{
+					QuatroBaralhos()
+				}
+			caso '4':
+				Quatros()
+				escrevaLenta("\n\nRepare-se que a Carta Sul (ouro) 4 aponta para a Carta Noite (ouro) 4 que possui uma lua desenhada que aponta para a Carta Quarta Semana (ouro) 4 que nao aponta pra lugar nenhum.\n\n" , 4)
+				u.aguarde(44*44+444)
+				escrevaLenta("Percebe que nao havia nada e fica muito triste e recolhe as cartas 4 de ouro, ate que elas se fundem e" , 4)
+				escrevaLenta("....\n\n" , 44*44)
+				u.aguarde(44*44)
+				limpa() limpa() limpa() limpa()
+				u.aguarde(44*44)
+				escrevaLenta("SOMEM!!!!\n\n" , 44*4+44)
+				escrevaLenta("Quatro portas se abre em meio a quarta parede do quarto quarto\n\n" , 4)
+				u.aguarde(44*44+444)
+				escrevaLenta("Qual voce entra\n 4/4 Porta \n 4/4+4/4 Porta \n 4-4/4 Porta\n 4 Porta" , 4)
+				QuatroQuestionamento()
+				leia(andar_teclas)
+				escreva("\n")
+				Quatros()
+				limpa() limpa() limpa() limpa()
+				escolha(andar_teclas)
+				{
+					caso '1':
+					caso '2':
+					caso '3':
+						se (QuatroMorte() == verdadeiro)
+						{
+							pare
+						}
+							senao
+						{
+							QuatroBaralhos()
+						}
+					
+					caso '4':
+						u.aguarde(4444)
+						QuartoFim()
+				
+			}
+		}
+	}
+	
+	funcao QuartoFim()
+	{
+		limpa() limpa() limpa() limpa()
+		escrevaLenta("Voce eh evoluido a um ser de quatro dimensoes.\n" , 444)
+		escrevaLenta("Aqui as coisas sao diferentes, se sente estranho pela mudança.\n" , 44)
+		escrevaLenta("Eh como se fosse" , 444)
+		u.aguarde((4444-444)/4)
+		escrevaLenta("...." , (4444-444)/4)
+		limpa() limpa() limpa() limpa()
+		escreva("Voce eehh uumm seer ddee quat dime....\n")
+		escreva("Aqui aass cois saoo dife sese sent estr pela muda....\n")
+		escreva("Eehh como sese foss....\n\n")
+		u.aguarde(4444-444)
+		escrevaLenta("Fimm" , 444)
+		escrevaLenta("...." , 44)
+		
+		enquanto(4==4)
+		{
+			
+		}
+		
+	}
+
+	funcao Quatros()
+	{
+		escrevaLenta("4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444\n\n" , 4/4)
+	}
+
+	funcao logico QuatroMorte()
+	{
+		escrevaLenta("Na proxima pense no 4, agora a força do 4 vai te matar numa chance de 1/4.\n" , 4)
+		u.aguarde(44*44)
+		
+		limpa() limpa() limpa() limpa()
+		se(sorteia(1 , 4) == 4)
+		{
+			escrevaLenta("Foi divido em 4 partes e got fired four times.    (Fire = 4 em Noruegues e Dinamarques)\n" , 4)
+			u.aguarde(44*44+44)
+			
+			para(inteiro q=0; q < 44; q++)
+			{
+				escreva("\n")
+				para(inteiro u=0; u < 4; u++)
+				{
+					escreva("Died    ")
+				}
+				
+			}
+			retorne(verdadeiro)
+		}
+		senao
+		{
+			escrevaLenta("Ficou vivo miseravier, tente denovo" , 4)
+			u.aguarde(44*44)
+			retorne(falso)
+		}
+	}
+
+	funcao QuatroQuestionamento()
+	{
+		escrevaLenta("????    :    " , 4)
 	}
 	
 	funcao SalaMantimentos()
