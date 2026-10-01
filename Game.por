@@ -1,5 +1,6 @@
 programa
 {
+	inclua biblioteca Texto --> txt
 	inclua biblioteca Util --> u
 	inclua biblioteca Matematica --> mat
 
@@ -231,10 +232,18 @@ programa
 				pare
 				caso 5:
 					ExecutarJogo()
-
 				caso 6:
-					MorteSono()
+					ExibirLaudo()
 				pare
+				
+				caso 44:
+					QuartoQuarto()
+
+				caso 444:
+					QuatroBaralhos()
+				caso 4444:
+					QuartoFim()
+				
 				caso contrario:
 					limpa()
 					escreva("Opção errada! Rode o programa de novo.\n")
@@ -774,36 +783,36 @@ programa
 		
 		u.aguarde(800) 
 		
-		escrever_devagar("DOCUMENTO: Laudo de Triagem Psiquiátrica e Biológica\n")
-		escrever_devagar("PACIENTE: Dra. Aris Thorne (Especialista em Xenobiologia)\n")
-		escrever_devagar("RESPONSÁVEL: Dr. Marcus Vance (Médico Chefe)\n")
-		escrever_devagar("STATUS: QUARENTENA NÍVEL 4 [ACESSO RESTRITO]\n")
+		escrevaLenta("DOCUMENTO: Laudo de Triagem Psiquiátrica e Biológica\n" , 10)
+		escrevaLenta("PACIENTE: Dra. Aris Thorne (Especialista em Xenobiologia)\n" , 10)
+		escrevaLenta("RESPONSÁVEL: Dr. Marcus Vance (Médico Chefe)\n" , 10)
+		escrevaLenta("STATUS: QUARENTENA NÍVEL 4 [ACESSO RESTRITO]\n" , 10)
 		escreva("-----------------------------------------------------------------\n\n")
 		
 		u.aguarde(1000)
 
-		escrever_devagar("[OBSERVAÇÕES CLÍNICAS]:\n")
-		escrever_devagar("A paciente deu entrada no setor médico apresentando quadro de paranóia severa.\n")
-		escrever_devagar("Relata 'zumbidos na frequência espectral' e insistia que os colegas do módulo B\n")
-		escrever_devagar("estavam 'com os olhares vazios e tomados por uma raiva invisível'.\n\n")
+		escreva("[OBSERVAÇÕES CLÍNICAS]:\n")
+		escrevaLenta("A paciente deu entrada no setor médico apresentando quadro de paranóia severa.\n" , 10)
+		escrevaLenta("Relata 'zumbidos na frequência espectral' e insistia que os colegas do módulo B\n" , 10)
+		escrevaLenta("estavam 'com os olhares vazios e tomados por uma raiva invisível'.\n\n" , 10)
 
 		u.aguarde(1200)
 
-		escrever_devagar("[EXAMES FISIOLÓGICOS]:\n")
-		escrever_devagar("- Batimentos cardíacos: Excepcionalmente estáveis (incompatível com o pânico).\n")
-		escrever_devagar("- Varredura biológica: Negativa para bactérias, vírus ou toxinas conhecidas.\n")
-		escrever_devagar("- Mapeamento Cerebral: Anomalia detectada. Padrões de ondas cerebrais mostram\n")
-		escrever_devagar("  picos de agressividade extrema ocorrendo em microsegundos, alternados com\n")
-		escrever_devagar("  períodos de aparente calma e lucidez.\n\n")
+		escreva("[EXAMES FISIOLÓGICOS]:\n")
+		escrevaLenta("- Batimentos cardíacos: Excepcionalmente estáveis (incompatível com o pânico).\n" , 10)
+		escrevaLenta("- Varredura biológica: Negativa para bactérias, vírus ou toxinas conhecidas.\n" , 10)
+		escrevaLenta("- Mapeamento Cerebral: Anomalia detectada. Padrões de ondas cerebrais mostram\n" , 10)
+		escrevaLenta("  picos de agressividade extrema ocorrendo em microsegundos, alternados com\n" , 10)
+		escrevaLenta("  períodos de aparente calma e lucidez.\n\n" , 10)
 
 		u.aguarde(1200)
 
-		escrever_devagar("[NOTA FINAL DO MÉDICO]:\n")
-		escrever_devagar("A paranoia é contagiosa? De um dia para o outro, três auxiliares que estavam em\n")
-		escrever_devagar("contato com a Dra. Aris começaram a manifestar o mesmo comportamento hostil.\n")
-		escrever_devagar("O mais perturbador é que NENHUM dos exames aponta infecção física. Não há febre,\n")
-		escrever_devagar("não há lesão... É como se a agressividade estivesse sendo transmitida pelo ar,\n")
-		escrever_devagar("ou por algo que nossos sensores simplesmente não conseguem rastrear.\n\n")
+		escreva("[NOTA FINAL DO MÉDICO]:\n")
+		escrevaLenta("A paranoia é contagiosa? De um dia para o outro, três auxiliares que estavam em\n" , 10)
+		escrevaLenta("contato com a Dra. Aris começaram a manifestar o mesmo comportamento hostil.\n" , 10)
+		escrevaLenta("O mais perturbador é que NENHUM dos exames aponta infecção física. Não há febre,\n" , 10)
+		escrevaLenta("não há lesão... É como se a agressividade estivesse sendo transmitida pelo ar,\n" , 10)
+		escrevaLenta("ou por algo que nossos sensores simplesmente não conseguem rastrear.\n\n" , 10)
 
 		escreva("-----------------------------------------------------------------\n")
 		escreva("              [FIM DO LAUDO - ARQUIVO SALVO]                     \n")
@@ -813,16 +822,15 @@ programa
 		escreva("Pressione ENTER para continuar...")
 		AguardarEnter()
 	}
-	funcao escrever_devagar(cadeia texto)
+	funcao escrevaAguarde(cadeia texto , inteiro tempo)
 	{
 		escreva(texto)
-		u.aguarde(300) 
+		u.aguarde(tempo) 
 	}
 
 	funcao Quadros()
 	{
-		escreva("Os quadros mostram retratos de pessoas antigas que parecem te encarar.\n")
-		u.aguarde(3000)
+		escrevaAguarde("Os quadros mostram retratos de pessoas antigas que parecem te encarar.\n" , 3000)
 	}
 
 	funcao PegarArma(cadeia nome, cadeia numero, cadeia titulo, cadeia descricao, cadeia vantagem)
@@ -1220,25 +1228,16 @@ programa
 		limpa()
 
 		escreva("=======================================================================\n")
-		u.aguarde(500)
-		escreva("Você se vira em direção ao primeiro quarto à sua esquerda e,\n")
-		u.aguarde(500)
-		escreva("ao abrir a porta que range suavemente, você encontra um quarto\n")
-		u.aguarde(500)
-		escreva("com uma aparência comum devido ao sistema de controle de gravidade e oxigênio que envolve toda a estação...\n")
-		escreva("Aperte ENTER para continuar: ")
+		escrevaAguarde("Você se vira em direção ao primeiro quarto à sua esquerda e,\n" , 500)
+		escrevaAguarde("ao abrir a porta que range suavemente, você encontra um quarto\n" , 500)
+		escrevaAguarde("com uma aparência comum devido ao sistema de controle de gravidade e oxigênio que envolve toda a estação...\n" , 500)
 		
-		AguardarEnter()
 		limpa()
 
 		escreva("-------------------------------------------------------------------------------------------------------------------\n")
-		u.aguarde(500)
-		escreva("No pequeno quarto há uma cama com edredons marrons, intocada.\n")
-		u.aguarde(500)
-		escreva("Acima desta cama, acoplado ao teto há uma máscara de oxigênio para emergência, como todos os dormitórios...\n")
-		u.aguarde(500)
-		escreva("Na mesinha de canto, ao lado da cama, há uma moldura de madeira com a foto de um homem e ao que parece, sua esposa.\n")
-		u.aguarde(500)
+		escrevaAguarde("No pequeno quarto há uma cama com edredons marrons, intocada.\n" , 500)
+		escrevaAguarde("Acima desta cama, acoplado ao teto há uma máscara de oxigênio para emergência, como todos os dormitórios...\n" , 500)
+		escrevaAguarde("Na mesinha de canto, ao lado da cama, há uma moldura de madeira com a foto de um homem e ao que parece, sua esposa.\n" , 500)
 		escreva("-------------------------------------------------------------------------------------------------------------------\n")
 		escreva("[E] para interagir\n")
 		escreva("[Q] para continuar explorando\n")
@@ -1251,82 +1250,20 @@ programa
 	
 			caso 'E':
 			caso 'e':
-				escreva("Você pega a pequena moldura de mesa nas mãos, passa a mão pela foto, tentando reconhecer aquelas pessoas...\n")
-				escreva("Aperte ENTER para continuar: ")
-				AguardarEnter()
-				escreva("Então, o seu foco muda repentinamente,")
-				AguardarEnter() 
-				escreva("uma forte dor de cabeça toma suas têmporas,\n")
-				AguardarEnter()
-				escreva("você fecha os olhos com força diante dessa situação.\n")
-				AguardarEnter()
-				escreva("Sua mente te tortura com flashs de pessoas correndo desordenadamente,\n")
-				AguardarEnter()
-				escreva("umas tentando se esconder e outras tentando atacar agressivamente o ser humanoide que você não consegue identificar.\n")
-				AguardarEnter()
-				escreva("Sua mente é tomada por confusão, você pensa:\n")
-				escreva("M")
-				u.aguarde(300)
-				escreva("a")
-				u.aguarde(300)
-				escreva("s")
-				u.aguarde(300)
-				escreva(" ")
-				u.aguarde(300)
-				escreva("o")
-				u.aguarde(300)
-				escreva(" ")
-				u.aguarde(300)
-				escreva("q")
-				u.aguarde(300)
-				escreva("u")
-				u.aguarde(300)
-				escreva("e")
-				u.aguarde(300)
-				escreva(" ")
-				u.aguarde(500)
-				escreva("e")
-				u.aguarde(300)
-				escreva("s")
-				u.aguarde(300)
-				escreva("t")
-				u.aguarde(300)
-				escreva("á")
-				u.aguarde(300)
-				escreva(" ")
-				u.aguarde(300)
-				escreva("a")
-				u.aguarde(300)
-				escreva("c")
-				u.aguarde(300)
-				escreva("o")
-				u.aguarde(300)
-				escreva("n")
-				u.aguarde(300)
-				escreva("t")
-				u.aguarde(300)
-				escreva("e")
-				u.aguarde(300)
-				escreva("c")
-				u.aguarde(300)
-				escreva("e")
-				u.aguarde(300)
-				escreva("n")
-				u.aguarde(300)
-				escreva("d")
-				u.aguarde(300)
-				escreva("o")
-				u.aguarde(300)
-				escreva("?\n")
-				u.aguarde(300)
-				escreva("Assim que você se recompõe deste sentimento estranho e mal-estar, você devolve a moldura e continua investigando o quarto.")
-				u.aguarde(4000)
+				escrevaAguarde("Você pega a pequena moldura de mesa nas mãos, passa a mão pela foto, tentando reconhecer aquelas pessoas...\n" , 300)
+				escrevaAguarde("Então, o seu foco muda repentinamente," , 300)
+				escrevaAguarde("uma forte dor de cabeça toma suas têmporas,\n" , 300)
+				escrevaAguarde("você fecha os olhos com força diante dessa situação.\n" , 300)
+				escrevaAguarde("Sua mente te tortura com flashs de pessoas correndo desordenadamente,\n" , 300)
+				escrevaAguarde("umas tentando se esconder e outras tentando atacar agressivamente o ser humanoide que você não consegue identificar.\n" , 300)
+				escrevaAguarde("Sua mente é tomada por confusão, você pensa:\n" , 300)
+				escrevaLenta("Mas oque ta acontecendo?\n" , 400)
+				escrevaAguarde("Assim que você se recompõe deste sentimento estranho e mal-estar, você devolve a moldura e continua investigando o quarto." , 4000)
 				pare
 						
 			caso 'Q':
 			caso 'q':
-				escreva("Você ignora a moldura e olha mais uma vez ao redor, esse quarto está tão...perfeito que chega a ser esquisito pensar que alguém \ncom uma vida, família e nome um dia dormiu ali.\n")
-				u.aguarde(3000)
+				escrevaAguarde("Você ignora a moldura e olha mais uma vez ao redor, esse quarto está tão...perfeito que chega a ser esquisito pensar que alguém \ncom uma vida, família e nome um dia dormiu ali.\n" , 3000)
 				ExplorarDormitorio()
 				pare
 			}
@@ -1429,11 +1366,203 @@ programa
 
 	funcao QuartoQuarto()
 	{
-		escreva("-----------------------------------------------------------------------------------\n")
-		u.aguarde(500)
-		escreva("Voce se aproxima do ultimo quarto a sua direita ")
+		logico StoppedExploration = falso
+		limpa() limpa() limpa() limpa()
+		Quatros()
+		u.aguarde(444)
+		escrevaLenta("Voce se aproxima do ultimo quarto a sua direita e entra nele, o Quarto Quarto.\n\n" , 4)
+		u.aguarde(44*44+44)
+		Quatros()
+		limpa() limpa() limpa() limpa()
+		escrevaLenta("Ao analisar, parece 4 quartetos de diferentes objetos estranhos.\n\n" , 4)
+		escrevaLenta("Deseja olhar qual?\n 4/4. Cartazes\n 4/4+4/4. Beliches\n 4-4/4. Livros\n 4. Baralhos\n\n", 4)
+		QuatroQuestionamento()
+		leia(andar_teclas)
+		escreva("\n")
+		Quatros()
+		limpa() limpa() limpa() limpa()
+		escolha(andar_teclas)
+		{
+			caso '1':
+				QuatroCartazes()
+			caso '2':
+				QuatroBeliches()
+			caso '3':
+				QuatroLivros()
+			caso '4':
+				QuatroBaralhos()
+		}
+		
 	}
 
+	funcao QuatroCartazes()
+	{
+		limpa() limpa() limpa() limpa()
+		Quatros()
+		escrevaLenta("Ao analisar, parece ter 4 cartazes de 4 famosos de 4 continentes diferentes na parede.\n\n" , 4)
+		u.aguarde(444)
+		escrevaLenta(" - Neymar Junior. Grande Futebolista Brasileiro com 4 filhos, 4 Copas do mundo disputadas e 4 assistencias numa partida da  Champions.\n\n" , 4)
+		u.aguarde(444)
+		escrevaLenta(" - Hirohiko Araki. Famoso Mangaka Japones, contendo o seu Zodiaco Chines como o Rato (1) e o Ocidental como Gemeos (3) e assim tendo o 4 como numero da sorte.\n\n" , 4)
+		u.aguarde(444)
+		escrevaLenta(" - Adele. Talentosa Cantora Britânica, tendo 4 albuns de estudio, '25' ganhou 4 Brit Awards e 'Make You Feel My Love', quarto single de divulgação de '19', chegou a 4 posição no UK Singles Chart.\n\n" , 4)
+		u.aguarde(444)
+		escrevaLenta(" - Wangari Maathai. Inteligente Cientista Queniana, tendo ganho o Nobel da Paz em 2004 e no mesmo ano mais 4 diferentes premios, publicou 4 livros e recebeu 4 diplomas honorarios.\n\n" , 4)
+		escrevaLenta("Após isso, tu se locomove as Beliches.\n\n" , 4)
+		u.aguarde(44*44)
+	}
+	funcao QuatroBeliches()
+	{
+		// escrevaLenta("\n" , 4)
+		limpa() limpa() limpa() limpa()
+		Quatros()
+		escrevaLenta("Percebes que possui 4 beliches, 4 andares com 4 metros de altura cada, além de cada um ter 4 colchoes de 4cm cada, 4 lencois e 4 travesseiros.\n" , 4)
+		u.aguarde(444)
+		escrevaLenta("Após isso, tu se locomove aos Livros.\n\n" , 4)
+		u.aguarde(44*44)
+	}
+
+	funcao QuatroLivros()
+	{
+		limpa() limpa() limpa() limpa()
+		Quatros()
+		escrevaLenta("Observa que todos os 4 livros estão cheios de 4, possuindo 44 paginas dividas em 4 capitulos e possui 4 autores\nSendo eles: \n\n" , 4)
+		u.aguarde(444)
+		escrevaLenta(" - Paul IV\n\n" , 4)
+		escrevaLenta(" - Hugo Fourcade \n\n" , 4)
+		escrevaLenta(" - Vlad Patru\n\n" , 4)
+		escrevaLenta(" - Hans Vier\n\n" , 4)
+		escrevaLenta("Após isso, tu se locomove aos Baralhos.\n\n" , 4)
+		u.aguarde(44*44)
+	}
+	funcao QuatroBaralhos()
+	{
+		limpa() limpa() limpa() limpa()
+		Quatros()
+		escrevaLenta("Viersualiza que cada um dos 4 baralhos possui temas diferentes, um sendo tema das 4 estaçoes do ano, outro sendo das 4 semanas do ano, outrem sendo 4 periodos do dia e o ultimo sendo dos 4 pontos cardeais \n" , 4)
+		escrevaLenta("\nCada carta possui suas 4 vieriacoes, Copas, Paus, Espadas e Ouros, por ser uma sala com muita coincidencia com o 4, olha para as cartas 4, mas qual? \n"  , 4)
+		escrevaLenta("\n 4/4. Copas\n 4/4+4/4. Paus\n 4-4/4. Espadas\n 4. Ouros\n\n ", 4)
+		QuatroQuestionamento()
+		leia(andar_teclas)
+		escreva("\n")
+		Quatros()
+		limpa() limpa() limpa() limpa()
+		escolha(andar_teclas)
+		{
+			caso '1':
+			caso '2':
+			caso '3':
+				se (QuatroMorte() == verdadeiro)
+				{
+					pare
+				}
+				senao
+				{
+					QuatroBaralhos()
+				}
+			caso '4':
+				Quatros()
+				escrevaLenta("\n\nRepare-se que a Carta Sul (ouro) 4 aponta para a Carta Noite (ouro) 4 que possui uma lua desenhada que aponta para a Carta Quarta Semana (ouro) 4 que nao aponta pra lugar nenhum.\n\n" , 4)
+				u.aguarde(44*44+444)
+				escrevaLenta("Percebe que nao havia nada e fica muito triste e recolhe as cartas 4 de ouro, ate que elas se fundem e" , 4)
+				escrevaLenta("....\n\n" , 44*44)
+				u.aguarde(44*44)
+				limpa() limpa() limpa() limpa()
+				u.aguarde(44*44)
+				escrevaLenta("SOMEM!!!!\n\n" , 44*4+44)
+				escrevaLenta("Quatro portas se abre em meio a quarta parede do quarto quarto\n\n" , 4)
+				u.aguarde(44*44+444)
+				escrevaLenta("Qual voce entra\n 4/4 Porta \n 4/4+4/4 Porta \n 4-4/4 Porta\n 4 Porta" , 4)
+				QuatroQuestionamento()
+				leia(andar_teclas)
+				escreva("\n")
+				Quatros()
+				limpa() limpa() limpa() limpa()
+				escolha(andar_teclas)
+				{
+					caso '1':
+					caso '2':
+					caso '3':
+						se (QuatroMorte() == verdadeiro)
+						{
+							pare
+						}
+							senao
+						{
+							QuatroBaralhos()
+						}
+					
+					caso '4':
+						u.aguarde(4444)
+						QuartoFim()
+				
+			}
+		}
+	}
+	
+	funcao QuartoFim()
+	{
+		limpa() limpa() limpa() limpa()
+		escrevaLenta("Voce eh evoluido a um ser de quatro dimensoes.\n" , 444)
+		escrevaLenta("Aqui as coisas sao diferentes, se sente estranho pela mudança.\n" , 44)
+		escrevaLenta("Eh como se fosse" , 444)
+		u.aguarde((4444-444)/4)
+		escrevaLenta("...." , (4444-444)/4)
+		limpa() limpa() limpa() limpa()
+		escreva("Voce eehh uumm seer ddee quat dime....\n")
+		escreva("Aqui aass cois saoo dife sese sent estr pela muda....\n")
+		escreva("Eehh como sese foss....\n\n")
+		u.aguarde(4444-444)
+		escrevaLenta("Fimm" , 444)
+		escrevaLenta("...." , 44)
+		
+		enquanto(4==4)
+		{
+			
+		}
+		
+	}
+
+	funcao Quatros()
+	{
+		escrevaLenta("4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444 4444\n\n" , 4/4)
+	}
+
+	funcao logico QuatroMorte()
+	{
+		escrevaLenta("Na proxima pense no 4, agora a força do 4 vai te matar numa chance de 1/4.\n" , 4)
+		u.aguarde(44*44)
+		
+		limpa() limpa() limpa() limpa()
+		se(sorteia(1 , 4) == 4)
+		{
+			escrevaLenta("Foi divido em 4 partes e got fired four times.    (Fire = 4 em Noruegues e Dinamarques)\n" , 4)
+			u.aguarde(44*44+44)
+			
+			para(inteiro q=0; q < 44; q++)
+			{
+				escreva("\n")
+				para(inteiro u=0; u < 4; u++)
+				{
+					escreva("Died    ")
+				}
+				
+			}
+			retorne(verdadeiro)
+		}
+		senao
+		{
+			escrevaLenta("Ficou vivo miseravier, tente denovo" , 4)
+			u.aguarde(44*44)
+			retorne(falso)
+		}
+	}
+
+	funcao QuatroQuestionamento()
+	{
+		escrevaLenta("????    :    " , 4)
+	}
+	
 	funcao SalaMantimentos()
 	{
 		andar_alien = falso
@@ -1449,7 +1578,7 @@ programa
 		u.aguarde(500)
 		escreva("O ar aqui é gelado e cheira a metal estéril. Prateleiras\n")
 		u.aguarde(500)
-		escreva("magnéticas cobrem as paredes com fileiras de pacotes.\n")
+		escreva("Magnéticas cobrem as paredes com fileiras de pacotes.\n")
 		u.aguarde(500)
 		escreva("No centro, as luzes azuis de um terminal piscam.\n")
 		u.aguarde(500)
@@ -1602,7 +1731,7 @@ programa
 		
 		se (enrraboFeito == aposta)
 		{
-			escreva("enrraba(FINAL RARO!PABENS)")
+			escreva("enrraba")
 		}
 		senao
 		{
@@ -1610,6 +1739,12 @@ programa
 		}
 		
 		escreva(" voce ate a morte.")
+		
+		se (enrraboFeito == aposta)
+		{
+			escreva("(FINAL RARO! PABENS)")
+		}
+		
 		u.aguarde(2000)
 		escreva("\n========================================\n")
 		escreva("         SONO FATAL, FIM DE JOGO        \n")
@@ -1670,4 +1805,19 @@ programa
 	retorne falso
 
 	}
+	
+	funcao escrevaLenta(cadeia texto , inteiro vel)
+    	{
+        inteiro tamanho
+        caracter letra
+
+        tamanho = txt.numero_caracteres(texto)
+
+        para(inteiro i = 0; i < tamanho; i++)
+        {
+            letra = txt.obter_caracter(texto, i)
+            escreva(letra)
+            u.aguarde(vel)
+        }
+    }
 }
