@@ -648,7 +648,17 @@ programa
 		{
 			retorne 2.0
 		}
-		retorne 1.5
+		senao se (nome == "Lancador Flechette")
+		{
+			retorne 3.0
+		}
+		senao se (nome == "Laser de Energia")
+		{
+			retorne 2.5
+		}
+		
+		    retorne 1.5
+		    
 	}
 
 	funcao AfastarAlienAoDisparar()
@@ -897,16 +907,20 @@ programa
 	funcao SalaArmamento()
 	{
 		andar_alien = falso
-		
-		escreva("A porta pesada se abre com um silvo hidráulico, revelando a Sala de Armamentos.\n")
-		escreva("Diante de você, um painel iluminado exibe fileiras de equipamentos avançados.\n")
-		escreva("O brilho neon reflete na superfície polida de lasers de energia direcionada e pistolas giroscópicas.\n")
-		escreva("Ao lado, descansam armas magnéticas de pulso, lançadores de agulha Flechette e imponentes armas de micro-ondas.\n")
-		escreva("O arsenal está à sua disposição.\n")
+
+		escreva("================================================================================\n")
+		u.aguarde(500)
+		escreva("                       	   [SALA DE ARMAMENTOS]                               \n")
+		u.aguarde(500)
+		escreva("================================================================================\n")
+		escrevaLenta("A porta pesada se abre com um silvo hidráulico, revelando a Sala de Armamentos.\n", 50)
+		escrevaLenta("Diante de você, um painel iluminado exibe fileiras de equipamentos avançados.\n", 50)
+		escrevaLenta("O brilho neon reflete na superfície de Granadas de Criogênio e pistolas giroscópicas.\n", 50)
+		escrevaLenta("Ao lado, descansam armas magnéticas de pulso.\n", 50)
+		escreva("O arsenal está à sua disposição.\n", 50)
 		escreva("[1] para pegar a Granada de Criogênio\n")
 		escreva("[2] para pegar a Pistola Giroscopica\n")
 		escreva("[3] para pegar a Arma Magnetica de Pulso\n")
-		escreva("[4] para pegar o Injetor de Adrnalina Sintética\n")
 		escreva("[Q] para retornar")
 		leia(andar_teclas)
 
@@ -920,10 +934,6 @@ programa
 			pare
 			caso '3':
 				PegarArma("Arma Magnetica de Pulso", "3", "[ ARMAS MAGNÉTICAS DE PULSO ]", "Bobinas eletromagnéticas que aceleram um dardo metálico envenenado.", "Vantagem: Faz o Alien recuar 2.0 em X e Y.")
-			pare
-			caso '4':
-				PegarArma("Injetor de Adrenalina", "4", "[ INJETOR DE ADRENALINA SINTÉTICA ]", "Aumenta a velocidade (chance de esquiva).","")
-				u.aguarde(2500)
 			pare
 			caso 'Q':
 			caso 'q':
