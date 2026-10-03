@@ -1662,18 +1662,55 @@ programa
 		{
 			caso 'E':
 			caso 'e':
-				escreva("-------------------------------------------------------------------------------\n")
-				u.aguarde(500)
-				escreva("Você anda e olha ao redor do enorme espaço cheio de corredores com prateleiras,\n")
-				u.aguarde(500)
-				escreva("nota-se centenas de pacotes aluminizados contendo 'Pasta Nutritiva Sabor Alface'.\n")
-				u.aguarde(500)
-				escreva("Isso te deixa com pouco apetite mas infelizmente não deu para trazer o Jacquin. ")
-				escreva("-------------------------------------------------------------------------------\n")
-				escreva("Através do vidro embaçado, você vê pequenas plantas crescendo em gel nutritivo.\n")
-				escreva("Tomates espaciais geneticamente modificados brilham sob uma luz ultravioleta.\n\n")
+				explorarMantimentos()
+				pare
+			caso 'Q':
+			caso 'q':
+				escreva("")
+				pare					
 		}
-		
+	}
+
+	funcao explorarMantimentos()
+	{
+		escreva("---------------------------------------------------------------------------------------------------\n")
+		u.aguarde(500)
+		escrevaLenta("Você anda e olha ao redor do enorme espaço cheio de corredores frios com prateleiras,\n", 33)
+		u.aguarde(500)
+		escrevaLenta("de um lado, centenas de pacotes aluminizados contendo 'Pasta Nutritiva Sabor Alface'.\n", 33)
+		u.aguarde(500)
+		escrevaLenta("Do outro, través do vidro embaçado, você vê pequenas plantas crescendo em gel nutritivo.\n", 33)
+		u.aguarde(500)
+		escrevaLenta("Tomates espaciais geneticamente modificados brilham sob uma luz ultravioleta.\n", 33)
+		u.aguarde(500)
+		escreva("---------------------------------------------------------------------------------------------------\n")
+		escreva("[I] para investigar Pasta Nutritiva Sabor Alface\n")
+		escreva("[E] para examinar a estufa de Tomates\n")
+		escreva("[Q] para retornar")
+
+		leia(andar_teclas)
+		limpa()
+
+		se (andar_teclas == 'I' ou andar_teclas == 'i')
+		{
+        		escrevaLenta("Você pega um pacote de Pasta Nutritiva. A embalagem está fria.\n", 33)
+        		escrevaLenta("O rótulo diz: 'Nutrição 100% sintética. Sabor Alface de Júpiter'.\n", 33)
+        		escrevaLenta("Lembrar que o chefe Jacquin não pôde vir saborear isso te dá um aperto no peito.\n", 33)
+        		u.aguarde(500)
+		}
+		senao se (andar_teclas == 'E' ou andar_teclas == 'e')
+		{
+       		escrevaLenta("Você limpa o embaçado do vidro com a manga do traje.\n", 33)
+        		escrevaLenta("Os tomates parecem quase vivos sob a luz UV pulsante.\n", 33)
+        		escrevaLenta("O painel hidropônico indica: 'Pronto para colheita em 48 horas cósmicas'.\n", 33)
+        		u.aguarde(500)
+        	 }
+    		senao 
+    		{
+        		escreva("Você decide apenas observar e manter os suprimentos intactos por enquanto.\n")
+        		u.aguarde(500)
+        		SalaMantimentos()
+   		}
 	}
 
 	funcao PegChave()
