@@ -271,6 +271,23 @@ programa
 		escreva("==================================================\n")
 	}
 
+	funcao recSan()
+	{
+		andar_alien = falso
+		
+		se (comer() == verdadeiro)
+		{
+			sanidade += 10
+			escrevaAguarde("Você se alimentou, pabens!", 500)
+
+		}
+		senao
+		{
+			escrevaAguarde("Azar, você não tem comida!", 500)	
+		}
+		andar_alien = falso
+	}
+
 	funcao Acao(cadeia acao)
 	{
 		se (acao == "W" ou acao == "w")
@@ -300,6 +317,10 @@ programa
 		senao se (acao == "7")
 		{
 			Atirar()
+		}
+		senao se (acao == "V" ou acao == "v")
+		{
+			recSan()
 		}
 		senao
 		{
@@ -978,11 +999,11 @@ programa
 	{
 		andar_alien = falso
 
-		escreva("================================================================================\n")
+		escreva("=====================================================================================\n")
 		u.aguarde(500)
-		escreva("                       	   [SALA DE ARMAMENTOS]                               \n")
+		escreva("                       	      [SALA DE ARMAMENTOS]                                 \n")
 		u.aguarde(500)
-		escreva("================================================================================\n")
+		escreva("=====================================================================================\n")
 		escrevaLenta("A porta pesada se abre com um silvo hidráulico, revelando a Sala de Armamentos.\n", 50)
 		escrevaLenta("Diante de você, um painel iluminado exibe fileiras de equipamentos avançados.\n", 50)
 		escrevaLenta("O brilho neon reflete na superfície de Granadas de Criogênio e pistolas giroscópicas.\n", 50)
@@ -1066,18 +1087,18 @@ programa
 		escrevaAguarde("=======================================================================\n", 500)
 		escrevaAguarde("                            [SALA ESCRITÓRIO]                          \n", 500)
 		escrevaAguarde("=======================================================================\n", 500)
-		escrevaLenta("Você entrou em uma sala com algumas pilhas de folhas nas mesas,\n", 33)
-		escreva("a iluminação do ambiente falha levemente. O local tem cheiro de coisas antigas, nas paredes há alguns quadros\n")
-		escreva("Voce nota uma porta no fim desta sala, o que voce fará?\n")
+		escrevaLenta("        Você entrou em uma sala com algumas pilhas de folhas nas mesas,\n", 33)
+		escrevaLenta("a iluminação do ambiente falha levemente. O local tem cheiro de coisas antigas,\n", 33)
+		escrevaLenta("    nas paredes há alguns quadros\n", 33)
+		escrevaLenta("    Voce nota uma porta no fim desta sala, o que voce fará?\n", 33)
 		
 		sala_armamento = verdadeiro
 		
 		escreva("===============================\n")
-		escreva("|[1] para abrir a porta       |\n")
-		escreva("|[2] para olhar as folhas     |\n")
-		escreva("|[3] para olhar os quadros    |\n")
-		escreva("|[Q] para retornar            |\n")
-		escreva("===============================\n")
+		escreva("|[1] para abrir a porta        \n")
+		escreva("|[2] para olhar as folhas      \n")
+		escreva("|[3] para olhar os quadros     \n")
+		escreva("|[Q] para retornar             \n")
 		escreva("Escolha: ")
 		leia(andar_teclas)
 		limpa()
@@ -1223,7 +1244,9 @@ programa
 		u.aguarde(500)
 		escreva("================================================================================\n")
 		u.aguarde(500)
-		escreva("Você entra em um local repleto de cabines individuais e no meio delas tem um corredor livre.\n")
+		escreva("              Você entra em um local repleto de cabines individuais e\n")
+		u.aguarde(500)
+		escreva("            no meio delas tem um corredor livre.\n")
 		u.aguarde(500)
 		escreva("Ao que parece, são os dormitórios dos tripulantes que um dia existiram ali...\n")
 		u.aguarde(500)
@@ -1740,6 +1763,18 @@ programa
 				pare					
 		}
 	}
+	
+	funcao logico comer()
+	{
+		para(inteiro i = 0; i < itensNoInventario; i++)
+		{
+			se (inventario[i] == "Pasta Nutritiva" ou inventario[i] == "Tomate")
+			{
+				retorne verdadeiro
+			}
+		}
+		retorne falso
+	}
 
 	funcao explorarMantimentos()
 	{
@@ -1780,7 +1815,9 @@ programa
         		{
         			caso 'S':
         			caso 's':
+        				escrevaLenta("Para comer, pressione [V]\n", 33)
         				AdicionarItem("Pasta Nutritiva")
+        				AguardarEnter()
         				pare
         			caso 'N':
         			caso 'n':
@@ -1808,10 +1845,27 @@ programa
 
 	funcao salaQuarentena()
 	{
-		escreva("==============================================================================\n")
-		escreva("                                [QUARENTENA]                                  \n")
-		escreva("==============================================================================\n")
-		escreva("")
+		escrevaAguarde("==============================================================================\n", 500)
+		escrevaAguarde("                            [ZONA DE BIO-QUARENTENA]                          \n", 500)
+		escrevaAguarde("==============================================================================\n", 500)
+		escrevaLenta("           As grossas portas de blindagem dupla se fecham pesadamente\n", 33)
+		escrevaLenta("            atrás de você com um estrondo metálico ecoante. O ar aqui\n", 33)
+		escrevaLenta("            dentro é frio, denso e tem um forte gosto metálico.\n", 33)
+		escrevaLenta("---------------------------------------------------------------------------------\n", 33)
+		escrevaLenta("             Luzes de emergência amarelas giram lentamente no teto,\n", 33)
+		escrevaLenta("           projetando sombras longas nas paredes de policarbonato reforçado.\n", 33)
+		escrevaLenta("             O chão está coberto por marcas de arranhões profundos e poças\n", 33)
+		escrevaLenta("            secas de um fluido químico amarelado.\n", 33)
+		escrevaLenta("---------------------------------------------------------------------------------\n", 33)
+		escrevaLenta("            Ao centro, uma redoma de vidro blindado está estilhaçada de\n", 33)
+		escrevaLenta("          dentro para fora. Painéis digitais piscam freneticamente em\n", 33)
+		escrevaLenta("             vermelho com a mensagem: 'RISCO BIOLÓGICO: NÍVEL 5'.\n", 33)
+		escrevaAguarde("==============================================================================\n", 500)
+		escreva("[E] para explorar\n")
+		escreva("[Q] para retornar\n")
+
+		leia(andar_teclas)
+		limpa()
 	}
 
 	funcao PegChave()
