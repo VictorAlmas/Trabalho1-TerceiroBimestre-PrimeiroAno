@@ -31,7 +31,7 @@ programa
 	inteiro municao_carregador = 0
 	inteiro municao_reserva = 0
 
-	logico chip_acesso_encontrado = falso
+	logico cartao_acesso_encontrado = falso
 	logico salaEnf_explorada = falso
 	inteiro sorteio
 
@@ -759,7 +759,22 @@ programa
 	{
 		se (jogador_x == 6.0 e jogador_y == 3.0)
 		{
-			SalaEscritorio()
+			escreva("Tem uma sala aqui, quer entrar?\n")
+			escreva("[S] sim ou [N] não?")
+			escreva("Escolha: ")
+		
+		leia(andar_teclas)
+
+		escolha(andar_teclas)
+		{
+			caso 'S':
+			caso 's':
+				SalaEscritorio()
+				pare
+			caso 'N':
+			caso 'n':
+				pare
+		}
 		}
 		senao se (jogador_x == 4.0 e jogador_y == 7.0)
 		{
@@ -767,11 +782,41 @@ programa
 		}
 		senao se (jogador_x == 8.0 e jogador_y == 1.0)
 		{
-			SalaEnfermaria()
+			escreva("Tem uma sala aqui, quer entrar?\n")
+			escreva("[S] sim ou [N] não?")
+			escreva("Escolha: ")
+		
+		leia(andar_teclas)
+
+		escolha(andar_teclas)
+		{
+			caso 'S':
+			caso 's':
+				SalaEnfermaria()
+				pare
+			caso 'N':
+			caso 'n':
+				pare
+		}
 		}
 		senao se (jogador_x == 6.0 e jogador_y == 7.0)
 		{
-			SalaDormitorio()
+			escreva("Tem uma sala aqui, quer entrar?\n")
+			escreva("[S] sim ou [N] não?")
+			escreva("Escolha: ")
+		
+		leia(andar_teclas)
+
+		escolha(andar_teclas)
+		{
+			caso 'S':
+			caso 's':
+				SalaDormitorio()
+				pare
+			caso 'N':
+			caso 'n':
+				pare
+		}
 		}
 		senao se (jogador_x == -5.0 e jogador_y == -7.0)
 		{	
@@ -804,6 +849,31 @@ programa
 				caso 'n':
 					pare
 
+		}
+		}
+		senao se (jogador_x == -10.0 e jogador_y == -5.0)
+		{
+			escreva("Tem uma sala aqui, quer entrar?\n")
+			escreva("[S] sim ou [N] não?")
+			escreva("Escolha: ")
+		
+		leia(andar_teclas)
+
+		escolha(andar_teclas)
+		{
+			caso 'S':
+			caso 's':
+				para (inteiro i = 0; i < itensNoInventario; i++)
+				{
+					se(inventario[i]=="Cartão de Acesso nv.2")
+					{
+						salaQuarentena()	
+					}
+					senao
+					{
+						escreva("A porta está trancada, você precisará de um cartão de acesso...")
+					}
+				}
 		}
 	}
 	}
@@ -1091,13 +1161,13 @@ programa
 							escreva("Você não pegou o item.")
 							u.aguarde(500)
 							pare
-						caso contrario: escreva("contrario")
+						caso contrario: escreva("comando inválido!")
 							pare
 					}
 
 				caso 2:
 					escreva("\n[SUCESSO] Sob restos de vidros de um tanque de bacta quebrado,\n")
-					escreva("você encontra um Chip de Acesso de Segurança Nível 2!\n")
+					escreva("você encontra um Cartão de Acesso de Segurança Nível 2!\n")
 					AguardarEnter()
 					escreva("Deseja adicionar ao inventário?\n")
 					escreva("[S] sim ou [N] não?")
@@ -1119,7 +1189,7 @@ programa
 							pare
 					}
 					
-					chip_acesso_encontrado = verdadeiro
+					cartao_acesso_encontrado = verdadeiro
 					pare
 
 				caso 3:
@@ -1693,10 +1763,33 @@ programa
 
 		se (andar_teclas == 'I' ou andar_teclas == 'i')
 		{
+			escreva("----------------------------------------------------------------------------------------\n")
         		escrevaLenta("Você pega um pacote de Pasta Nutritiva. A embalagem está fria.\n", 33)
         		escrevaLenta("O rótulo diz: 'Nutrição 100% sintética. Sabor Alface de Júpiter'.\n", 33)
         		escrevaLenta("Lembrar que o chefe Jacquin não pôde vir saborear isso te dá um aperto no peito.\n", 33)
         		u.aguarde(500)
+        		escreva("----------------------------------------------------------------------------------------\n")
+        		escreva("Você deseja adicionar ao inventário?\n")
+        		escreva("[S] sim ou [N] não?\n")
+        		escreva("Escolha: ")
+
+        		leia(andar_teclas)
+        		limpa()
+
+        		escolha(andar_teclas)
+        		{
+        			caso 'S':
+        			caso 's':
+        				AdicionarItem("Pasta Nutritiva")
+        				pare
+        			caso 'N':
+        			caso 'n':
+        				escreva("Você não pegou o item.")
+        				u.aguarde(1000)
+        				pare
+        		}
+        		
+        		
 		}
 		senao se (andar_teclas == 'E' ou andar_teclas == 'e')
 		{
@@ -1711,6 +1804,14 @@ programa
         		u.aguarde(500)
         		SalaMantimentos()
    		}
+	}
+
+	funcao salaQuarentena()
+	{
+		escreva("==============================================================================\n")
+		escreva("                                [QUARENTENA]                                  \n")
+		escreva("==============================================================================\n")
+		escreva("")
 	}
 
 	funcao PegChave()
