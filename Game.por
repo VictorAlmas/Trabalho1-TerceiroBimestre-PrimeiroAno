@@ -1868,6 +1868,62 @@ programa
 		limpa()
 	}
 
+	funcao explorarQuarentena()
+	{
+		andar_alien = falso
+		
+		escreva("--------------------------------------------------------------------------------------\n")
+		escrevaLenta("Você começa a andar por esse lugar e seu corpo é invadido por um mal-estar,\n", 33)
+		escrevaLenta("um som semelhante a estática toma seus ouvidos e então você ouve um rosnado...\n", 33)
+		u.aguarde(1000)
+		escrevaLenta("Você percebe que isso vem das suas costas e então você se vira rapidamente e\n", 33)
+		escrevaLenta("seus olhos encontram um homem muito muito magro em um nível que uma pessoa comum\n", 33)
+		escrevaLenta("não teria sobrevivido, esse homem rosna baixo e espuma pela boca e então você nota\n", 33)
+		escrevaLenta("que os rosnados em alguns momentos parecem querer te dizer algo.\n\n", 33)
+		escreva("Pressione ENTER para continuar: \n")
+		AguardarEnter()
+		limpa()
+		escreva("----------------------------------------------------------------------------------------\n")
+		escrevaLenta("Antes que você possa fugir, esse homem infectado tenta te atacar!\n", 33)
+		escreva("[I] para desviar\n")
+		escreva("[Q] para ficar\n")
+		escreva("Escolha: ")
+		
+		leia(andar_teclas)
+		limpa()
+
+		escolha(andar_teclas)
+		{
+			caso 'I':
+			caso 'i':
+				sorteio = u.sorteia(1, 3)
+				pare
+			escolha(sorteio)
+			{
+				caso 1:
+					escreva("[SUCESSO]Você desvia e consegue sair da sala vivo.")
+					pare
+				caso 2:
+					escreva("[AZAR]Você tenta desviar mas tropeça e esse homem te dilacera vivo.\n")
+					morteInfectado()
+					pare
+				caso 3:
+					escreva("O Alien entrou, engoliu o infectado vivo e matou você também.\n")
+					morteAlienQuarentena()
+					pare
+			}
+			caso 'Q':
+			caso 'q':
+				escrevaLenta("Você fica parado e esse homem tenta formar a palavra 'desculpe' em meio aos seus rosnados de fome...\n", 33)
+				escrevaLenta("Perceba que o sofrimento jamais acaba pois, aparentemente,\n", 33)
+				escrevaLenta("O hospedeiro tem lapsos de consciência enquanto infectado, independente do avanço.\n", 33)
+				escreva("Então ele não consegue controlar e avança em você, te rasgando vivo.\n")
+				morteInfectado()
+				pare
+		}
+		andar_alien = verdadeiro
+	}
+
 	funcao PegChave()
 	{
 		// B(r,eᵃᵈ) > keʸ.
@@ -2008,7 +2064,25 @@ programa
 		u.aguarde(2000)
 		escreva("\n========================================\n")
 		escreva("         SONO FATAL, FIM DE JOGO        \n")
-		escreva("==========================================")
+		escreva(" =========================================")
+		AguardarEnter()
+		Menu()
+	}
+
+	funcao morteInfectado()
+	{
+		escreva("\n====================================\n")
+		escreva("      VOCÊ MORREU PARA INFECTADO      \n")
+		escreva(" =====================================  ")
+		AguardarEnter()
+		Menu()
+	}
+
+	funcao morteAlienQuarentena()
+	{
+		escreva("\n==================================\n")
+		escreva("     VOCÊS MORRERAM PARA O ALIEN    \n")	
+		escreva(" ===================================  ")
 		AguardarEnter()
 		Menu()
 	}
