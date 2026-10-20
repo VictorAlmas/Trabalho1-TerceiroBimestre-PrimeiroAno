@@ -6,6 +6,11 @@ programa
 
 
         inteiro sanidade = 100
+        const inteiro SANIDADE_MAXIMA = 100
+        const inteiro RECUPERA_COMIDA = 10
+        const inteiro RECUPERA_MEDKIT = 50
+        const inteiro PASSOS_INFECCAO = 10
+        const inteiro PISTAS_PARA_REVELACAO = 4
         real jogador_x = 0.0
         real jogador_y = 0.0
 
@@ -46,6 +51,13 @@ programa
         logico cartao_acesso_encontrado = falso
         logico salaEnf_explorada = falso
         inteiro sorteio
+        logico infectado = falso
+        inteiro passos_infectado = 0
+
+        logico pista_intruso = falso
+        logico pista_laudo = falso
+        logico pista_redoma = falso
+        logico pista_contagio = falso
 
 
         funcao Sair()
@@ -151,6 +163,7 @@ programa
                 escreva("ALERTA DE SEGURANCA: Intruso detectado a bordo da nave.\n\n")
                 u.aguarde(1000)
                 escreva("Especie nao identificada.\n\n")
+                pista_intruso = verdadeiro
                 u.aguarde(3000)
                 escreva("Iniciando protocolo de orientacao para sobrevivente.\n\n")
                 u.aguarde(2000)
@@ -291,6 +304,11 @@ programa
         {
                 escreva("==================================================\n")
                 escreva(" SANIDADE: ", sanidade, "/100\n")
+                se (infectado)
+                {
+                        escreva(" VIRUS ATIVO! Passos restantes: ", PASSOS_INFECCAO - passos_infectado, "\n")
+                        escreva(" ", SintomaInfeccao(), "\n")
+                }
                 escreva(" Posicao do jogador: X:", jogador_x, " | Y:", jogador_y, "\n")
                 escreva(" Posicao do alien: X:", alien_x, " | Y:", alien_y, "\n")
                 se (alien_congelado > 0)
@@ -307,18 +325,23 @@ programa
 
         funcao recSan()
         {
+                inteiro recuperado
+
                 andar_alien = falso
-                
-                se (comer() == verdadeiro)
+
+                se (sanidade >= SANIDADE_MAXIMA)
                 {
-                        sanidade += 10
-                        escrevaAguarde("Voce se alimentou, pabens!", 500)
-
-
+                        escrevaAguarde("Sua sanidade ja esta no maximo, guarde a comida para depois.", 800)
+                }
+                senao se (comer() == verdadeiro)
+                {
+                        recuperado = RestaurarSanidade(RECUPERA_COMIDA)
+                        escreva("Voce se alimentou e recuperou ", recuperado, " de sanidade. (", sanidade, "/", SANIDADE_MAXIMA, ")\n")
+                        u.aguarde(1500)
                 }
                 senao
                 {
-                        escrevaAguarde("Azar, voce nao tem comida!", 500)        
+                        escrevaAguarde("Azar, voce nao tem comida!", 500)
                 }
                 andar_alien = verdadeiro
         }
@@ -326,6 +349,9 @@ programa
 
         funcao Acao(cadeia acao)
         {
+                real x_antes = jogador_x
+                real y_antes = jogador_y
+
                 se (acao == "W" ou acao == "w")
                 {
                         jogador_y++
@@ -366,6 +392,11 @@ programa
 
 
                 LimitPosicoes()
+
+                se (infectado e (jogador_x != x_antes ou jogador_y != y_antes))
+                {
+                        ContarPassoInfeccao()
+                }
         }
 
 
@@ -410,6 +441,7 @@ programa
                 escreva("           COLAPSO MENTAL          \n")
                 escreva("====================================\n")
                 escreva("O Alien encurralou voce no silencio do espaco.\n")
+                FinalRevelacao()
                 Morrido()
         }
 
@@ -527,6 +559,71 @@ programa
         }
 
 
+        funcao inteiro RestaurarSanidade(inteiro quantidade)
+        {
+                inteiro antes = sanidade
+
+                sanidade = sanidade + quantidade
+
+                se (sanidade > SANIDADE_MAXIMA)
+                {
+                        sanidade = SANIDADE_MAXIMA
+                }
+
+                retorne sanidade - antes
+        }
+
+
+        funcao inteiro ValorRestauracao(cadeia nome)
+        {
+                se (nome == "Nano-Medkit")
+                {
+                        retorne RECUPERA_MEDKIT
+                }
+                se (EhComida(nome))
+                {
+                        retorne RECUPERA_COMIDA
+                }
+                retorne 0
+        }
+
+
+        funcao logico EhConsumivel(cadeia nome)
+        {
+                se (ValorRestauracao(nome) > 0)
+                {
+                        retorne verdadeiro
+                }
+                retorne falso
+        }
+
+
+        funcao UsarConsumivel(inteiro indice)
+        {
+                cadeia nome = inventario[indice]
+                inteiro recuperado
+
+                se (sanidade >= SANIDADE_MAXIMA)
+                {
+                        escreva("Sua sanidade ja esta no maximo. Guarde \"", nome, "\" para depois.\n")
+                        retorne
+                }
+
+                recuperado = RestaurarSanidade(ValorRestauracao(nome))
+                RemoverItemPorIndice(indice)
+
+                se (nome == "Nano-Medkit")
+                {
+                        escreva("Voce injeta o Nano-Medkit e sente os nanobots acalmando sua mente...\n")
+                }
+                senao
+                {
+                        escreva("Voce se alimentou com ", nome, ".\n")
+                }
+                escreva("Sanidade recuperada: +", recuperado, " (", sanidade, "/", SANIDADE_MAXIMA, ")\n")
+        }
+
+
         funcao TrocarItem()
         {
                 inteiro origem
@@ -588,6 +685,13 @@ programa
 
                 se (indice >= 0 e indice < itensNoInventario)
                 {
+                        se (EhConsumivel(inventario[indice]))
+                        {
+                                UsarConsumivel(indice)
+                                u.aguarde(1500)
+                                retorne
+                        }
+
                         escreva("Voce usou: ", inventario[indice], "\n")
 
 
@@ -1134,6 +1238,7 @@ programa
         funcao ExibirLaudo()
         {
                 limpa()
+                pista_laudo = verdadeiro
                 
                 escreva("=================================================================\n")
                 escreva("       ESTACAO ESPACIAL AURA - RELATORIO MEDICO / CONFIDENCIAL   \n")
@@ -1423,7 +1528,9 @@ programa
 
                                                 caso 'S':
                                                 caso 's':
+                                                        escreva("Para usar, abra o inventario [F] e escolha \"Usar item\".\n")
                                                         AdicionarItem ("Nano-Medkit")
+                                                        AguardarEnter()
                                                         pare
                                                 caso 'N':
                                                 caso 'n':
@@ -1975,12 +2082,23 @@ programa
                 andar_alien = verdadeiro
         }
         
+        funcao logico EhComida(cadeia nome)
+        {
+                se (nome == "Pasta Nutritiva" ou nome == "Tomate")
+                {
+                        retorne verdadeiro
+                }
+                retorne falso
+        }
+
+
         funcao logico comer()
         {
-                para(inteiro i = 0; i < itensNoInventario; i++)
+                para (inteiro i = 0; i < itensNoInventario; i++)
                 {
-                        se (inventario[i] == "Pasta Nutritiva" ou inventario[i] == "Tomate")
+                        se (EhComida(inventario[i]))
                         {
+                                RemoverItemPorIndice(i)
                                 retorne verdadeiro
                         }
                 }
@@ -2048,8 +2166,30 @@ programa
                 {
                        escrevaLenta("Voce limpa o embacado do vidro com a manga do traje.\n", 33)
                         escrevaLenta("Os tomates parecem quase vivos sob a luz UV pulsante.\n", 33)
-                        escrevaLenta("O painel hidroponico indica: 'Pronto para colheita em 48 horas cosmicas'.\n", 33)
+                        escrevaLenta("O painel hidroponico indica: 'Pronto para colheita'.\n", 33)
                         u.aguarde(500)
+                        escreva("----------------------------------------------------------------------------------------\n")
+                        escreva("Voce deseja colher um tomate e adicionar ao inventario?\n")
+                        escreva("[S] sim ou [N] nao?\n")
+                        escreva("Escolha: ")
+
+                        leia(andar_teclas)
+                        limpa()
+
+                        escolha(andar_teclas)
+                        {
+                                caso 'S':
+                                caso 's':
+                                        escrevaLenta("Para comer, pressione [V]\n", 33)
+                                        AdicionarItem("Tomate")
+                                        AguardarEnter()
+                                        pare
+                                caso 'N':
+                                caso 'n':
+                                        escreva("Voce nao pegou o item.")
+                                        u.aguarde(1000)
+                                        pare
+                        }
                  }
                     senao 
                     {
@@ -2062,6 +2202,8 @@ programa
 
         funcao salaQuarentena()
         {
+                pista_redoma = verdadeiro
+
                 escrevaAguarde("==============================================================================\n", 500)
                 escrevaAguarde("                            [ZONA DE BIO-QUARENTENA]                          \n", 500)
                 escrevaAguarde("==============================================================================\n", 500)
@@ -2084,6 +2226,18 @@ programa
 
                 leia(andar_teclas)
                 limpa()
+
+
+                escolha(andar_teclas)
+                {
+                        caso 'E':
+                        caso 'e':
+                                explorarQuarentena()
+                                pare
+                        caso 'Q':
+                        caso 'q':
+                                pare
+                }
         }
 
 
@@ -2120,7 +2274,19 @@ programa
                         escolha(sorteio)
                         {
                                 caso 1:
-                                        escreva("[SUCESSO]Voce desvia e consegue sair da sala vivo.")
+                                        escreva("[SUCESSO]Voce desvia e consegue sair da sala vivo.\n\n")
+                                        escrevaLenta("Mas, durante o desvio, o infectado roca em voce. Um contato breve, mas o bastante.\n", 33)
+                                        escrevaLenta("O virus que ja incubava dentro do seu corpo reage e termina de amadurecer!\n", 33)
+                                        escrevaLenta("Sua cabeca lateja, suas maos tremem e algo dentro de voce comeca a mudar.\n", 33)
+                                        pista_contagio = verdadeiro
+                                        se (infectado == falso)
+                                        {
+                                                infectado = verdadeiro
+                                                passos_infectado = 0
+                                        }
+                                        escreva("Voce tem ", PASSOS_INFECCAO, " passos antes que o virus complete o trabalho.\n\n")
+                                        escreva("Pressione ENTER para continuar: ")
+                                        AguardarEnter()
                                         pare
                                 caso 2:
                                         escreva("[AZAR]Voce tenta desviar mas tropeca e esse homem te dilacera vivo.\n")
@@ -2131,6 +2297,7 @@ programa
                                         morteAlienQuarentena()
                                         pare
                         }
+                                pare
                         caso 'Q':
                         caso 'q':
                                 escrevaLenta("Voce fica parado e esse homem tenta formar a palavra 'desculpe' em meio aos seus rosnados de fome...\n", 33)
@@ -2291,6 +2458,7 @@ programa
                 escreva("\n========================================\n")
                 escreva("         SONO FATAL, FIM DE JOGO        \n")
                 escreva(" =========================================")
+                FinalRevelacao()
                 Morrido()
         }
 
@@ -2300,6 +2468,7 @@ programa
                 escreva("\n====================================\n")
                 escreva("      VOCE MORREU PARA O INFECTADO      \n")
                 escreva(" =====================================  ")
+                FinalRevelacao()
                 Morrido()
         }
 
@@ -2309,8 +2478,133 @@ programa
                 escreva("\n==================================\n")
                 escreva("     VOCES MORRERAM PARA O ALIEN    \n")        
                 escreva(" ===================================  ")
+                FinalRevelacao()
                 Morrido()
         }
+        funcao inteiro ContarPistas()
+        {
+                inteiro total = 0
+
+                se (pista_intruso)
+                {
+                        total++
+                }
+                se (pista_laudo)
+                {
+                        total++
+                }
+                se (pista_redoma)
+                {
+                        total++
+                }
+                se (pista_contagio)
+                {
+                        total++
+                }
+
+                retorne total
+        }
+
+
+        funcao FinalRevelacao()
+        {
+                se (ContarPistas() < PISTAS_PARA_REVELACAO)
+                {
+                        retorne
+                }
+
+                escreva("\n\nPressione ENTER para continuar...")
+                AguardarEnter()
+                limpa()
+
+                escrevaLenta("No instante final, tudo o que voce viu comeca a se encaixar...\n\n", 40)
+                u.aguarde(1500)
+
+                se (pista_intruso)
+                {
+                        escrevaLenta("'ALERTA DE SEGURANCA: Intruso detectado a bordo da nave. Especie nao identificada.'\n", 33)
+                        u.aguarde(1000)
+                        escrevaLenta("A nave nunca falou do alien. Seus sensores acharam algo que nao sabiam nomear em quem tinha acabado de acordar.\n\n", 33)
+                        u.aguarde(1500)
+                }
+                se (pista_laudo)
+                {
+                        escrevaLenta("Laudo da Dra. Aris Thorne: 'A paranoia eh contagiosa?'  'Nao ha febre, nao ha lesao.'\n", 33)
+                        u.aguarde(1000)
+                        escrevaLenta("Ela foi a primeira a adoecer. Os exames nunca acharam o virus, nem em voce:\n", 33)
+                        escrevaLenta("por isso voce foi congelado como sobrevivente, e nao trancado como paciente.\n\n", 33)
+                        u.aguarde(1500)
+                }
+                se (pista_redoma)
+                {
+                        escrevaLenta("A redoma de vidro blindado, estilhacada de dentro para fora.\n", 33)
+                        u.aguarde(1000)
+                        escrevaLenta("Nao havia monstro preso la dentro. Era a tripulacao que voce contaminou sem saber.\n\n", 33)
+                        u.aguarde(1500)
+                }
+                se (pista_contagio)
+                {
+                        escrevaLenta("O infectado tentava dizer 'desculpe'. Nos lapsos de lucidez, ele te reconheceu: um colega de bordo.\n", 33)
+                        u.aguarde(1000)
+                        escrevaLenta("O virus que dormia em voce, preso pela criogenia, terminou de incubar ao toque dele.\n\n", 33)
+                        u.aguarde(1500)
+                }
+
+                escrevaLenta("O 'ultimo eco humano' que o radar captou era o seu proprio pulso, ecoando pela nave.\n", 33)
+                u.aguarde(1000)
+                escrevaLenta("O alien tambem o seguia. E cada sala por onde voce passou levou um pouco do virus junto.\n\n", 33)
+                u.aguarde(2000)
+                escrevaLenta("Voce nao era a sobrevivente. Voce era o motivo de nao haver sobreviventes.\n\n", 50)
+                u.aguarde(2500)
+
+                escreva("====================================\n")
+                escreva("   FINAL VERDADEIRO: O PORTADOR   \n")
+                escreva(" =====================================  ")
+        }
+
+
+        funcao cadeia SintomaInfeccao()
+        {
+                se (passos_infectado < 3)
+                {
+                        retorne "Sintoma: dor de cabeca e maos tremulas. Algo se mexe sob a sua pele."
+                }
+                se (passos_infectado < 6)
+                {
+                        retorne "Sintoma: paranoia. Voce jura que ha alguem te seguindo nas sombras."
+                }
+                se (passos_infectado < 9)
+                {
+                        retorne "Sintoma: agressividade. Seus punhos fecham sozinhos e voce quer destruir tudo."
+                }
+                retorne "Sintoma: raiva e delirio. Voce ja nao reconhece mais nada ao redor."
+        }
+
+
+        funcao ContarPassoInfeccao()
+        {
+                passos_infectado++
+
+                se (passos_infectado >= PASSOS_INFECCAO)
+                {
+                        MorteInfeccao()
+                }
+        }
+
+
+        funcao MorteInfeccao()
+        {
+                limpa()
+                escrevaLenta("A paranoia e a raiva tomam conta de voce por completo. Nada ao redor parece real...\n", 33)
+                escrevaLenta("O virus terminou de amadurecer e seu corpo, sem forcas, desaba no chao.\n", 33)
+                escreva("\n====================================\n")
+                escreva("   O VIRUS TERMINOU DE INCUBAR EM VOCE   \n")
+                escreva(" =====================================  ")
+                FinalRevelacao()
+                Morrido()
+        }
+
+
         funcao SortearPosicoes()
         {
                 inteiro nova_x
