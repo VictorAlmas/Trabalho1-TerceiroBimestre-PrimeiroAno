@@ -266,16 +266,7 @@ programa
 					ExecutarJogo()
 					pare
 				caso 6:
-					SalaEscritorio()
-					pare
-				caso 44:
-					QuartoQuarto()
-					pare
-				caso 444:
-					QuatroBaralhos()
-					pare
-				caso 4444:
-					QuartoFim()
+					// Sala()
 					pare
 
 				caso contrario:
